@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="HobbySql">
+
+	<resultMap id="Hobby" class="com.si.domain.Hobby">
+		<result column="ID" property="id" />
+		<result column="TITLE" property="title" />
+		<result column="CATEGORYID" property="categoryId" />
+		
+ 	</resultMap>
+ 	<select id="readCategoryList" resultMap="Category">
+ 		SELECT ID, title, categoryId 
+ 		FROM hobby
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+</sqlMap>
+
+

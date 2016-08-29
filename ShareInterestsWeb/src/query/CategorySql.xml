@@ -8,13 +8,23 @@
 		<result column="ID" property="id" />
 		<result column="NAME" property="name" />
  	</resultMap>
- 	
- 	
- 	
  	<select id="readCategoryList" resultMap="Category">
  		SELECT ID, NAME 
- 		FROM CATEGORY
+ 		FROM category
  	</select>
+ 	
+ 	<resultMap id="CategoryMap" class="java.util.HashMap">
+    	<result property="key" column="ID"/>
+    	<result property="value" column="NAME"/> <!-- 두번째컬럼을 Category 객체로 하고 싶어 -->
+	</resultMap>
+
+	<select id="readCategoryMap" resultMap="CategoryMap">
+    	select ID, NAME from category
+	</select>
+ 	
+ 	
+ 	
+ 	
  	
 	<!-- <select id="readUser" resultMap="User">
        SELECT ID, NAME, EMAIL, TYPE, ISVERIFIED, ISDELETED, REGISTEREDDATE, DELETEDDATE, VERIFIEDDATE 

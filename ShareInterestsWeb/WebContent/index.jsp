@@ -45,10 +45,11 @@
 	</div>
 
 	<!-- category -->
-	
-
-
-
+	<ul class="list-group">
+	<c:forEach items="${category}" var="item">
+  		<li class="list-group-item">${item.name} <span class="badge"> ${item.size()} </span></li>
+	</c:forEach>
+	</ul>
 
 </div>
 </body>

@@ -47,9 +47,11 @@ public class UserController {
 //		//LanguagePack lang = LanguageServiceImpl.getLangPack(language);
 		
 		List<Category> categoryList = categoryService.findAll();
-		System.out.println(categoryList);
+		System.out.println("JH: "+ categoryList);
 		ModelAndView model = new ModelAndView("index");
 		model.addObject("category", categoryList);
+		
+		
 		//model.addObject("page_title", lang.getStringHazardReportingSystem());
 //		model.addObject("loginComplete", loginComplete);
 //		model.addObject("loginFail", loginFail);
