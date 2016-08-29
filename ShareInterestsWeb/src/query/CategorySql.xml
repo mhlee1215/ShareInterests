@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="CategorySql">
+
+	<resultMap id="Category" class="com.respace.domain.Category">
+		<result column="ID" property="id" />
+		<result column="NAME" property="name" />
+ 	</resultMap>
+ 	
+ 	
+ 	
+ 	<select id="readCategoryList" resultMap="Category">
+ 		SELECT ID, NAME 
+ 		FROM CATEGORY
+ 	</select>
+ 	
+	<!-- <select id="readUser" resultMap="User">
+       SELECT ID, NAME, EMAIL, TYPE, ISVERIFIED, ISDELETED, REGISTEREDDATE, DELETEDDATE, VERIFIEDDATE 
+       FROM rs_user 
+       WHERE EMAIL = #email# 
+       <isNotEmpty property="password">
+       and PASSWORD = #password#
+       </isNotEmpty>
+	</select>
+
+	<insert id="createUser" parameterClass="com.respace.domain.RS_User">
+		 INSERT INTO
+		 rs_user (EMAIL, PASSWORD, TYPE)
+		 VALUES (#email#, #password#, #type#)
+	</insert>
+	
+	<update id="updateUser" parameterClass="com.respace.domain.RS_User">
+		 UPDATE rs_user SET
+		 ID = #id#
+		 <isNotEmpty property="password">
+		 ,PASSWORD = #password#
+		 </isNotEmpty>
+		 <isNotEmpty property="type">
+		 ,TYPE = #type#
+		 </isNotEmpty>
+		 <isNotEmpty property="isverified">
+		 ,ISVERIFIED = #isverified#
+		 ,VERIFIEDDATE = DATE_FORMAT(now(), "%Y%m%d%H%i%s")
+		 </isNotEmpty>
+		 <isNotEmpty property="isdeleted">
+		 ,ISDELETED = #isdeleted#
+		 ,DELETEDDATE = DATE_FORMAT(now(), "%Y%m%d%H%i%s")
+		 </isNotEmpty>
+		 WHERE ID = #id# 
+	</update> -->
+</sqlMap>
+
+

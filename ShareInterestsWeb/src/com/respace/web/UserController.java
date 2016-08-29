@@ -8,15 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.respace.domain.Category;
 import com.respace.domain.User;
+import com.respace.service.CategoryService;
 import com.respace.service.UserService;
 
 
@@ -30,8 +27,8 @@ public class UserController {
 	@Autowired
 	private final UserService userService = null;
 	
-	
-	
+	@Autowired
+	private final CategoryService categoryService = null;
 	
 	@RequestMapping("/index.do")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -49,11 +46,10 @@ public class UserController {
 //	    String language = (String)request.getSession().getAttribute("lang");
 //		//LanguagePack lang = LanguageServiceImpl.getLangPack(language);
 		
-		List<User> userList = userService.findAll();
-		//System.out.println(user);
+		List<Category> categoryList = categoryService.findAll();
+		System.out.println(categoryList);
 		ModelAndView model = new ModelAndView("index");
-		System.out.println(userList);
-		model.addObject("user", userList);
+		model.addObject("category", categoryList);
 		//model.addObject("page_title", lang.getStringHazardReportingSystem());
 //		model.addObject("loginComplete", loginComplete);
 //		model.addObject("loginFail", loginFail);
@@ -64,10 +60,7 @@ public class UserController {
 //		model.addObject("isUseController", "true");
 //		model.addObject("user_type", user_type);
 		
-		
-		
 		model.addObject("active", "index");
-				
 		return model;
     }
 	
