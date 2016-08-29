@@ -4,7 +4,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="CategorySql">
 
-	<resultMap id="Category" class="com.respace.domain.Category">
+	<resultMap id="Category" class="com.si.domain.Category">
 		<result column="ID" property="id" />
 		<result column="NAME" property="name" />
  	</resultMap>

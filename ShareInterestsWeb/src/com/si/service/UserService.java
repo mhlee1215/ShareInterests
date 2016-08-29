@@ -1,4 +1,4 @@
-package com.respace.service;
+package com.si.service;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.respace.dao.UserDao;
-import com.respace.domain.User;
-import com.respace.util.Crypto;
+import com.si.dao.UserDao;
+import com.si.domain.User;
+import com.si.util.Crypto;
 
 
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserService {
 
 	private Logger logger = Logger.getLogger(getClass());
 
@@ -136,7 +136,6 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	@Override
 	public int findPassword(String id) throws EmailException,
 			MalformedURLException {
 		// TODO Auto-generated method stub

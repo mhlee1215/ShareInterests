@@ -1,4 +1,4 @@
-package com.respace.web;
+package com.si.web;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.respace.domain.Category;
-import com.respace.domain.User;
-import com.respace.service.CategoryService;
-import com.respace.service.UserService;
+import com.si.domain.Category;
+import com.si.domain.User;
+import com.si.service.CategoryService;
+import com.si.service.UserService;
 
 
 

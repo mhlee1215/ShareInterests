@@ -1,14 +1,16 @@
-package com.respace.service;
+package com.si.service;
 
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.respace.dao.CategoryDao;
-import com.respace.domain.Category;
+import com.si.dao.CategoryDao;
+import com.si.domain.Category;
 
-public class CategoryServiceImpl implements CategoryService {
+@Service
+public class CategoryService {
 
 	private Logger logger = Logger.getLogger(getClass());
 

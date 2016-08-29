@@ -4,7 +4,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="UserSql">
 
-	<resultMap id="User" class="com.respace.domain.User">
+	<resultMap id="User" class="com.si.domain.User">
 		<result column="ID" property="id" />
 		<result column="NAME" property="name" />
  	</resultMap>

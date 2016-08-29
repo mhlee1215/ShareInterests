@@ -1,15 +1,15 @@
-package com.respace.util;
+package com.si.util;
 
 public class Crypto {
 	/**
-	 * ?�일?�호?�에 ?�이??버퍼 ?�기 �?��
+	 * ?�일?�호?�에 ?�이??버퍼 ?�기 �?��
 	 */
 	public static final int			kBufferSize			= 8192;
 	public static java.security.Key	key					= null;
 	public static final String		defaultkeyfileurl	= "defaultkey.key";
 
 	/**
-	 * 비�????�성메소??
+	 * 비�????�성메소??
 	 * 
 	 * @return void
 	 * @exception java.io.IOException
@@ -34,9 +34,9 @@ public class Crypto {
 	}
 
 	/**
-	 * �?��??비�??��? �??�??�는 메서??
+	 * �?��??비�??��? �??�??�는 메서??
 	 * 
-	 * @return Key 비�????�래??
+	 * @return Key 비�????�래??
 	 * @exception Exception
 	 */
 	private static java.security.Key getKey() throws Exception {
@@ -59,18 +59,18 @@ public class Crypto {
 				key = (java.security.Key) in.readObject();
 				in.close();
 			} else {
-				throw new Exception("?�호?�객체�? ?�성?????�습?�다.");
+				throw new Exception("?�호?�객체�? ?�성?????�습?�다.");
 			}
 		}
 		return key;
 	}
 
 	/**
-	 * 문자????�� ?�호??
+	 * 문자????�� ?�호??
 	 * 
 	 * @param ID
-	 *            비�????�호?��? ?�망?�는 문자??
-	 * @return String ?�호?�된 ID
+	 *            비�????�호?��? ?�망?�는 문자??
+	 * @return String ?�호?�된 ID
 	 * @exception Exception
 	 */
 	public static String encrypt(String ID) throws Exception {
@@ -88,11 +88,11 @@ public class Crypto {
 	}
 
 	/**
-	 * 문자????�� 복호??
+	 * 문자????�� 복호??
 	 * 
 	 * @param codedID
-	 *            비�???복호?��? ?�망?�는 문자??
-	 * @return String 복호?�된 ID
+	 *            비�???복호?��? ?�망?�는 문자??
+	 * @return String 복호?�된 ID
 	 * @exception Exception
 	 */
 	public static String decrypt(String codedID) throws Exception {
@@ -110,12 +110,12 @@ public class Crypto {
 	}
 
 	/**
-	 * ?�일 ??�� ?�호??
+	 * ?�일 ??�� ?�호??
 	 * 
 	 * @param infile
-	 *            ?�호?�을 ?�망?�는 ?�일�?
+	 *            ?�호?�을 ?�망?�는 ?�일�?
 	 * @param outfile
-	 *            ?�호?�된 ?�일�?
+	 *            ?�호?�된 ?�일�?
 	 * @exception Exception
 	 */
 	public static void encryptFile(String infile, String outfile) throws Exception {
@@ -135,12 +135,12 @@ public class Crypto {
 	}
 
 	/**
-	 * ?�일 ??�� 복호??
+	 * ?�일 ??�� 복호??
 	 * 
 	 * @param infile
-	 *            복호?�을 ?�망?�는 ?�일�?
+	 *            복호?�을 ?�망?�는 ?�일�?
 	 * @param outfile
-	 *            복호?�된 ?�일�?
+	 *            복호?�된 ?�일�?
 	 * @exception Exception
 	 */
 	public static void decryptFile(String infile, String outfile) throws Exception {
