@@ -10,13 +10,47 @@
 		<result column="CATEGORYID" property="categoryId" />
 		
  	</resultMap>
- 	<select id="readCategoryList" resultMap="Category">
+ 	
+ 	<select id="readHobbyList" resultMap="Hobby">
  		SELECT ID, title, categoryId 
  		FROM hobby
+ 		where ID = ID
+ 		<isNotEmpty property="categoryId" prepend="and">
+        categoryId = #categoryId#
+        </isNotEmpty>
+        <isNotEmpty property="title" prepend="and">
+        TITLE like '%$title$%'
+        </isNotEmpty>
  	</select>
  	
- 	
- 	
+ 	<insert id="createHobby" parameterClass="com.si.domain.Hobby">
+		 INSERT INTO
+		 hobby (TITLE, CATEGORYID)
+		 VALUES (#title#, #categoryId#)
+	</insert>
+	
+	<update id="updateHobby" parameterClass="com.si.domain.Hobby">
+		 UPDATE hobby SET
+		 ID = #id#
+		 <isNotEmpty property="title">
+		 ,TITLE = #title#
+		 </isNotEmpty>
+		 <isNotEmpty property="categoryId">
+		 ,CATEGORYID = #categoryId#
+		 </isNotEmpty>
+		 WHERE ID = #id# 
+	</update>
+	
+	<delete id="deleteHobby" parameterClass="com.si.domain.Hobby">
+		 DELETE FROM hobby
+		 WHERE ID = ID
+		 <isNotEmpty property="title" prepend="and">
+		 TITLE = #title#
+		 </isNotEmpty>
+		 <isNotEmpty property="categoryId" prepend="and">
+		 CATEGORYID = #categoryId#
+		 </isNotEmpty>
+	</delete>
  	
 </sqlMap>
 
