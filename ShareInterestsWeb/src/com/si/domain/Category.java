@@ -7,7 +7,12 @@ public class Category {
 	
 	private int		id				= 0;	// ID
 	private String 	name			= "";
-	private List<Hobby>	hobbyList   = new ArrayList<>();
+	private List<Hobby>	hobbyList   = null;
+	
+	public Category(){
+		this.hobbyList = new ArrayList<>();
+	}
+	
 	
 	public void addHobby(Hobby hobby){
 		this.hobbyList.add(hobby);

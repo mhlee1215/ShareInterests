@@ -31,5 +31,6 @@
   
   <sqlMap resource="query/UserSql.xml"/>
   <sqlMap resource="query/CategorySql.xml"/>
+  <sqlMap resource="query/HobbySql.xml"/>
    
 </sqlMapConfig>

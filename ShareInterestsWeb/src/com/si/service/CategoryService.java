@@ -1,5 +1,6 @@
 package com.si.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,16 +25,22 @@ public class CategoryService {
 	private HobbyDao		hobbyDao;
 	
 	
-	public Map<Integer, Category> findAll() {
+	public List<Category> findAll() {
 		
 		List<Hobby> hobbyList = hobbyDao.findAll();
-		Map<Integer, Category> categoryMap = categoryDao.findAll();
+		List<Category> categoryList = categoryDao.findAll();
 		
+		Map<Integer, Category> categoryMap = new HashMap<>();
+		for(Category c : categoryList){
+			categoryMap.put(c.getId(), c);
+		}
+				
 		for(Hobby h : hobbyList){
-			categoryMap.get(h.getCategoryId()).addHobby(h);
+			Category c = categoryMap.get(h.getCategoryId());
+			if(c !=null) c.addHobby(h);
 		}
 		
-		return categoryMap;
+		return categoryList;
 	}
 
 

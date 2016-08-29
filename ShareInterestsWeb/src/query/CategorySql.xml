@@ -13,15 +13,6 @@
  		FROM category
  	</select>
  	
- 	<resultMap id="CategoryMap" class="java.util.HashMap">
-    	<result property="key" column="ID"/>
-    	<result property="value" column="NAME"/> <!-- 두번째컬럼을 Category 객체로 하고 싶어 -->
-	</resultMap>
-
-	<select id="readCategoryMap" resultMap="CategoryMap">
-    	select ID, NAME from category
-	</select>
- 	
  	
  	
  	

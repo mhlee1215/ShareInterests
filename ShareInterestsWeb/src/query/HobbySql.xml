@@ -10,7 +10,7 @@
 		<result column="CATEGORYID" property="categoryId" />
 		
  	</resultMap>
- 	<select id="readCategoryList" resultMap="Category">
+ 	<select id="readHobbyList" resultMap="Hobby">
  		SELECT ID, title, categoryId 
  		FROM hobby
  	</select>

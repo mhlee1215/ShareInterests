@@ -1,6 +1,6 @@
 package com.si.dao;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -18,8 +18,8 @@ public class CategoryDao extends SqlMapClientDaoSupport {
 	 } 
 	
 	@SuppressWarnings("unchecked")
-	public Map<Integer, Category> findAll() {
-		return getSqlMapClientTemplate().queryForMap("CategorySql.readCategoryList", "", "key", "value");
+	public List<Category> findAll() {
+		return getSqlMapClientTemplate().queryForList("CategorySql.readCategoryList");
 	}
 
 }
