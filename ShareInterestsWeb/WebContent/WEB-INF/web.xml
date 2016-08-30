@@ -26,8 +26,14 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SpringEx</servlet-name>
-    <url-pattern>*.do</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+	<servlet-name>SpringEx</servlet-name>
+	<url-pattern>*.*</url-pattern>
+</servlet-mapping>
+  
   <filter>
     <filter-name>Encoding Filter</filter-name>
     <filter-class>

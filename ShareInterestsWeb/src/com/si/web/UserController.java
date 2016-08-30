@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.si.domain.Category;
@@ -20,6 +23,8 @@ import com.si.service.UserService;
 
 
 @Controller
+
+@RequestMapping("/")
 public class UserController {
 
 	private Logger logger = Logger.getLogger(getClass());
@@ -147,6 +152,23 @@ public class UserController {
 		model.addObject("logoutComplete", "true");
 		return model;
     }
+	
+	
+	@RequestMapping("/category/{Cat1}/{Cat2}/{Cat3}")
+	public ModelAndView categoryTest(HttpServletRequest request, HttpServletResponse response
+			,@PathVariable(value = "Cat1") String Cat1
+			,@PathVariable(value = "Cat2") String Cat2
+			,@PathVariable(value = "Cat3") String Cat3
+			) {
+//	    String remainingPaths = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+//	    logger.debug("path = " + path + "/" + remainingPaths);
+		
+		System.out.println("Cat1: "+Cat1);
+		System.out.println("Cat2: "+Cat2);
+		System.out.println("Cat3: "+Cat3);
+		
+	    return new ModelAndView("index");
+	}
 //	
 //	@RequestMapping("/findPassword.do")
 //    public ModelAndView findPassword(HttpServletRequest request, HttpServletResponse response) {
