@@ -1,50 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlMap namespace="DifficultySql">
-    <resultMap class="com.si.domain.Difficulty" id="Difficulty">
-        <result column="ID" property="id"/>
-        <result column="ARTICLEID" property="articleid"/>
-        <result column="LEVEL" property="level"/>
-    </resultMap>
-    <select id="readDifficultyList" parameterClass="com.si.domain.Difficulty" resultMap="Difficulty">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="DifficultySql"><resultMap class="com.si.domain.Difficulty" id="Difficulty"><result column="ID" property="id"/><result column="ARTICLEID" property="articleId"/><result column="LEVEL" property="level"/></resultMap><select id="readDifficultyList" parameterClass="com.si.domain.Difficulty" resultMap="Difficulty">
 		/*select read list Difficulty*/
 		SELECT a.id,a.id, a.articleId, a.level, ''  FROM difficulty a WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEqual compareValue="0" property="level"> and a.LEVEL = #level#</isNotEqual>
-        <isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual>
-    </select>
-    <select id="readDifficulty" parameterClass="com.si.domain.Difficulty" resultMap="Difficulty">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEqual compareValue="0" property="level"> and a.LEVEL = #level#</isNotEqual><isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual></select><select id="readDifficulty" parameterClass="com.si.domain.Difficulty" resultMap="Difficulty">
 		/*select read Difficulty*/
 		SELECT a.id,a.id, a.articleId, a.level, ''  FROM difficulty a WHERE 1=1 
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEqual compareValue="0" property="level"> and a.LEVEL = #level#</isNotEqual>
-    </select>
-    <insert id="createDifficulty" parameterClass="com.si.domain.Difficulty">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEqual compareValue="0" property="level"> and a.LEVEL = #level#</isNotEqual></select><insert id="createDifficulty" parameterClass="com.si.domain.Difficulty">
 		/* insert Difficulty*/
 		INSERT INTO difficulty(articleId, level) 
-		VALUES (#articleid#, #level#)
-	</insert>
-    <update id="updateDifficulty" parameterClass="com.si.domain.Difficulty">
+		VALUES (#articleId#, #level#)
+	</insert><update id="updateDifficulty" parameterClass="com.si.domain.Difficulty">
 		/* update Difficulty*/
 		update difficulty SET ID = #id#
-		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId">,ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEqual compareValue="0" property="level">,LEVEL = #level#</isNotEqual>
-        <isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual>
-    </update>
-    <delete id="deleteDifficulty" parameterClass="com.si.domain.Difficulty">
+		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual><isNotEmpty property="articleId">,ARTICLEID = #articleId#</isNotEmpty><isNotEqual compareValue="0" property="level">,LEVEL = #level#</isNotEqual><isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual></update><delete id="deleteDifficulty" parameterClass="com.si.domain.Difficulty">
 		/*delete Difficulty*/
 		delete FROM difficulty WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEqual compareValue="0" property="level"> and LEVEL = #level#</isNotEqual>
-    </delete>
-    <select id="countDifficulty" parameterClass="com.si.domain.Difficulty" resultClass="int">
+		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual><isNotEmpty property="articleId"> and ARTICLEID = #articleId#</isNotEmpty><isNotEqual compareValue="0" property="level"> and LEVEL = #level#</isNotEqual></delete><select id="countDifficulty" parameterClass="com.si.domain.Difficulty" resultClass="int">
 		/*count Difficulty*/
 		SELECT count(*) FROM difficulty a WHERE 1=1 
 
-<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEqual compareValue="0" property="level"> and a.LEVEL = #level#</isNotEqual>
-    </select>
-</sqlMap>
+<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEqual compareValue="0" property="level"> and a.LEVEL = #level#</isNotEqual></select></sqlMap>

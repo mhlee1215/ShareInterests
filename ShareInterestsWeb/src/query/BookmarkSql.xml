@@ -1,50 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlMap namespace="BookmarkSql">
-    <resultMap class="com.si.domain.Bookmark" id="Bookmark">
-        <result column="ID" property="id"/>
-        <result column="USERID" property="userid"/>
-        <result column="HOBBYID" property="hobbyid"/>
-    </resultMap>
-    <select id="readBookmarkList" parameterClass="com.si.domain.Bookmark" resultMap="Bookmark">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BookmarkSql"><resultMap class="com.si.domain.Bookmark" id="Bookmark"><result column="ID" property="id"/><result column="USERID" property="userId"/><result column="HOBBYID" property="hobbyId"/></resultMap><select id="readBookmarkList" parameterClass="com.si.domain.Bookmark" resultMap="Bookmark">
 		/*select read list Bookmark*/
 		SELECT a.id,a.id, a.userId, a.hobbyId, ''  FROM bookmark a WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyid#</isNotEmpty>
-        <isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual>
-    </select>
-    <select id="readBookmark" parameterClass="com.si.domain.Bookmark" resultMap="Bookmark">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="userId"> and a.USERID = #userId#</isNotEmpty><isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyId#</isNotEmpty><isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual></select><select id="readBookmark" parameterClass="com.si.domain.Bookmark" resultMap="Bookmark">
 		/*select read Bookmark*/
 		SELECT a.id,a.id, a.userId, a.hobbyId, ''  FROM bookmark a WHERE 1=1 
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyid#</isNotEmpty>
-    </select>
-    <insert id="createBookmark" parameterClass="com.si.domain.Bookmark">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="userId"> and a.USERID = #userId#</isNotEmpty><isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyId#</isNotEmpty></select><insert id="createBookmark" parameterClass="com.si.domain.Bookmark">
 		/* insert Bookmark*/
 		INSERT INTO bookmark(userId, hobbyId) 
-		VALUES (#userid#, #hobbyid#)
-	</insert>
-    <update id="updateBookmark" parameterClass="com.si.domain.Bookmark">
+		VALUES (#userId#, #hobbyId#)
+	</insert><update id="updateBookmark" parameterClass="com.si.domain.Bookmark">
 		/* update Bookmark*/
 		update bookmark SET ID = #id#
-		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual>
-        <isNotEmpty property="userId">,USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="hobbyId">,HOBBYID = #hobbyid#</isNotEmpty>
-        <isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual>
-    </update>
-    <delete id="deleteBookmark" parameterClass="com.si.domain.Bookmark">
+		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual><isNotEmpty property="userId">,USERID = #userId#</isNotEmpty><isNotEmpty property="hobbyId">,HOBBYID = #hobbyId#</isNotEmpty><isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual></update><delete id="deleteBookmark" parameterClass="com.si.domain.Bookmark">
 		/*delete Bookmark*/
 		delete FROM bookmark WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="hobbyId"> and HOBBYID = #hobbyid#</isNotEmpty>
-    </delete>
-    <select id="countBookmark" parameterClass="com.si.domain.Bookmark" resultClass="int">
+		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual><isNotEmpty property="userId"> and USERID = #userId#</isNotEmpty><isNotEmpty property="hobbyId"> and HOBBYID = #hobbyId#</isNotEmpty></delete><select id="countBookmark" parameterClass="com.si.domain.Bookmark" resultClass="int">
 		/*count Bookmark*/
 		SELECT count(*) FROM bookmark a WHERE 1=1 
 
-<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyid#</isNotEmpty>
-    </select>
-</sqlMap>
+<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="userId"> and a.USERID = #userId#</isNotEmpty><isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyId#</isNotEmpty></select></sqlMap>

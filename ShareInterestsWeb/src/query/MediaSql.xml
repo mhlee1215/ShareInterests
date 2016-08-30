@@ -1,56 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlMap namespace="MediaSql">
-    <resultMap class="com.si.domain.Media" id="Media">
-        <result column="ID" property="id"/>
-        <result column="ARTICLEID" property="articleid"/>
-        <result column="TYPE" property="type"/>
-        <result column="URL" property="url"/>
-    </resultMap>
-    <select id="readMediaList" parameterClass="com.si.domain.Media" resultMap="Media">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="MediaSql"><resultMap class="com.si.domain.Media" id="Media"><result column="ID" property="id"/><result column="ARTICLEID" property="articleId"/><result column="TYPE" property="type"/><result column="URL" property="url"/></resultMap><select id="readMediaList" parameterClass="com.si.domain.Media" resultMap="Media">
 		/*select read list Media*/
 		SELECT a.id,a.id, a.articleId, a.type, a.url, ''  FROM media a WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="type"> and a.TYPE = #type#</isNotEmpty>
-        <isNotEmpty property="url"> and a.URL = #url#</isNotEmpty>
-        <isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual>
-    </select>
-    <select id="readMedia" parameterClass="com.si.domain.Media" resultMap="Media">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="type"> and a.TYPE = #type#</isNotEmpty><isNotEmpty property="url"> and a.URL = #url#</isNotEmpty><isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual></select><select id="readMedia" parameterClass="com.si.domain.Media" resultMap="Media">
 		/*select read Media*/
 		SELECT a.id,a.id, a.articleId, a.type, a.url, ''  FROM media a WHERE 1=1 
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="type"> and a.TYPE = #type#</isNotEmpty>
-        <isNotEmpty property="url"> and a.URL = #url#</isNotEmpty>
-    </select>
-    <insert id="createMedia" parameterClass="com.si.domain.Media">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="type"> and a.TYPE = #type#</isNotEmpty><isNotEmpty property="url"> and a.URL = #url#</isNotEmpty></select><insert id="createMedia" parameterClass="com.si.domain.Media">
 		/* insert Media*/
 		INSERT INTO media(articleId, type, url) 
-		VALUES (#articleid#, #type#, #url#)
-	</insert>
-    <update id="updateMedia" parameterClass="com.si.domain.Media">
+		VALUES (#articleId#, #type#, #url#)
+	</insert><update id="updateMedia" parameterClass="com.si.domain.Media">
 		/* update Media*/
 		update media SET ID = #id#
-		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId">,ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="type">,TYPE = #type#</isNotEmpty>
-        <isNotEmpty property="url">,URL = #url#</isNotEmpty>
-        <isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual>
-    </update>
-    <delete id="deleteMedia" parameterClass="com.si.domain.Media">
+		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual><isNotEmpty property="articleId">,ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="type">,TYPE = #type#</isNotEmpty><isNotEmpty property="url">,URL = #url#</isNotEmpty><isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual></update><delete id="deleteMedia" parameterClass="com.si.domain.Media">
 		/*delete Media*/
 		delete FROM media WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="type"> and TYPE = #type#</isNotEmpty>
-        <isNotEmpty property="url"> and URL = #url#</isNotEmpty>
-    </delete>
-    <select id="countMedia" parameterClass="com.si.domain.Media" resultClass="int">
+		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual><isNotEmpty property="articleId"> and ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="type"> and TYPE = #type#</isNotEmpty><isNotEmpty property="url"> and URL = #url#</isNotEmpty></delete><select id="countMedia" parameterClass="com.si.domain.Media" resultClass="int">
 		/*count Media*/
 		SELECT count(*) FROM media a WHERE 1=1 
 
-<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="type"> and a.TYPE = #type#</isNotEmpty>
-        <isNotEmpty property="url"> and a.URL = #url#</isNotEmpty>
-    </select>
-</sqlMap>
+<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="type"> and a.TYPE = #type#</isNotEmpty><isNotEmpty property="url"> and a.URL = #url#</isNotEmpty></select></sqlMap>

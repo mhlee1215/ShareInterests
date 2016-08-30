@@ -1,56 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlMap namespace="CommentSql">
-    <resultMap class="com.si.domain.Comment" id="Comment">
-        <result column="ID" property="id"/>
-        <result column="USERID" property="userid"/>
-        <result column="ARTICLEID" property="articleid"/>
-        <result column="DESCRIPTION" property="description"/>
-    </resultMap>
-    <select id="readCommentList" parameterClass="com.si.domain.Comment" resultMap="Comment">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="CommentSql"><resultMap class="com.si.domain.Comment" id="Comment"><result column="ID" property="id"/><result column="USERID" property="userId"/><result column="ARTICLEID" property="articleId"/><result column="DESCRIPTION" property="description"/></resultMap><select id="readCommentList" parameterClass="com.si.domain.Comment" resultMap="Comment">
 		/*select read list Comment*/
 		SELECT a.id,a.id, a.userId, a.articleId, a.description, ''  FROM comment a WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty>
-        <isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual>
-    </select>
-    <select id="readComment" parameterClass="com.si.domain.Comment" resultMap="Comment">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="userId"> and a.USERID = #userId#</isNotEmpty><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty><isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual></select><select id="readComment" parameterClass="com.si.domain.Comment" resultMap="Comment">
 		/*select read Comment*/
 		SELECT a.id,a.id, a.userId, a.articleId, a.description, ''  FROM comment a WHERE 1=1 
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty>
-    </select>
-    <insert id="createComment" parameterClass="com.si.domain.Comment">
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="userId"> and a.USERID = #userId#</isNotEmpty><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty></select><insert id="createComment" parameterClass="com.si.domain.Comment">
 		/* insert Comment*/
 		INSERT INTO comment(userId, articleId, description) 
-		VALUES (#userid#, #articleid#, #description#)
-	</insert>
-    <update id="updateComment" parameterClass="com.si.domain.Comment">
+		VALUES (#userId#, #articleId#, #description#)
+	</insert><update id="updateComment" parameterClass="com.si.domain.Comment">
 		/* update Comment*/
 		update comment SET ID = #id#
-		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual>
-        <isNotEmpty property="userId">,USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="articleId">,ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="description">,DESCRIPTION = #description#</isNotEmpty>
-        <isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual>
-    </update>
-    <delete id="deleteComment" parameterClass="com.si.domain.Comment">
+		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual><isNotEmpty property="userId">,USERID = #userId#</isNotEmpty><isNotEmpty property="articleId">,ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="description">,DESCRIPTION = #description#</isNotEmpty><isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual></update><delete id="deleteComment" parameterClass="com.si.domain.Comment">
 		/*delete Comment*/
 		delete FROM comment WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="articleId"> and ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="description"> and DESCRIPTION = #description#</isNotEmpty>
-    </delete>
-    <select id="countComment" parameterClass="com.si.domain.Comment" resultClass="int">
+		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual><isNotEmpty property="userId"> and USERID = #userId#</isNotEmpty><isNotEmpty property="articleId"> and ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="description"> and DESCRIPTION = #description#</isNotEmpty></delete><select id="countComment" parameterClass="com.si.domain.Comment" resultClass="int">
 		/*count Comment*/
 		SELECT count(*) FROM comment a WHERE 1=1 
 
-<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
-        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
-        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
-        <isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty>
-    </select>
-</sqlMap>
+<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="userId"> and a.USERID = #userId#</isNotEmpty><isNotEmpty property="articleId"> and a.ARTICLEID = #articleId#</isNotEmpty><isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty></select></sqlMap>

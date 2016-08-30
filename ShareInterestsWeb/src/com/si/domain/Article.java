@@ -1,6 +1,7 @@
 package com.si.domain;
 
-public class Article{
+public class Article
+{
 	int id = 0;
 	int  authorId = 0;
 	int  hobbyId = 0;

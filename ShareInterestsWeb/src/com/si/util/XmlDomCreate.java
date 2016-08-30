@@ -229,7 +229,7 @@ public class XmlDomCreate {
 			String path = "autoGen/src/query";
 			boolean isMade = new File(path).mkdirs();
 			File f = new File(path+"/"+params.name+"Sql.xml");
-			writeFile(f, genSqlXML(params));
+			writeFile(f, genSqlXML(params).replaceAll("UTF-16", "UTF-8"));
 		}
 	}
 	
@@ -490,7 +490,7 @@ public class XmlDomCreate {
 					Element result = doc.createElement("result");
 					resultMap.appendChild(result);
 					Attr p_id = doc.createAttribute("property");
-					p_id.setValue(p.toLowerCase().trim());
+					p_id.setValue(p.trim());
 					result.setAttributeNode(p_id);
 					Attr property = doc.createAttribute("column");
 					property.setValue(p.toUpperCase().trim());
@@ -549,7 +549,7 @@ public class XmlDomCreate {
 					isnotnull2 = doc.createElement("isNotEmpty");
 					isnotnull2.setAttribute("property", p);
 				}
-				isnotnull2.setTextContent(" and "+alias+"."+p.toUpperCase()+" = #"+p.toLowerCase()+"#");
+				isnotnull2.setTextContent(" and "+alias+"."+p.toUpperCase()+" = #"+p+"#");
 				select_read_list.appendChild(isnotnull2);
 			}
 			if(orderStr.length()>0){
@@ -610,7 +610,7 @@ public class XmlDomCreate {
 					isnotnull2 = doc.createElement("isNotEmpty");
 					isnotnull2.setAttribute("property", p);
 				}				
-				isnotnull2.setTextContent(" and "+alias+"."+p.toUpperCase()+" = #"+p.toLowerCase()+"#");
+				isnotnull2.setTextContent(" and "+alias+"."+p.toUpperCase()+" = #"+p+"#");
 				select_read.appendChild(isnotnull2);
 			}
 
@@ -643,9 +643,9 @@ public class XmlDomCreate {
 					continue;
 				String p = cvs_parts[i].trim();
 				if( sharp_p_added == 0)
-					sharp_p += "#"+p.toLowerCase()+"#";
+					sharp_p += "#"+p+"#";
 				else
-					sharp_p += ", #"+p.toLowerCase()+"#";
+					sharp_p += ", #"+p+"#";
 				sharp_p_added++;
 			}
 			
@@ -700,7 +700,7 @@ public class XmlDomCreate {
 						isnotnull2 = doc.createElement("isNotEmpty");
 						isnotnull2.setAttribute("property", p);
 					}				
-					isnotnull2.setTextContent(","+p.toUpperCase()+" = #"+p.toLowerCase()+"#");
+					isnotnull2.setTextContent(","+p.toUpperCase()+" = #"+p+"#");
 					update.appendChild(isnotnull2);
 				}
 			}
@@ -746,7 +746,7 @@ public class XmlDomCreate {
 					isnotnull2 = doc.createElement("isNotEmpty");
 					isnotnull2.setAttribute("property", p);
 				}
-				isnotnull2.setTextContent(" and "+p.toUpperCase()+" = #"+p.toLowerCase()+"#");
+				isnotnull2.setTextContent(" and "+p.toUpperCase()+" = #"+p+"#");
 				delete.appendChild(isnotnull2);
 			}
 			
@@ -784,7 +784,7 @@ public class XmlDomCreate {
 					isnotnull2 = doc.createElement("isNotEmpty");
 					isnotnull2.setAttribute("property", p);
 				}
-				isnotnull2.setTextContent(" and "+alias+"."+p.toUpperCase()+" = #"+p.toLowerCase()+"#");
+				isnotnull2.setTextContent(" and "+alias+"."+p.toUpperCase()+" = #"+p+"#");
 				count.appendChild(isnotnull2);
 			}
 			
@@ -811,9 +811,9 @@ public class XmlDomCreate {
 
 			
 			String result = printXML(doc);
-			return prettyXmlResult;
-//			return ((DOMImplementationLS) domImpl).createLSSerializer()
-//				    .writeToString(doc);
+			//return prettyXmlResult;
+			return ((DOMImplementationLS) domImpl).createLSSerializer()
+				    .writeToString(doc);
 			// System.out.println(prettyXmlResult);
 			//return prettyXmlResult;
 			// System.out.println("File saved!");

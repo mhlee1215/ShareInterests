@@ -32,5 +32,13 @@
   <sqlMap resource="query/UserSql.xml"/>
   <sqlMap resource="query/CategorySql.xml"/>
   <sqlMap resource="query/HobbySql.xml"/>
+  <sqlMap resource="query/AssetSql.xml"/>
+  <sqlMap resource="query/ArticleSql.xml"/>
+  <sqlMap resource="query/BookmarkSql.xml"/>
+  <sqlMap resource="query/CommentSql.xml"/>
+  <sqlMap resource="query/DifficultySql.xml"/>
+  <sqlMap resource="query/HashtagSql.xml"/>
+  <sqlMap resource="query/FeedbackSql.xml"/>
+  <sqlMap resource="query/MediaSql.xml"/>
    
 </sqlMapConfig>
