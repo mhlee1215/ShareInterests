@@ -45,12 +45,29 @@
 	</div>
 
 	<!-- category -->
-	<ul class="list-group">
-	<c:forEach items="${category}" var="item">
-  		<li class="list-group-item">${item.name} <span class="badge"> ${item.size()} </span></li>
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	<c:forEach items="${category}" var="cat">
+		<div class="panel panel-default">
+    		<div class="panel-heading" role="tab" id="heading${cat.id}">
+      			<h4 class="panel-title">
+        			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${cat.id}" aria-expanded="false" aria-controls="collapse${item.id}">
+					${cat.name} <span class="badge"> ${cat.size()} </span>      
+        			</a>
+      			</h4>
+    		</div>
+    		<div id="collapse${cat.id}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${cat.id}">
+      			<div class="panel-body">
+        		<c:forEach items="${cat.hobbyList}" var="hobby">
+        			<a href="#"> ${hobby.title} </a>
+      			</c:forEach>
+      			</div>
+    		</div>
+  		</div>  		
 	</c:forEach>
-	</ul>
-
+	</div>
+	
+	
+	
 </div>
 </body>
 </html>
