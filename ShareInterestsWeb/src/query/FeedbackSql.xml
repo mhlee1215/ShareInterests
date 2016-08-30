@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlMap namespace="FeedbackSql">
+    <resultMap class="com.si.domain.Feedback" id="Feedback">
+        <result column="ID" property="id"/>
+        <result column="USERID" property="userid"/>
+        <result column="ARTICLEID" property="articleid"/>
+    </resultMap>
+    <select id="readFeedbackList" parameterClass="com.si.domain.Feedback" resultMap="Feedback">
+		/*select read list Feedback*/
+		SELECT a.id,a.id, a.userId, a.articleId, ''  FROM feedback a WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
+        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
+        <isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual>
+    </select>
+    <select id="readFeedback" parameterClass="com.si.domain.Feedback" resultMap="Feedback">
+		/*select read Feedback*/
+		SELECT a.id,a.id, a.userId, a.articleId, ''  FROM feedback a WHERE 1=1 
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
+        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
+    </select>
+    <insert id="createFeedback" parameterClass="com.si.domain.Feedback">
+		/* insert Feedback*/
+		INSERT INTO feedback(userId, articleId) 
+		VALUES (#userid#, #articleid#)
+	</insert>
+    <update id="updateFeedback" parameterClass="com.si.domain.Feedback">
+		/* update Feedback*/
+		update feedback SET ID = #id#
+		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual>
+        <isNotEmpty property="userId">,USERID = #userid#</isNotEmpty>
+        <isNotEmpty property="articleId">,ARTICLEID = #articleid#</isNotEmpty>
+        <isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual>
+    </update>
+    <delete id="deleteFeedback" parameterClass="com.si.domain.Feedback">
+		/*delete Feedback*/
+		delete FROM feedback WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual>
+        <isNotEmpty property="userId"> and USERID = #userid#</isNotEmpty>
+        <isNotEmpty property="articleId"> and ARTICLEID = #articleid#</isNotEmpty>
+    </delete>
+    <select id="countFeedback" parameterClass="com.si.domain.Feedback" resultClass="int">
+		/*count Feedback*/
+		SELECT count(*) FROM feedback a WHERE 1=1 
+
+<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="userId"> and a.USERID = #userid#</isNotEmpty>
+        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
+    </select>
+</sqlMap>

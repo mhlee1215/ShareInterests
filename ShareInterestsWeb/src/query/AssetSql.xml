@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlMap namespace="AssetSql">
+    <resultMap class="com.si.domain.Asset" id="Asset">
+        <result column="ID" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="CATEGORY" property="category"/>
+    </resultMap>
+    <select id="readAssetList" parameterClass="com.si.domain.Asset" resultMap="Asset">
+		/*select read list Asset*/
+		SELECT a.id,a.id, a.name, a.category, ''  FROM asset a WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+        <isNotEmpty property="category"> and a.CATEGORY = #category#</isNotEmpty>
+        <isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual>
+    </select>
+    <select id="readAsset" parameterClass="com.si.domain.Asset" resultMap="Asset">
+		/*select read Asset*/
+		SELECT a.id,a.id, a.name, a.category, ''  FROM asset a WHERE 1=1 
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+        <isNotEmpty property="category"> and a.CATEGORY = #category#</isNotEmpty>
+    </select>
+    <insert id="createAsset" parameterClass="com.si.domain.Asset">
+		/* insert Asset*/
+		INSERT INTO asset(name, category) 
+		VALUES (#name#, #category#)
+	</insert>
+    <update id="updateAsset" parameterClass="com.si.domain.Asset">
+		/* update Asset*/
+		update asset SET ID = #id#
+		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual>
+        <isNotEmpty property="name">,NAME = #name#</isNotEmpty>
+        <isNotEmpty property="category">,CATEGORY = #category#</isNotEmpty>
+        <isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual>
+    </update>
+    <delete id="deleteAsset" parameterClass="com.si.domain.Asset">
+		/*delete Asset*/
+		delete FROM asset WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual>
+        <isNotEmpty property="name"> and NAME = #name#</isNotEmpty>
+        <isNotEmpty property="category"> and CATEGORY = #category#</isNotEmpty>
+    </delete>
+    <select id="countAsset" parameterClass="com.si.domain.Asset" resultClass="int">
+		/*count Asset*/
+		SELECT count(*) FROM asset a WHERE 1=1 
+
+<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+        <isNotEmpty property="category"> and a.CATEGORY = #category#</isNotEmpty>
+    </select>
+</sqlMap>

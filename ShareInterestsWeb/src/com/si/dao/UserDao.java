@@ -1,11 +1,7 @@
 package com.si.dao;
 
 import java.util.List;
-
 import javax.annotation.Resource;
-
-
-
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Repository;
 import com.ibatis.sqlmap.client.SqlMapClient;

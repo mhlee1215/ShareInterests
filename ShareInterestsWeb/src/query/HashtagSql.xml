@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlMap namespace="HashtagSql">
+    <resultMap class="com.si.domain.Hashtag" id="Hashtag">
+        <result column="ID" property="id"/>
+        <result column="ARTICLEID" property="articleid"/>
+        <result column="NAME" property="name"/>
+    </resultMap>
+    <select id="readHashtagList" parameterClass="com.si.domain.Hashtag" resultMap="Hashtag">
+		/*select read list Hashtag*/
+		SELECT a.id,a.id, a.articleId, a.name, ''  FROM hashtag a WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
+        <isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+        <isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual>
+    </select>
+    <select id="readHashtag" parameterClass="com.si.domain.Hashtag" resultMap="Hashtag">
+		/*select read Hashtag*/
+		SELECT a.id,a.id, a.articleId, a.name, ''  FROM hashtag a WHERE 1=1 
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
+        <isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+    </select>
+    <insert id="createHashtag" parameterClass="com.si.domain.Hashtag">
+		/* insert Hashtag*/
+		INSERT INTO hashtag(articleId, name) 
+		VALUES (#articleid#, #name#)
+	</insert>
+    <update id="updateHashtag" parameterClass="com.si.domain.Hashtag">
+		/* update Hashtag*/
+		update hashtag SET ID = #id#
+		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual>
+        <isNotEmpty property="articleId">,ARTICLEID = #articleid#</isNotEmpty>
+        <isNotEmpty property="name">,NAME = #name#</isNotEmpty>
+        <isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual>
+    </update>
+    <delete id="deleteHashtag" parameterClass="com.si.domain.Hashtag">
+		/*delete Hashtag*/
+		delete FROM hashtag WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual>
+        <isNotEmpty property="articleId"> and ARTICLEID = #articleid#</isNotEmpty>
+        <isNotEmpty property="name"> and NAME = #name#</isNotEmpty>
+    </delete>
+    <select id="countHashtag" parameterClass="com.si.domain.Hashtag" resultClass="int">
+		/*count Hashtag*/
+		SELECT count(*) FROM hashtag a WHERE 1=1 
+
+<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual>
+        <isNotEmpty property="articleId"> and a.ARTICLEID = #articleid#</isNotEmpty>
+        <isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+    </select>
+</sqlMap>

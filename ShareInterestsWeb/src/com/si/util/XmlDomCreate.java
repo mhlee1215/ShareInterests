@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -32,10 +33,10 @@ import org.w3c.dom.ls.DOMImplementationLS;
 import com.si.dao.CategoryDao;
 
 public class XmlDomCreate {
-	public static String number_property_strings[] = {"id", "seq_no", "id_contact"};
+	public static String number_property_strings[] = {"id", "seq_no", "id_contact", "level"};
 	public static ArrayList<String> number_property_list= new ArrayList<String>();
 	
-	public static String number_str_strings[] = {"price", "min", "max"};
+	public static String number_str_strings[] = {"price", "min", "max", "level"};
 	public static ArrayList<String> number_str_list= new ArrayList<String>();
 	
 	public static String date_update_in_update_strings[] = {"modifieddate"};
@@ -57,6 +58,7 @@ public class XmlDomCreate {
 		String query_start_str;
 		String query_number_str;
 		String alias;
+		String packageName;
 		
 		public QueryParams(){
 			this.query_start_str = "query_start";
@@ -66,7 +68,7 @@ public class XmlDomCreate {
 	}
 	
 	public static void main(String argv[]) {
- 
+		System.out.println(getFirstUpper("abc"));
 		for(int i = 0 ; i < number_property_strings.length ; i++)
 			number_property_list.add(number_property_strings[i]);
 		
@@ -107,12 +109,81 @@ public class XmlDomCreate {
 //		params.columns = "`reference_id`, `reference_category`, `name`, `url`, `type`, `seq_no`, `registered_date`, `filename`, `filetype`, `filesize`, `modified_date`, `filepath`, `code_status`, `etc`";
 //		params.orderStr = "seq_no";
 //		
+		List<QueryParams> qList = new ArrayList<QueryParams>();
+		
+		
 		params = new QueryParams();
 		params.name = "Article";
-		params.className = "com.si.domain.Article";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
 		params.columns = "`id`, `authorId`, `hobbyId`, `date`, `priceMin`, `priceMax`, `description`";
 		params.extra_columns = "";
 		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Difficulty";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `articleId`, `level`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Comment";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `userId`, `articleId`, `description`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Asset";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `name`, `category`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Feedback";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `userId`, `articleId`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Media";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `articleId`, `type`, `url`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Hashtag";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `articleId`, `name`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Bookmark";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `userId`, `hobbyId`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
 		
 		//params = new QueryParams();
 		//params.name = "User";
@@ -120,7 +191,8 @@ public class XmlDomCreate {
 		//params.columns = "`name`, `email`, `password`, `registereddate`, `deleteddate`, `verifieddate`, `status`, `isverified`, `isdeleted`, `type`";
 		//params.orderStr = "";
 		
-		writeFiles(params);
+		for(QueryParams qp : qList)
+			writeFiles(qp);
 //		String classDomain = genClassDomain(params);
 //		String sqlMapXml = genSqlXML(params);
 ////		System.out.println(classDomain);
@@ -157,7 +229,7 @@ public class XmlDomCreate {
 			String path = "autoGen/src/query";
 			boolean isMade = new File(path).mkdirs();
 			File f = new File(path+"/"+params.name+"Sql.xml");
-			writeFile(f, genSqlXML(params).replaceAll("UTF-16", "UTF-8"));
+			writeFile(f, genSqlXML(params));
 		}
 	}
 	
@@ -165,8 +237,8 @@ public class XmlDomCreate {
 		String result = "";
 		String indent = "";
 		
-		String C = params.className;
-		String c = params.className.toLowerCase();
+		String C = params.name;
+		String c = C.toLowerCase();
 		
 		result += indent +"package com.si.dao;\n";
 
@@ -226,8 +298,8 @@ public class XmlDomCreate {
 		String result = "";
 		String indent = "";
 		
-		String C = params.className;
-		String c = params.className.toLowerCase();
+		String C = params.name;
+		String c = C.toLowerCase();
 		
 		result += indent +"package com.si.service;\n\n";
 
@@ -237,7 +309,8 @@ public class XmlDomCreate {
 		result += indent +"import org.apache.log4j.Logger;\n";
 		result += indent +"import org.springframework.beans.factory.annotation.Autowired;\n";
 		result += indent +"import org.springframework.stereotype.Service;\n";
-		result += indent +"import com.si.dao."+C+"Dao;\n\n";
+		result += indent +"import com.si.dao."+C+"Dao;\n";
+		result += indent +"import com.si.domain."+C+";\n\n";
 
 		result += indent +"@Service\n";
 		result += indent +"public class "+C+"Service{\n";
@@ -288,22 +361,79 @@ public class XmlDomCreate {
 		String columns = params.columns.replace("`", "");
 		String ex_columns = params.extra_columns;
 		
-		String resultStr = "int id = 0;";
+		String resultStr = "";
+		String indent = "";
+		
+		resultStr += indent + "package "+ params.packageName+";\n\n";
+		resultStr += indent + "public class "+params.name+"{\n";
+		
+		indent = "\t";
+		//resultStr += indent + "int id = 0;\n";
+		
+		List<String> typeList = new ArrayList<String>();
+		List<String> nameList = new ArrayList<String>();
 		
 		String[] cvs_parts = columns.split(",");
 		for (String p : cvs_parts){
-			resultStr += "String "+p+" = \"\";";
+			//if("id".equals(p)) continue;
+			
+			String type = "";
+			
+			if(p.toLowerCase().contains("id") || p.toLowerCase().contains("price") || number_str_list.contains(p)){
+				type = "int";
+				resultStr += indent + type + " "+p+" = 0;\n";
+			}
+			else{
+				type = "String";
+				resultStr += indent + type + " "+p+" = \"\";\n";
+			}
+			
+			
+			
+			typeList.add(type);
+			nameList.add(p.trim());
+			
 		}
 		for (String p : class_basic_strings_list){
-			resultStr += "int "+p+" = 0;";
+			resultStr += indent + "int "+p+" = 0;\n";
+			typeList.add("int");
+			nameList.add(p);
+
 		}
 		String[] ex_cvs_parts = ex_columns.split(",");
 		for (String p : ex_cvs_parts){
-			if(!p.isEmpty())
-				resultStr += "String "+p+" = \"\";";
+			if(!p.isEmpty()){
+				resultStr += indent + "String "+p+" = \"\";\n";
+
+				typeList.add("String");
+				nameList.add(p);
+			}
 		}
 		
+		
+		for(int i = 0 ; i < typeList.size() ; i++){
+			String tt = typeList.get(i);
+			String nn = nameList.get(i);
+			
+			resultStr += indent + "public "+tt+" get"+getFirstUpper(nn)+"(){\n";
+			resultStr += indent + "\treturn "+nn+";\n";
+			resultStr += indent + "}\n";
+			
+			resultStr += indent + "public void set"+getFirstUpper(nn)+"("+tt+" "+nn+"){\n";
+			resultStr += indent + "\tthis."+nn+" = "+nn+";\n";
+			resultStr += indent + "}\n";
+		}
+		
+		indent = "";
+		resultStr += indent + "}";
+		
 		return resultStr;
+	}
+	
+	public static String getFirstUpper(String a){
+		System.out.println("???:"+a);
+		String result = a.substring(0, 1).toUpperCase()+a.substring(1);
+		return result;
 	}
 
 	public static String genSqlXML(QueryParams params) {
@@ -404,8 +534,8 @@ public class XmlDomCreate {
 			}
 			
 			String select_read_list_text = "";
-			select_read_list_text += "/*select read list "+name+"*/";
-			select_read_list_text += "SELECT "+alias+".id,"+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1";
+			select_read_list_text += "\n\t\t/*select read list "+name+"*/";
+			select_read_list_text += "\n\t\tSELECT "+alias+".id,"+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1\n\t\t";
 			select_read_list.setTextContent(select_read_list_text);
 			for (String p : cvs_parts){
 //				System.out.println("++"+p);
@@ -457,8 +587,8 @@ public class XmlDomCreate {
 			select_read.setAttribute("id", "read"+name);
 			
 			String select_read_text = "";
-			select_read_text += "/*select read "+name+"*/";
-			select_read_text += "SELECT "+alias+".id,"+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1 ";
+			select_read_text += "\n\t\t/*select read "+name+"*/";
+			select_read_text += "\n\t\tSELECT "+alias+".id,"+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1 \n\t\t";
 			
 			select_read.setTextContent(select_read_text);
 			
@@ -497,7 +627,7 @@ public class XmlDomCreate {
 			String insert_columns = "";
 			int insert_columns_added = 0;
 			for (int i = 0 ; i < cvs_parts.length ; i++){
-				if(cvs_parts[i].toLowerCase().contains("date") || cvs_parts[i].toLowerCase().contains("id"))
+				if(cvs_parts[i].toLowerCase().equals("id"))
 					continue;
 				if (insert_columns_added == 0)
 					insert_columns = cvs_parts[i].trim();
@@ -509,7 +639,7 @@ public class XmlDomCreate {
 			String sharp_p = "";
 			int sharp_p_added = 0;
 			for (int i = 0 ; i < cvs_parts.length ; i++){
-				if(cvs_parts[i].toLowerCase().contains("date") || cvs_parts[i].toLowerCase().contains("date"))
+				if(cvs_parts[i].toLowerCase().equals("id"))
 					continue;
 				String p = cvs_parts[i].trim();
 				if( sharp_p_added == 0)
@@ -520,20 +650,20 @@ public class XmlDomCreate {
 			}
 			
 			String insert_text = "";
-			insert_text += "/* insert "+name+"*/";
-			insert_text += "INSERT INTO "+name.toLowerCase()+"("+insert_columns+") VALUES ("+sharp_p+")";
+			insert_text += "\n\t\t/* insert "+name+"*/";
+			insert_text += "\n\t\tINSERT INTO "+name.toLowerCase()+"("+insert_columns+") \n\t\tVALUES ("+sharp_p+")\n\t";
 			insert.setTextContent(insert_text);
 			
 			Element select_key = null;
 			
-			select_key = doc.createElement("selectKey");
-			select_key.setAttribute("type", "post");
-			select_key.setAttribute("resultClass", "int");
-			select_key.setAttribute("keyProperty", "id");
-			
-							
-			select_key.setTextContent("SELECT max(id) FROM "+name.toLowerCase());
-			insert.appendChild(select_key);
+//			select_key = doc.createElement("selectKey");
+//			select_key.setAttribute("type", "post");
+//			select_key.setAttribute("resultClass", "int");
+//			select_key.setAttribute("keyProperty", "id");
+//			
+//							
+//			select_key.setTextContent("SELECT max(id) FROM "+name.toLowerCase());
+//			insert.appendChild(select_key);
 			
 			Element update = doc.createElement("update");
 			sqlMap.appendChild(update);
@@ -541,8 +671,8 @@ public class XmlDomCreate {
 			update.setAttribute("id", "update"+name);
 			
 			String update_text = "";
-			update_text += "/* update "+name+"*/";
-			update_text += "update" +" "+name.toLowerCase()+" SET ID = #id#";
+			update_text += "\n\t\t/* update "+name+"*/";
+			update_text += "\n\t\tupdate" +" "+name.toLowerCase()+" SET ID = #id#\n\t\t";
 			
 			for (String p : cvs_parts){
 				p = p.trim();
@@ -594,8 +724,8 @@ public class XmlDomCreate {
 			delete.setAttribute("id", "delete"+name);
 			
 			String delete_text = "";
-			delete_text += "/*delete "+name+"*/";
-			delete_text += "delete FROM "+""+name.toLowerCase()+" WHERE 1=1";
+			delete_text += "\n\t\t/*delete "+name+"*/";
+			delete_text += "\n\t\tdelete FROM "+""+name.toLowerCase()+" WHERE 1=1\n\t\t";
 			
 			delete.setTextContent(delete_text);
 			
@@ -640,8 +770,8 @@ public class XmlDomCreate {
 			
 			
 			String count_text = "";
-			count_text += "/*count "+name+"*/";
-			count_text += "SELECT count(*) FROM "+""+name.toLowerCase()+" "+alias+" WHERE 1=1";
+			count_text += "\n\t\t/*count "+name+"*/";
+			count_text += "\n\t\tSELECT count(*) FROM "+""+name.toLowerCase()+" "+alias+" WHERE 1=1 \n\n";
 			count.setTextContent(count_text);
 			for (String p : cvs_parts){
 				p = p.trim();
@@ -681,9 +811,9 @@ public class XmlDomCreate {
 
 			
 			String result = printXML(doc);
-			//return prettyXmlResult;
-			return ((DOMImplementationLS) domImpl).createLSSerializer()
-				    .writeToString(doc);
+			return prettyXmlResult;
+//			return ((DOMImplementationLS) domImpl).createLSSerializer()
+//				    .writeToString(doc);
 			// System.out.println(prettyXmlResult);
 			//return prettyXmlResult;
 			// System.out.println("File saved!");
