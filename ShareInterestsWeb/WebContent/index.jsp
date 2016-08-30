@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Share Interests</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -47,18 +48,18 @@
 	<!-- category -->
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 	<c:forEach items="${category}" var="cat">
-		<div class="panel panel-default">
+		<div class="panel panel-default" style="margin:0px">
     		<div class="panel-heading" role="tab" id="heading${cat.id}">
       			<h4 class="panel-title">
         			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${cat.id}" aria-expanded="false" aria-controls="collapse${item.id}">
-					${cat.name} <span class="badge"> ${cat.size()} </span>      
+					${cat.name} <span class="badge" align="right"> ${cat.size()} </span>      
         			</a>
       			</h4>
     		</div>
-    		<div id="collapse${cat.id}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${cat.id}">
+    		<div id="collapse${cat.id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${cat.id}">
       			<div class="panel-body">
         		<c:forEach items="${cat.hobbyList}" var="hobby">
-        			<a href="#"> ${hobby.title} </a>
+        			<a href="#"> ${hobby.title}, </a>
       			</c:forEach>
       			</div>
     		</div>
