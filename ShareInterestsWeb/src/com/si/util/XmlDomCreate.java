@@ -193,7 +193,7 @@ public class XmlDomCreate {
 				String[] cvs_parts = columns.split(",");
 				for (String p : cvs_parts){
 					if(p.isEmpty()) continue;
-//					System.out.println(">>"+p);
+					System.out.println(">>"+p);
 					Element result = doc.createElement("result");
 					resultMap.appendChild(result);
 					Attr p_id = doc.createAttribute("property");
@@ -245,6 +245,7 @@ public class XmlDomCreate {
 			select_read_list_text += "SELECT "+alias+".id,"+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1";
 			select_read_list.setTextContent(select_read_list_text);
 			for (String p : cvs_parts){
+//				System.out.println("++"+p);
 				p = p.trim();
 				Element isnotnull2 = null;
 				if(isNumberProperty(p)){
@@ -298,13 +299,13 @@ public class XmlDomCreate {
 			
 			select_read.setTextContent(select_read_text);
 			
-			{
-				Element isnotnull = doc.createElement("isNotEqual");
-				select_read.appendChild(isnotnull);
-				isnotnull.setAttribute("property", "id");
-				isnotnull.setAttribute("compareValue", "0");
-				isnotnull.setTextContent(" and "+"id".toUpperCase()+" = #"+"id"+"#");
-			}
+//			{
+//				Element isnotnull = doc.createElement("isNotEqual");
+//				select_read.appendChild(isnotnull);
+//				isnotnull.setAttribute("property", "id");
+//				isnotnull.setAttribute("compareValue", "0");
+//				isnotnull.setTextContent(" and "+"id".toUpperCase()+" = #"+"id"+"#");
+//			}
 			for (String p : cvs_parts){
 				p = p.trim();
 				Element isnotnull2 = null;
@@ -333,7 +334,7 @@ public class XmlDomCreate {
 			String insert_columns = "";
 			int insert_columns_added = 0;
 			for (int i = 0 ; i < cvs_parts.length ; i++){
-				if(cvs_parts[i].toLowerCase().contains("date"))
+				if(cvs_parts[i].toLowerCase().contains("date") || cvs_parts[i].toLowerCase().contains("id"))
 					continue;
 				if (insert_columns_added == 0)
 					insert_columns = cvs_parts[i].trim();
@@ -345,7 +346,7 @@ public class XmlDomCreate {
 			String sharp_p = "";
 			int sharp_p_added = 0;
 			for (int i = 0 ; i < cvs_parts.length ; i++){
-				if(cvs_parts[i].toLowerCase().contains("date"))
+				if(cvs_parts[i].toLowerCase().contains("date") || cvs_parts[i].toLowerCase().contains("date"))
 					continue;
 				String p = cvs_parts[i].trim();
 				if( sharp_p_added == 0)
@@ -436,11 +437,11 @@ public class XmlDomCreate {
 			delete.setTextContent(delete_text);
 			
 			
-			Element isnotnull = doc.createElement("isNotEqual");
-			delete.appendChild(isnotnull);
-			isnotnull.setAttribute("property", "id");
-			isnotnull.setAttribute("compareValue", "0");
-			isnotnull.setTextContent(" and "+"id".toUpperCase()+" = #"+"id"+"#");
+//			Element isnotnull = doc.createElement("isNotEqual");
+//			delete.appendChild(isnotnull);
+//			isnotnull.setAttribute("property", "id");
+//			isnotnull.setAttribute("compareValue", "0");
+//			isnotnull.setTextContent(" and "+"id".toUpperCase()+" = #"+"id"+"#");
 			for (String p : cvs_parts){
 				p = p.trim();
 				Element isnotnull2 = null;
@@ -456,13 +457,13 @@ public class XmlDomCreate {
 				delete.appendChild(isnotnull2);
 			}
 			
-			{
-				isnotnull = doc.createElement("isNotEqual");
-				delete.appendChild(isnotnull);
-				isnotnull.setAttribute("property", "id");
-				isnotnull.setAttribute("compareValue", "0");
-				isnotnull.setTextContent(" WHERE "+"id".toUpperCase()+" = #"+"id"+"#");
-			}
+//			{
+//				isnotnull = doc.createElement("isNotEqual");
+//				delete.appendChild(isnotnull);
+//				isnotnull.setAttribute("property", "id");
+//				isnotnull.setAttribute("compareValue", "0");
+//				isnotnull.setTextContent(" WHERE "+"id".toUpperCase()+" = #"+"id"+"#");
+//			}
 			
 			
 			/**
