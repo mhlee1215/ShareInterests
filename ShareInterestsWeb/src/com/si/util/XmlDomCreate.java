@@ -1,5 +1,7 @@
 package com.si.util;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -24,6 +28,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.DOMImplementationLS;
+
+import com.si.dao.CategoryDao;
 
 public class XmlDomCreate {
 	public static String number_property_strings[] = {"id", "seq_no", "id_contact"};
@@ -114,11 +120,168 @@ public class XmlDomCreate {
 		//params.columns = "`name`, `email`, `password`, `registereddate`, `deleteddate`, `verifieddate`, `status`, `isverified`, `isdeleted`, `type`";
 		//params.orderStr = "";
 		
-		String classDomain = genClassDomain(params);
-		String sqlMapXml = genSqlXML(params);
-//		System.out.println(classDomain);
-		System.out.println(sqlMapXml);
+		writeFiles(params);
+//		String classDomain = genClassDomain(params);
+//		String sqlMapXml = genSqlXML(params);
+////		System.out.println(classDomain);
+//		System.out.println(sqlMapXml);
 		//System.out.println(genClassDomain(params.columns.replace("`",  "")));
+	}
+	
+	public static void writeFiles(QueryParams params){
+//		String classDomain = genClassDomain(params);
+//		String sqlMapXml = genSqlXML(params);
+		
+		{
+			String path = "autoGen/src/com/si/domain";
+			boolean isMade = new File(path).mkdirs();
+			File f = new File(path+"/"+params.name+".java");
+			writeFile(f, genClassDomain(params));
+		}
+		
+		{
+			String path = "autoGen/src/com/si/dao";
+			boolean isMade = new File(path).mkdirs();
+			File f = new File(path+"/"+params.name+"Dao.java");
+			writeFile(f, genDao(params));
+		}
+		
+		{
+			String path = "autoGen/src/com/si/service";
+			boolean isMade = new File(path).mkdirs();
+			File f = new File(path+"/"+params.name+"Service.java");
+			writeFile(f, genService(params));
+		}
+		
+		{
+			String path = "autoGen/src/query";
+			boolean isMade = new File(path).mkdirs();
+			File f = new File(path+"/"+params.name+"Sql.xml");
+			writeFile(f, genSqlXML(params).replaceAll("UTF-16", "UTF-8"));
+		}
+	}
+	
+	public static String genDao(QueryParams params){
+		String result = "";
+		String indent = "";
+		
+		String C = params.className;
+		String c = params.className.toLowerCase();
+		
+		result += indent +"package com.si.dao;\n";
+
+		result += indent +"import java.util.List;\n";
+		result += indent +"import javax.annotation.Resource;\n";
+		result += indent +"import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;\n";
+		result += indent +"import org.springframework.stereotype.Repository;\n";
+		result += indent +"import com.ibatis.sqlmap.client.SqlMapClient;\n";
+		result += indent +"import com.si.domain."+C+";\n\n";
+
+		result += indent +"@Repository\n";
+		result += indent +"public class "+C+"Dao extends SqlMapClientDaoSupport{\n\n";
+			
+		indent = "\t";
+		result += indent +"@Resource(name=\"sqlMapClient\")\n";
+		result += indent +"protected void initDAO(SqlMapClient sqlMapClient) {\n";        
+		result += indent +"\tthis.setSqlMapClient(sqlMapClient);\n";
+		result += indent +"}\n\n"; 
+			
+			
+		result += indent +"@SuppressWarnings(\"unchecked\")\n";
+		
+		result += indent +"public List<"+C+"> read"+C+"List("+C+" "+c+") {\n";	
+		result += indent +"\tList<"+C+"> array = getSqlMapClientTemplate().queryForList(\""+C+"Sql.read"+C+"List\", "+c+");\n";
+		result += indent +"\treturn array;\n";
+		result += indent +"}\n\n";
+
+
+		result += indent +"public "+C+" read"+C+"("+C+" "+c+") {\n";
+		result += indent +"\treturn ("+C+")getSqlMapClientTemplate().queryForObject(\""+C+"Sql.read"+C+"\", "+c+");\n";
+		result += indent +"}\n\n";
+
+
+		result += indent +"public void create"+C+"("+C+" "+c+") {\n";
+		result += indent +"\tgetSqlMapClientTemplate().insert(\"UserSql.create"+C+"\", "+c+");\n";
+		result += indent +"}\n\n";
+
+
+		result += indent +"public void delete"+C+"("+C+" "+c+") {\n";
+		result += indent +"\tgetSqlMapClientTemplate().delete(\""+C+"Sql.delete"+C+"\", "+c+");\n";
+		result += indent +"}\n\n";
+
+
+		result += indent +"public void update"+C+"("+C+" "+c+") {\n";
+		result += indent +"\tgetSqlMapClientTemplate().update(\""+C+"Sql.update"+C+"\", "+c+");\n";
+		result += indent +"}\n";
+		
+		indent = "";
+		result += indent +"}\n";
+
+		
+		
+		return result;
+	}
+	
+	public static String genService(QueryParams params){
+		String result = "";
+		String indent = "";
+		
+		String C = params.className;
+		String c = params.className.toLowerCase();
+		
+		result += indent +"package com.si.service;\n\n";
+
+		result += indent +"import java.util.HashMap;\n";
+		result += indent +"import java.util.List;\n";
+		result += indent +"import java.util.Map;\n";
+		result += indent +"import org.apache.log4j.Logger;\n";
+		result += indent +"import org.springframework.beans.factory.annotation.Autowired;\n";
+		result += indent +"import org.springframework.stereotype.Service;\n";
+		result += indent +"import com.si.dao."+C+"Dao;\n\n";
+
+		result += indent +"@Service\n";
+		result += indent +"public class "+C+"Service{\n";
+		
+		indent = "\t";
+		result += indent +"private Logger logger = Logger.getLogger(getClass());\n\n";
+		result += indent +"@Autowired\n";
+		result += indent +"private "+C+"Dao "+c+"Dao;\n\n";
+		result += indent +"public List<"+C+"> read"+C+"List("+C+" "+c+") {\n";	
+		result += indent +"\treturn "+c+"Dao.read"+C+"List("+c+");\n";
+		result += indent +"}\n\n";
+		
+		result += indent +"public "+C+" read"+C+"("+C+" "+c+") {\n";
+		result += indent +"\treturn "+c+"Dao.read"+C+"("+c+");\n";
+		result += indent +"}\n\n";
+
+
+		result += indent +"public void create"+C+"("+C+" "+c+") {\n";
+		result += indent +"\t"+c+"Dao.create"+C+"("+c+");\n";
+		result += indent +"}\n\n";
+
+		result += indent +"public void delete"+C+"("+C+" "+c+") {\n";
+		result += indent +"\t"+c+"Dao.delete"+C+"("+c+");\n";
+		result += indent +"}\n\n";
+
+		result += indent +"public void update"+C+"("+C+" "+c+") {\n";
+		result += indent +"\t"+c+"Dao.update"+C+"("+c+");\n";
+		result += indent +"}\n\n";
+		indent = "";
+		result += indent +"}\n";
+
+		return result;
+	}
+	
+	public static void writeFile(File f, String s){
+		try {
+			PrintWriter pw = new PrintWriter(f);
+			pw.write(s);
+			pw.flush();
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static String genClassDomain(QueryParams params){
