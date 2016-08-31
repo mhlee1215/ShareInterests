@@ -101,17 +101,20 @@
                                 </div>
                                     
                                 <div class="form-group">
-                                    <label for="firstname" class="col-md-3 control-label">First Name</label>
+                                    <label for="name" class="col-md-3 control-label">Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                                        <input type="text" class="form-control" name="name" placeholder="Name">
                                     </div>
                                 </div>
+                                
+                                <!-- 
                                 <div class="form-group">
                                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="lastname" placeholder="Last Name">
                                     </div>
                                 </div>
+                                 -->
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">Password</label>
                                     <div class="col-md-9">
@@ -119,13 +122,15 @@
                                     </div>
                                 </div>
                                     
+                                <!-- 
                                 <div class="form-group">
                                     <label for="icode" class="col-md-3 control-label">Invitation Code</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="icode" placeholder="">
                                     </div>
                                 </div>
-
+								 -->
+								 
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
