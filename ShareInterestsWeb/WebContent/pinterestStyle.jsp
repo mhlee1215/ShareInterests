@@ -1,76 +1,166 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Share Interests</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-<!-- Navigation Bar -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">Category</a></li>
-            <li><a href="#contact">About</a></li>
-          </ul>
-        </div>
-      </div>
-</div>
-<!-- logo -->
-<div class="container">
-    <div style="margin-top: 100px; text-align: center;">
-        <h1>Share Interests</h1>
-        <p class="lead">Never stop exploring</p>
-    </div>
-      
-	<div class="input-group">
-  	<input type="text" class="form-control">
-  	<span class="input-group-btn">
-    <button class="btn btn-default" type="button">Go!</button>
-  	</span>
-	</div>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-	<!-- category -->
-	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	<c:forEach items="${category}" var="cat">
-		<div class="panel panel-default" style="margin:0px">
-    		<div class="panel-heading" role="tab" id="heading${cat.id}">
-      			<h4 class="panel-title">
-        			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${cat.id}" aria-expanded="false" aria-controls="collapse${item.id}">
-					${cat.name} <span class="badge" align="right"> ${cat.size()} </span>      
-        			</a>
-      			</h4>
-    		</div>
-    		<div id="collapse${cat.id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${cat.id}">
-      			<div class="panel-body">
-        		<c:forEach items="${cat.hobbyList}" var="hobby">
-        			<a href="${cat.name}/${hobby.title}.do"> ${hobby.title}, </a>
-      			</c:forEach>
-      			</div>
-    		</div>
-  		</div>  		
-	</c:forEach>
-	</div>
-	
-	
-	
-</div>
-</body>
-</html>
+<link rel="stylesheet" href="/ShareInterestsWeb/css/pinterest-style.css">
+<script src="/ShareInterestsWeb/js/freewall.js"></script>
+</head>
+<script type="text/javascript">
+		$(document).ready(function() {
+			var wall = new Freewall("#freewall");
+			wall.reset({
+				selector: '.brick',
+				animate: true,
+				cellW: 200,
+				cellH: 'auto',
+				onResize: function() {
+					wall.fitWidth();
+				}
+			});
+
+			wall.container.find('.brick img').load(function() {
+				wall.fitWidth();
+			});
+		});
+
+		</script>
+		<style type="text/css">
+			body {
+				background: rgba(231, 231, 231, 0.43);
+			}
+			.free-wall {
+				margin: 15px;
+			}
+			.brick {
+				width: 221.2px;
+			}
+			.info {
+				padding: 15px;
+				color: #333;
+			}
+			.brick img {
+				margin: 0px;
+				padding: 0px;
+				display: block;
+			}
+		</style>
+<body>
+<div class='header'>
+<jsp:include page="header.jsp"></jsp:include>			
+		</div>
+		<div id="freewall" class="free-wall">
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing2.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing3.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing4.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing2.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/camping2.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/camping1.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/camping4.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing2.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing3.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/camping3.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing4.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing2.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing3.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    <div class="brick">
+		        <img src="/ShareInterestsWeb/assets/surfing4.jpg" width="100%">
+		        <div class="info">
+		            <h3>Freewall</h3>
+		            <h5>Pinterest layout</h5>
+		        </div>
+		    </div>
+		    
+		</div>
+<jsp:include page="footer.jsp"></jsp:include>	
 </body>
 </html>
