@@ -13,8 +13,25 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
+ <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-heading">Share Interests</div>
+                <div class="intro-lead-in">Tell us your Story and More</div>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+    </header>
+    
 <!-- logo -->
 <div class="container" style="display:block;">
+	<!-- Header -->
+   <!-- 
     <div style="margin-top: 100px; text-align: center;">
         <h1>Share Interests</h1>
         <p class="lead">Never stop exploring</p>
@@ -26,6 +43,7 @@
     <button class="btn btn-default" type="button">Go!</button>
   	</span>
 	</div>
+	 -->
 
 	<!-- category -->
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -119,7 +137,7 @@ div.panel2.show {
 }
 </style>
 </div>
-</body>
-</html>
+
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

@@ -104,6 +104,9 @@ $(document).ready(function() {
 
 <body>
 <jsp:include page="header.jsp"/>
+
+
+
 <div class="jumbotron text-center title_text">
   <h1>${hobbyTitle }</h1>
   <p>Resize this responsive page to see the effect!</p> 
