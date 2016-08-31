@@ -15,7 +15,7 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="/ShareInterestsWeb/css/pgwslider.min.css">
-<script src="/ShareInterestsWeb/js/pgwslider.min.js"></script>
+
 
 </head>
 <script type="text/javascript">
@@ -103,6 +103,7 @@ $(document).ready(function() {
 </style>
 
 <body>
+<jsp:include page="header.jsp"/>
 <div class="jumbotron text-center title_text">
   <h1>${hobbyTitle }</h1>
   <p>Resize this responsive page to see the effect!</p> 
@@ -147,5 +148,7 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+<jsp:include page="footer.jsp"/>
+<script src="/ShareInterestsWeb/js/pgwslider.min.js"></script>
 </body>
 </html>
