@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,7 +23,8 @@ $(document).ready(function() {
     $('.pgwSlider').pgwSlider({
     	"maxHeight":300,
     	"displayControls":true,
-    	"verticalCentering":true
+    	"verticalCentering":true,
+    	"intervalDuration":5000
     });
 });
 </script>
@@ -90,7 +92,7 @@ $(document).ready(function() {
 <div class="jumbotron text-center title_text">
   <h1>${hobbyTitle }</h1>
   <p>Resize this responsive page to see the effect!</p> 
-  <button class="button button_like"><span>Like </span></button>
+  <button class="button button_like"><span>324 Likes </span></button>
   <button class="button button_articles"><span>3245 Articles </span></button> 
 </div>
 
