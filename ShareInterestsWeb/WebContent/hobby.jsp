@@ -39,8 +39,8 @@ $(document).ready(function() {
   border: none;
   color: #FFFFFF;
   text-align: center;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 12px;
+  padding: 7px;
   width: 100px;
   transition: all 0.5s;
   cursor: pointer;
@@ -53,9 +53,23 @@ $(document).ready(function() {
   border: none;
   color: #FFFFFF;
   text-align: center;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 12px;
+  padding: 7px;
   width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button_price {
+  border-radius: 4px;
+  background-color: #4CAF50;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  padding: 7px;
+  width: 50px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -94,6 +108,7 @@ $(document).ready(function() {
   <p>Resize this responsive page to see the effect!</p> 
   <button class="button button_like"><span>324 Likes </span></button>
   <button class="button button_articles"><span>3245 Articles </span></button> 
+  <button class="button button_price"><span>$$</span></button>
 </div>
 
 <div class="container" >
