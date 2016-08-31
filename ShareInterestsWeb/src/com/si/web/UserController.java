@@ -73,7 +73,7 @@ public class UserController {
 	
 	@RequestMapping("/login.do")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		/*
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
@@ -105,6 +105,9 @@ public class UserController {
 		}
 		model.addObject("email", email);
 		logger.debug("===[S]======================");
+		*/
+		ModelAndView model = new ModelAndView("login");;
+		model.addObject("active", "login");
 		return model;
     }
 //	
