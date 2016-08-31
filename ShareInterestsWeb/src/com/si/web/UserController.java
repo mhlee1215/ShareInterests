@@ -24,7 +24,7 @@ import com.si.service.UserService;
 
 @Controller
 
-@RequestMapping("/")
+//@RequestMapping("/main")
 public class UserController {
 
 	private Logger logger = Logger.getLogger(getClass());

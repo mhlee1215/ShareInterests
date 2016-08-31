@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:tx="http://www.springframework.org/schema/tx"
- 	xsi:schemaLocation="http://www.springframework.org/schema/beans
- 						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-						http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context-2.5.xsd
-						http://www.springframework.org/schema/jee
-						http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
-						http://www.springframework.org/schema/tx
-						http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+ 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
 						default-autowire="byName">
     
 	
 	 
-	<bean id="dataSource"  class="org.apache.commons.dbcp.BasicDataSource">
-    	<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver" />
-    	<property name="url" value="jdbc:mysql://54.201.96.236:3306/SI" />
-    	<property name="username" value="si" />
-    	<property name="password" value="a12345!" />
+	<beans:bean id="dataSource"  class="org.apache.commons.dbcp.BasicDataSource">
+    	<beans:property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver" />
+    	<beans:property name="url" value="jdbc:mysql://54.201.96.236:3306/SI" />
+    	<beans:property name="username" value="si" />
+    	<beans:property name="password" value="a12345!" />
     	
     	<!-- <property name="url" value="jdbc:sqlite:d:/IR_storage/crawlingData.db" />
     	<property name="username" value="null" />
@@ -31,24 +24,24 @@
     	<property name="username" value="root" />
     	<property name="password" value="12345" />
     	 -->
-    	<property name="testOnBorrow" value="true" />
-        <property name="testWhileIdle" value="true" />
-        <property name="maxActive" value="10" />
-        <property name="validationQuery" value="select 1 from dual" />
-  	</bean> 
+    	<beans:property name="testOnBorrow" value="true" />
+        <beans:property name="testWhileIdle" value="true" />
+        <beans:property name="maxActive" value="10" />
+        <beans:property name="validationQuery" value="select 1 from dual" />
+  	</beans:bean> 
 
 	
 	
 	
 	<!-- transaction manager -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
+    <beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>
 	
-	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation" value="classpath:/conf/sqlMapConfig.xml" />
+	<beans:bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <beans:property name="configLocation" value="classpath:/conf/sqlMapConfig.xml" />
         <!--  <property name="dataSource" ref="dataSource" /> -->
-    </bean>
+    </beans:bean>
 	
 	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
 
@@ -61,9 +54,15 @@
 	<!--
 		Instruct Spring to perform declarative transaction management
 		automatically on annotated classes.
-	-->
-	<tx:annotation-driven />
 	
+	<tx:annotation-driven />-->
+	
+	
+	 
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- <resources mapping="/assets/**" location="/assets/**" /> -->
 
+	 
 	
-</beans>
+	
+</beans:beans>
