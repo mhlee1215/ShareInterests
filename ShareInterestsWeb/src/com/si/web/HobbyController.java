@@ -24,7 +24,7 @@ import com.si.service.UserService;
 
 @Controller
 
-@RequestMapping("/browse")
+//@RequestMapping("/browse")
 public class HobbyController {
 
 	private Logger logger = Logger.getLogger(getClass());
