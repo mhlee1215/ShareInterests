@@ -52,7 +52,7 @@ public class HobbyController {
 		return model;
     }
 	
-	@RequestMapping("/{category_name}/{hobby_title}")
+	@RequestMapping("/{category_name}/{hobby_title}.do")
     public ModelAndView hobby(HttpServletRequest request, HttpServletResponse response
     		,@PathVariable(value = "category_name") String categoryName
 			,@PathVariable(value = "hobby_title") String hobbyTitle
