@@ -67,8 +67,75 @@
 	</c:forEach>
 	</div>
 	
+	<c:forEach items="${category}" var="cat">
+	<button class="accordion2">${cat.name} <span class="badge" align="right"> ${cat.size()} </span>   </button>
+	<div class="panel2">
+	  <div class="panel-body">
+        		<c:forEach items="${cat.hobbyList}" var="hobby">
+        			<a href="${cat.name}/${hobby.title}.do"> ${hobby.title}, </a>
+      			</c:forEach>
+      			</div>
+	</div>
+	</c:forEach>
 	
 	
+	
+	
+<script>
+var acc = document.getElementsByClassName("accordion2");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+  }
+}
+</script>
+<style>
+button.accordion2 {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+button.accordion2.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+button.accordion2:after {
+    content: '\02795';
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion2.active:after {
+    content: "\2796";
+}
+
+div.panel2 {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in-out;
+    opacity: 0;
+}
+
+div.panel2.show {
+    opacity: 1;
+    max-height: 500px;
+}
+</style>
 </div>
 </body>
 </html>
