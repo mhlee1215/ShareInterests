@@ -25,7 +25,7 @@ public class AssetDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createAsset(Asset asset) {
-		getSqlMapClientTemplate().insert("UserSql.createAsset", asset);
+		getSqlMapClientTemplate().insert("AssetSql.createAsset", asset);
 	}
 
 	public void deleteAsset(Asset asset) {

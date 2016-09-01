@@ -36,7 +36,7 @@ public class XmlDomCreate {
 	public static String number_property_strings[] = {"id", "seq_no", "id_contact", "level"};
 	public static ArrayList<String> number_property_list= new ArrayList<String>();
 	
-	public static String number_str_strings[] = {"price", "min", "max", "level"};
+	public static String number_str_strings[] = {"price", "min", "max", "level", "hour", "id"};
 	public static ArrayList<String> number_str_list= new ArrayList<String>();
 	
 	public static String date_update_in_update_strings[] = {"modifieddate"};
@@ -116,7 +116,7 @@ public class XmlDomCreate {
 		params.name = "Article";
 		params.packageName = "com.si.domain";
 		params.className = params.packageName+"."+params.name;
-		params.columns = "`id`, `authorId`, `hobbyId`, `date`, `priceMin`, `priceMax`, `description`";
+		params.columns = "`id`, `authorId`, `hobbyId`, `date`, `priceMin`, `priceMax`, `description`, `practiceHour`";
 		params.extra_columns = "";
 		params.orderStr = "";
 		qList.add(params);
@@ -273,7 +273,7 @@ public class XmlDomCreate {
 
 
 		result += indent +"public void create"+C+"("+C+" "+c+") {\n";
-		result += indent +"\tgetSqlMapClientTemplate().insert(\"UserSql.create"+C+"\", "+c+");\n";
+		result += indent +"\tgetSqlMapClientTemplate().insert(\""+C+"Sql.create"+C+"\", "+c+");\n";
 		result += indent +"}\n\n";
 
 
@@ -358,7 +358,7 @@ public class XmlDomCreate {
 	}
 	
 	public static String genClassDomain(QueryParams params){
-		String columns = params.columns.replace("`", "");
+		String columns = params.columns.replace("`", "").replace("'", "");
 		String ex_columns = params.extra_columns;
 		
 		String resultStr = "";
@@ -379,7 +379,7 @@ public class XmlDomCreate {
 			
 			String type = "";
 			
-			if(p.toLowerCase().contains("id") || p.toLowerCase().contains("price") || number_str_list.contains(p)){
+			if(XmlDomCreate.isNumberProperty(p)){
 				type = "int";
 				resultStr += indent + type + " "+p+" = 0;\n";
 			}
@@ -411,6 +411,8 @@ public class XmlDomCreate {
 		}
 		
 		
+		resultStr += indent + "\n";
+		
 		for(int i = 0 ; i < typeList.size() ; i++){
 			String tt = typeList.get(i);
 			String nn = nameList.get(i);
@@ -421,8 +423,23 @@ public class XmlDomCreate {
 			
 			resultStr += indent + "public void set"+getFirstUpper(nn)+"("+tt+" "+nn+"){\n";
 			resultStr += indent + "\tthis."+nn+" = "+nn+";\n";
-			resultStr += indent + "}\n";
+			resultStr += indent + "}\n\n";
 		}
+		
+		
+		resultStr += indent + "public String toString() {\n";
+		
+		resultStr += indent + "\treturn \"{";
+		for(int i = 0 ; i < nameList.size() ; i++){
+			String nn = nameList.get(i);
+			if( i > 0) resultStr += ",";
+			resultStr += "\\\""+nn+"\\\":\\\"\" + "+nn+" + \"\\\"";
+		}
+		resultStr += "}\";\n";
+		resultStr += indent + "}\n\n";
+		
+		
+		
 		
 		indent = "";
 		resultStr += indent + "}";
@@ -523,6 +540,8 @@ public class XmlDomCreate {
 			
 			String select_columns = "";
 			for (int i = 0 ; i < cvs_parts.length ; i++){
+				if(cvs_parts[i].trim().length() == 0) continue;
+				
 				if (i == 0)
 					select_columns = alias+"."+cvs_parts[i].trim();
 				else 
@@ -530,17 +549,19 @@ public class XmlDomCreate {
 			}
 			
 			for (int i = 0 ; i < ex_cvs_parts.length ; i++){
+				if(ex_cvs_parts[i].trim().length() == 0) continue;
 				select_columns += ", '' "+ex_cvs_parts[i].trim();
 			}
 			
 			String select_read_list_text = "";
 			select_read_list_text += "\n\t\t/*select read list "+name+"*/";
-			select_read_list_text += "\n\t\tSELECT "+alias+".id,"+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1\n\t\t";
+			select_read_list_text += "\n\t\tSELECT "+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1\n\t\t";
 			select_read_list.setTextContent(select_read_list_text);
 			for (String p : cvs_parts){
 //				System.out.println("++"+p);
 				p = p.trim();
 				Element isnotnull2 = null;
+				System.out.println("["+p+"]:"+isNumberProperty(p));
 				if(isNumberProperty(p)){
 					isnotnull2 = doc.createElement("isNotEqual");
 					isnotnull2.setAttribute("property", p);
@@ -588,7 +609,7 @@ public class XmlDomCreate {
 			
 			String select_read_text = "";
 			select_read_text += "\n\t\t/*select read "+name+"*/";
-			select_read_text += "\n\t\tSELECT "+alias+".id,"+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1 \n\t\t";
+			select_read_text += "\n\t\tSELECT "+select_columns+" FROM "+name.toLowerCase()+" "+alias+" WHERE 1=1 \n\t\t";
 			
 			select_read.setTextContent(select_read_text);
 			
@@ -828,6 +849,8 @@ public class XmlDomCreate {
 	
 	public static boolean isNumberProperty(String str){
 		boolean isNumber = false;
+		
+		str = str.toLowerCase();
 		
 		if(number_property_list.contains(str))
 			isNumber = true;

@@ -1,23 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="ArticleSql"><resultMap class="com.si.domain.Article" id="Article"><result column="ID" property="id"/><result column="AUTHORID" property="authorId"/><result column="HOBBYID" property="hobbyId"/><result column="DATE" property="date"/><result column="PRICEMIN" property="priceMin"/><result column="PRICEMAX" property="priceMax"/><result column="DESCRIPTION" property="description"/></resultMap><select id="readArticleList" parameterClass="com.si.domain.Article" resultMap="Article">
+<sqlMap namespace="ArticleSql">
+	<resultMap class="com.si.domain.Article" id="Article">
+		<result column="ID" property="id" />
+		<result column="AUTHORID" property="authorId" />
+		<result column="HOBBYID" property="hobbyId" />
+		<result column="DATE" property="date" />
+		<result column="PRICEMIN" property="priceMin" />
+		<result column="PRICEMAX" property="priceMax" />
+		<result column="DESCRIPTION" property="description" />
+		<result column="PRACTICEHOUR" property="practiceHour" />
+	</resultMap>
+	<select id="readArticleList" parameterClass="com.si.domain.Article"
+		resultMap="Article">
 		/*select read list Article*/
-		SELECT a.id,a.id, a.authorId, a.hobbyId, a.date, a.priceMin, a.priceMax, a.description, ''  FROM article a WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="authorId"> and a.AUTHORID = #authorId#</isNotEmpty><isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyId#</isNotEmpty><isNotEmpty property="date"> and a.DATE = #date#</isNotEmpty><isNotEqual compareValue="0" property="priceMin"> and a.PRICEMIN = #priceMin#</isNotEqual><isNotEqual compareValue="0" property="priceMax"> and a.PRICEMAX = #priceMax#</isNotEqual><isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty><isNotEqual compareValue="0" property="query_number"> LIMIT #query_start#,#query_number#</isNotEqual></select><select id="readArticle" parameterClass="com.si.domain.Article" resultMap="Article">
+		SELECT a.id, a.authorId, a.hobbyId,
+		a.date, a.priceMin, a.priceMax, a.description, a.practiceHour FROM
+		article a WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
+		</isNotEqual>
+		<isNotEqual compareValue="0" property="authorId"> and a.AUTHORID =
+			#authorId#</isNotEqual>
+		<isNotEqual compareValue="0" property="hobbyId"> and a.HOBBYID =
+			#hobbyId#</isNotEqual>
+		<isNotEmpty property="date"> and a.DATE = #date#</isNotEmpty>
+		<isNotEqual compareValue="0" property="priceMin"> and a.PRICEMIN =
+			#priceMin#</isNotEqual>
+		<isNotEqual compareValue="0" property="priceMax"> and a.PRICEMAX =
+			#priceMax#</isNotEqual>
+		<isNotEmpty property="description"> and a.DESCRIPTION = #description#
+		</isNotEmpty>
+		<isNotEqual compareValue="0" property="practiceHour"> and a.PRACTICEHOUR =
+			#practiceHour#</isNotEqual>
+		<isNotEqual compareValue="0" property="query_number"> LIMIT
+			#query_start#,#query_number#</isNotEqual>
+	</select>
+	<select id="readArticle" parameterClass="com.si.domain.Article"
+		resultMap="Article">
 		/*select read Article*/
-		SELECT a.id,a.id, a.authorId, a.hobbyId, a.date, a.priceMin, a.priceMax, a.description, ''  FROM article a WHERE 1=1 
-		<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="authorId"> and a.AUTHORID = #authorId#</isNotEmpty><isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyId#</isNotEmpty><isNotEmpty property="date"> and a.DATE = #date#</isNotEmpty><isNotEqual compareValue="0" property="priceMin"> and a.PRICEMIN = #priceMin#</isNotEqual><isNotEqual compareValue="0" property="priceMax"> and a.PRICEMAX = #priceMax#</isNotEqual><isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty></select><insert id="createArticle" parameterClass="com.si.domain.Article">
+		SELECT a.id, a.authorId, a.hobbyId, a.date,
+		a.priceMin, a.priceMax, a.description, a.practiceHour FROM article a
+		WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
+		</isNotEqual>
+		<isNotEqual compareValue="0" property="authorId"> and a.AUTHORID =
+			#authorId#</isNotEqual>
+		<isNotEqual compareValue="0" property="hobbyId"> and a.HOBBYID =
+			#hobbyId#</isNotEqual>
+		<isNotEmpty property="date"> and a.DATE = #date#</isNotEmpty>
+		<isNotEqual compareValue="0" property="priceMin"> and a.PRICEMIN =
+			#priceMin#</isNotEqual>
+		<isNotEqual compareValue="0" property="priceMax"> and a.PRICEMAX =
+			#priceMax#</isNotEqual>
+		<isNotEmpty property="description"> and a.DESCRIPTION = #description#
+		</isNotEmpty>
+		<isNotEqual compareValue="0" property="practiceHour"> and a.PRACTICEHOUR =
+			#practiceHour#</isNotEqual>
+	</select>
+	<insert id="createArticle" parameterClass="com.si.domain.Article">
 		/* insert Article*/
-		INSERT INTO article(authorId, hobbyId, date, priceMin, priceMax, description) 
-		VALUES (#authorId#, #hobbyId#, #date#, #priceMin#, #priceMax#, #description#)
-	</insert><update id="updateArticle" parameterClass="com.si.domain.Article">
+		INSERT INTO article(authorId, hobbyId, date, priceMin, priceMax,
+		description, practiceHour)
+		VALUES (#authorId#, #hobbyId#, #date#, #priceMin#, #priceMax#,
+		#description#, #practiceHour#)
+	</insert>
+	<update id="updateArticle" parameterClass="com.si.domain.Article">
 		/* update Article*/
 		update article SET ID = #id#
-		<isNotEqual compareValue="0" property="id">,ID = #id#</isNotEqual><isNotEmpty property="authorId">,AUTHORID = #authorId#</isNotEmpty><isNotEmpty property="hobbyId">,HOBBYID = #hobbyId#</isNotEmpty><isNotEqual compareValue="0" property="priceMin">,PRICEMIN = #priceMin#</isNotEqual><isNotEqual compareValue="0" property="priceMax">,PRICEMAX = #priceMax#</isNotEqual><isNotEmpty property="description">,DESCRIPTION = #description#</isNotEmpty><isNotEqual compareValue="0" property="id"> WHERE ID = #id#</isNotEqual></update><delete id="deleteArticle" parameterClass="com.si.domain.Article">
+		<isNotEqual compareValue="0" property="id">,ID = #id#
+		</isNotEqual>
+		<isNotEqual compareValue="0" property="authorId">,AUTHORID =
+			#authorId#</isNotEqual>
+		<isNotEqual compareValue="0" property="hobbyId">,HOBBYID = #hobbyId#
+		</isNotEqual>
+		<isNotEqual compareValue="0" property="priceMin">,PRICEMIN =
+			#priceMin#</isNotEqual>
+		<isNotEqual compareValue="0" property="priceMax">,PRICEMAX =
+			#priceMax#</isNotEqual>
+		<isNotEmpty property="description">,DESCRIPTION = #description#
+		</isNotEmpty>
+		<isNotEqual compareValue="0" property="practiceHour">,PRACTICEHOUR =
+			#practiceHour#</isNotEqual>
+		<isNotEqual compareValue="0" property="id"> WHERE ID = #id#
+		</isNotEqual>
+	</update>
+	<delete id="deleteArticle" parameterClass="com.si.domain.Article">
 		/*delete Article*/
 		delete FROM article WHERE 1=1
-		<isNotEqual compareValue="0" property="id"> and ID = #id#</isNotEqual><isNotEmpty property="authorId"> and AUTHORID = #authorId#</isNotEmpty><isNotEmpty property="hobbyId"> and HOBBYID = #hobbyId#</isNotEmpty><isNotEmpty property="date"> and DATE = #date#</isNotEmpty><isNotEqual compareValue="0" property="priceMin"> and PRICEMIN = #priceMin#</isNotEqual><isNotEqual compareValue="0" property="priceMax"> and PRICEMAX = #priceMax#</isNotEqual><isNotEmpty property="description"> and DESCRIPTION = #description#</isNotEmpty></delete><select id="countArticle" parameterClass="com.si.domain.Article" resultClass="int">
+		<isNotEqual compareValue="0" property="id"> and ID = #id#
+		</isNotEqual>
+		<isNotEqual compareValue="0" property="authorId"> and AUTHORID =
+			#authorId#</isNotEqual>
+		<isNotEqual compareValue="0" property="hobbyId"> and HOBBYID =
+			#hobbyId#</isNotEqual>
+		<isNotEmpty property="date"> and DATE = #date#</isNotEmpty>
+		<isNotEqual compareValue="0" property="priceMin"> and PRICEMIN =
+			#priceMin#</isNotEqual>
+		<isNotEqual compareValue="0" property="priceMax"> and PRICEMAX =
+			#priceMax#</isNotEqual>
+		<isNotEmpty property="description"> and DESCRIPTION = #description#
+		</isNotEmpty>
+		<isNotEqual compareValue="0" property="practiceHour"> and PRACTICEHOUR =
+			#practiceHour#</isNotEqual>
+	</delete>
+	<select id="countArticle" parameterClass="com.si.domain.Article"
+		resultClass="int">
 		/*count Article*/
-		SELECT count(*) FROM article a WHERE 1=1 
+		SELECT count(*) FROM article a WHERE 1=1
 
-<isNotEqual compareValue="0" property="id"> and a.ID = #id#</isNotEqual><isNotEmpty property="authorId"> and a.AUTHORID = #authorId#</isNotEmpty><isNotEmpty property="hobbyId"> and a.HOBBYID = #hobbyId#</isNotEmpty><isNotEmpty property="date"> and a.DATE = #date#</isNotEmpty><isNotEqual compareValue="0" property="priceMin"> and a.PRICEMIN = #priceMin#</isNotEqual><isNotEqual compareValue="0" property="priceMax"> and a.PRICEMAX = #priceMax#</isNotEqual><isNotEmpty property="description"> and a.DESCRIPTION = #description#</isNotEmpty></select></sqlMap>
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
+		</isNotEqual>
+		<isNotEqual compareValue="0" property="authorId"> and a.AUTHORID =
+			#authorId#</isNotEqual>
+		<isNotEqual compareValue="0" property="hobbyId"> and a.HOBBYID =
+			#hobbyId#</isNotEqual>
+		<isNotEmpty property="date"> and a.DATE = #date#</isNotEmpty>
+		<isNotEqual compareValue="0" property="priceMin"> and a.PRICEMIN =
+			#priceMin#</isNotEqual>
+		<isNotEqual compareValue="0" property="priceMax"> and a.PRICEMAX =
+			#priceMax#</isNotEqual>
+		<isNotEmpty property="description"> and a.DESCRIPTION = #description#
+		</isNotEmpty>
+		<isNotEqual compareValue="0" property="practiceHour"> and a.PRACTICEHOUR =
+			#practiceHour#</isNotEqual>
+	</select>
+</sqlMap>

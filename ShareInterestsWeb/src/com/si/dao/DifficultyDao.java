@@ -25,7 +25,7 @@ public class DifficultyDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createDifficulty(Difficulty difficulty) {
-		getSqlMapClientTemplate().insert("UserSql.createDifficulty", difficulty);
+		getSqlMapClientTemplate().insert("DifficultySql.createDifficulty", difficulty);
 	}
 
 	public void deleteDifficulty(Difficulty difficulty) {

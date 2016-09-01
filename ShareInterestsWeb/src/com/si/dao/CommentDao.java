@@ -25,7 +25,7 @@ public class CommentDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createComment(Comment comment) {
-		getSqlMapClientTemplate().insert("UserSql.createComment", comment);
+		getSqlMapClientTemplate().insert("CommentSql.createComment", comment);
 	}
 
 	public void deleteComment(Comment comment) {

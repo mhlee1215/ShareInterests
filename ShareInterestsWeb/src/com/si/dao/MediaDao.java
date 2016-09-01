@@ -25,7 +25,7 @@ public class MediaDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createMedia(Media media) {
-		getSqlMapClientTemplate().insert("UserSql.createMedia", media);
+		getSqlMapClientTemplate().insert("MediaSql.createMedia", media);
 	}
 
 	public void deleteMedia(Media media) {

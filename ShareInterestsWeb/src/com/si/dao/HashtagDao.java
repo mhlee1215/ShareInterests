@@ -25,7 +25,7 @@ public class HashtagDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createHashtag(Hashtag hashtag) {
-		getSqlMapClientTemplate().insert("UserSql.createHashtag", hashtag);
+		getSqlMapClientTemplate().insert("HashtagSql.createHashtag", hashtag);
 	}
 
 	public void deleteHashtag(Hashtag hashtag) {

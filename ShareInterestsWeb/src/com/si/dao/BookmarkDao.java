@@ -25,7 +25,7 @@ public class BookmarkDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createBookmark(Bookmark bookmark) {
-		getSqlMapClientTemplate().insert("UserSql.createBookmark", bookmark);
+		getSqlMapClientTemplate().insert("BookmarkSql.createBookmark", bookmark);
 	}
 
 	public void deleteBookmark(Bookmark bookmark) {

@@ -25,7 +25,7 @@ public class FeedbackDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createFeedback(Feedback feedback) {
-		getSqlMapClientTemplate().insert("UserSql.createFeedback", feedback);
+		getSqlMapClientTemplate().insert("FeedbackSql.createFeedback", feedback);
 	}
 
 	public void deleteFeedback(Feedback feedback) {

@@ -131,7 +131,7 @@
                     this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
                     this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
                     this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
-                    this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);
+                    this.abort = $("<div class='abort'>Abort</div>").appendTo(this.statusbar);
                      
                     obj.after(this.statusbar);
                   

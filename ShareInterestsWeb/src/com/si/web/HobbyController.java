@@ -19,8 +19,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.si.domain.Article;
 import com.si.domain.Category;
 import com.si.domain.User;
+import com.si.service.ArticleService;
 import com.si.service.CategoryService;
 import com.si.service.UserService;
 
@@ -29,10 +31,9 @@ import com.si.service.UserService;
 
 @Controller
 
-//@RequestMapping("/browse")
+@RequestMapping("/test")
 public class HobbyController {
-
-	private Logger logger = Logger.getLogger(getClass());
+private Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired
 	private final UserService userService = null;
@@ -97,6 +98,8 @@ public class HobbyController {
          
         return "success";
     }
+     
+	
      
 	
 }

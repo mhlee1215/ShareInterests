@@ -25,7 +25,7 @@ public class ArticleDao extends SqlMapClientDaoSupport{
 	}
 
 	public void createArticle(Article article) {
-		getSqlMapClientTemplate().insert("UserSql.createArticle", article);
+		getSqlMapClientTemplate().insert("ArticleSql.createArticle", article);
 	}
 
 	public void deleteArticle(Article article) {
