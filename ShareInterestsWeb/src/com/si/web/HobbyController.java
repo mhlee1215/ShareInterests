@@ -31,7 +31,7 @@ import com.si.service.UserService;
 
 @Controller
 
-@RequestMapping("/test")
+//@RequestMapping("/test")
 public class HobbyController {
 private Logger logger = Logger.getLogger(getClass());
 	
@@ -54,7 +54,9 @@ private Logger logger = Logger.getLogger(getClass());
 //		List<Category> categoryList = categoryService.findAll();
 //		System.out.println("JH: "+ categoryList);
 		ModelAndView model = new ModelAndView("article");
-//		
+		model.addObject("categoryName", categoryName);
+		model.addObject("hobbyTitle", hobbyTitle);
+		model.addObject("action", action);
 		return model;
     }
 	

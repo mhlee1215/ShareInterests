@@ -14,20 +14,11 @@
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/ShareInterestsWeb/css/pgwslider.min.css">
 
+<link rel="stylesheet" href="/ShareInterestsWeb/css/simplemde.min.css">
+<script src="/ShareInterestsWeb/js/simplemde.min.js"></script>
 
 </head>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('.pgwSlider').pgwSlider({
-    	"maxHeight":300,
-    	"displayControls":true,
-    	"verticalCentering":true,
-    	"intervalDuration":5000
-    });
-});
-</script>
 <style>
 .title_text {
     text-transform: uppercase;
@@ -109,48 +100,22 @@ $(document).ready(function() {
 
 <div class="jumbotron text-center title_text">
   <h1>${hobbyTitle }</h1>
-  <p>Resize this responsive page to see the effect!</p> 
-  <button class="button button_like"><span>324 Likes </span></button>
-  <button class="button button_articles"><span>3245 Articles </span></button> 
-  <button class="button button_price"><span>$$</span></button>
+  <p>now writing by ${action}</p> 
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
+simplemde.value("This text will appear in the editor");
+});
+</script>
 
 <div class="container" >
-<ul class="pgwSlider">
-    <li><img src="/ShareInterestsWeb/assets/surfing.jpg" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars"></li>
-    <li><img src="/ShareInterestsWeb/assets/surfing.jpg" alt="Montréal, QC, Canada" data-large-src="/ShareInterestsWeb/assets/surfing.jpg"></li>
-    <li>
-        <img src="/ShareInterestsWeb/assets/surfing.jpg">
-        <span>Shanghai, China</span>
-    </li>
-    <li>
-        <a href="http://www.nyc.gov" target="_blank">
-            <img src="/ShareInterestsWeb/assets/surfing.jpg">
-	    <span>New York, NY, USA</span>
-        </a>
-    </li>
-</ul>
+	<textarea id="MyID">
+	</textarea>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 3</h3> 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
-</div>
+
 <jsp:include page="footer.jsp"/>
 <script src="/ShareInterestsWeb/js/pgwslider.min.js"></script>
 </body>
