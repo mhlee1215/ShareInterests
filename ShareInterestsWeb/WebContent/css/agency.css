@@ -219,10 +219,11 @@ fieldset[disabled] .btn-xl.active {
 @media (min-width: 768px) {
   .navbar-custom.affix {
     background-color: #222222;
-    padding: 10px 0;
+    padding: 0px 0;
+    font-size: .8em;
   }
   .navbar-custom.affix .navbar-brand {
-    font-size: 1.5em;
+    
   }
 }
 header {

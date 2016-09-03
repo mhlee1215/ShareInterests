@@ -17,8 +17,8 @@ public class UserDao extends SqlMapClientDaoSupport{
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<User> findAll() {	
-		List<User> array = getSqlMapClientTemplate().queryForList("UserSql.readUserList");
+	public List<User> readUserList(User user) {	
+		List<User> array = getSqlMapClientTemplate().queryForList("UserSql.readUserList", user);
 		return array;
 	}
 

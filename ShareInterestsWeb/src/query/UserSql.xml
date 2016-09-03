@@ -7,50 +7,40 @@
 	<resultMap id="User" class="com.si.domain.User">
 		<result column="ID" property="id" />
 		<result column="NAME" property="name" />
+		<result column="EMAIL" property="email" />
  	</resultMap>
  	
- 	
- 	
- 	<select id="readUserList" resultMap="User">
- 		SELECT ID, NAME 
+ 	<select id="readUserList" resultMap="User" parameterClass="com.si.domain.User">
+ 		SELECT ID, NAME, EMAIL
  		FROM user
- 		
  	</select>
  	
-	<!-- <select id="readUser" resultMap="User">
-       SELECT ID, NAME, EMAIL, TYPE, ISVERIFIED, ISDELETED, REGISTEREDDATE, DELETEDDATE, VERIFIEDDATE 
-       FROM rs_user 
+	<select id="readUser" resultMap="User">
+       SELECT ID, NAME, EMAIL 
+       FROM user 
        WHERE EMAIL = #email# 
        <isNotEmpty property="password">
        and PASSWORD = #password#
        </isNotEmpty>
 	</select>
-
-	<insert id="createUser" parameterClass="com.respace.domain.RS_User">
+ 
+	<insert id="createUser" parameterClass="com.si.domain.User">
 		 INSERT INTO
-		 rs_user (EMAIL, PASSWORD, TYPE)
-		 VALUES (#email#, #password#, #type#)
+		 rs_user (NAME, EMAIL, PASSWORD)
+		 VALUES (#name#, #email#, #password#)
 	</insert>
 	
-	<update id="updateUser" parameterClass="com.respace.domain.RS_User">
-		 UPDATE rs_user SET
+	<update id="updateUser" parameterClass="com.si.domain.User">
+		 UPDATE user SET
 		 ID = #id#
 		 <isNotEmpty property="password">
 		 ,PASSWORD = #password#
 		 </isNotEmpty>
-		 <isNotEmpty property="type">
-		 ,TYPE = #type#
-		 </isNotEmpty>
-		 <isNotEmpty property="isverified">
-		 ,ISVERIFIED = #isverified#
-		 ,VERIFIEDDATE = DATE_FORMAT(now(), "%Y%m%d%H%i%s")
-		 </isNotEmpty>
-		 <isNotEmpty property="isdeleted">
-		 ,ISDELETED = #isdeleted#
-		 ,DELETEDDATE = DATE_FORMAT(now(), "%Y%m%d%H%i%s")
+		 <isNotEmpty property="email">
+		 ,EMAIL = #email#
 		 </isNotEmpty>
 		 WHERE ID = #id# 
-	</update> -->
+	</update>
 </sqlMap>
 
 

@@ -1,5 +1,11 @@
 package com.si.util;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+
+//import org.apache.catalina.util.Base64;
+import javax.xml.bind.DatatypeConverter;
+
 public class Crypto {
 	/**
 	 * ?�일?�호?�에 ?�이??버퍼 ?�기 �?��
@@ -74,18 +80,33 @@ public class Crypto {
 	 * @exception Exception
 	 */
 	public static String encrypt(String ID) throws Exception {
-		if (ID == null || ID.length() == 0)
-			return "";
-		javax.crypto.Cipher cipher = javax.crypto.Cipher.getInstance("DES/ECB/PKCS5Padding");
-		cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, getKey());
-		String amalgam = ID;
-
-		byte[] inputBytes1 = amalgam.getBytes("UTF8");
-		byte[] outputBytes1 = cipher.doFinal(inputBytes1);
-		sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
-		String outputStr1 = encoder.encode(outputBytes1);
-		return outputStr1;
+		return encryptSHA(ID);
+		
+//		if (ID == null || ID.length() == 0)
+//			return "";
+//		javax.crypto.Cipher cipher = javax.crypto.Cipher.getInstance("DES/ECB/PKCS5Padding");
+//		cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, getKey());
+//		String amalgam = ID;
+//
+//		byte[] inputBytes1 = amalgam.getBytes("UTF8");
+//		byte[] outputBytes1 = cipher.doFinal(inputBytes1);
+//		sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+//		String outputStr1 = encoder.encode(outputBytes1);
+//		return outputStr1;
 	}
+	
+	private static String encryptSHA(String plainText) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            byte[] bytes = plainText.getBytes(Charset.forName("UTF-8"));
+            md.update(bytes);
+            return DatatypeConverter.printBase64Binary(md.digest());
+        } catch (Exception e) {
+            System.out.println("Sha512 error.");
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 	/**
 	 * 문자????�� 복호??
@@ -163,8 +184,8 @@ public class Crypto {
 		String password = "a123411112312";
 		password = Crypto.encrypt(password);
 		System.out.println("Encrypted : "+password);
-		password = Crypto.decrypt(password);
-		System.out.println("Decrypted : "+password);
+//		password = Crypto.decrypt(password);
+//		System.out.println("Decrypted : "+password);
 		
 //		
 //		if (ars.length < 2) {

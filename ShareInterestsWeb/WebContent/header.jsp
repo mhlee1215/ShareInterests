@@ -24,7 +24,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="/ShareInterestsWeb/css/agency.min.css" rel="stylesheet">
+    <link href="/ShareInterestsWeb/css/agency.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,6 +38,11 @@
 	}
 	</style>
 </head>
+
+<%
+	String contextPath = request.getContextPath();
+System.out.println(contextPath);
+%>
 
 <body id="page-top" class="index">
 
@@ -59,13 +64,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Category</a>
+                        <a class="page-scroll" href="<%=contextPath%>/about.do">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#team">About</a>
+                        <a class="page-scroll" href="<%=contextPath%>/index.do">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">Junghuk</a>
+                        <a class="page-scroll" href="<%=contextPath%>/login.do">Sign In</a>
                     </li>
                 </ul>
             </div>

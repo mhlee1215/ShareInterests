@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -110,6 +112,37 @@ public class UserController {
 		model.addObject("active", "login");
 		return model;
     }
+	
+	@RequestMapping("/requestLogin.do")
+	public @ResponseBody String requestLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String email = ServletRequestUtils.getStringParameter(request, "email", "");
+		String password = ServletRequestUtils.getStringParameter(request, "password", "");
+		
+		logger.debug("public ModelAndView login");
+		logger.debug("===[S]======================");
+		logger.debug("email : "+email);
+		logger.debug("password : "+password);
+		User user = new User();
+		user.setEmail(email);
+		user.setPassword(password);
+		
+		int result = userService.readUser(user);
+		
+		
+		if(result == User.STATUS_NOT_FOUNDED){
+			
+			System.out.println("User does not exist! or password is wrong.");
+			return "notfound";
+		}
+		else if(result == User.STATUS_FOUNDED){
+			System.out.println("User is founded!");
+						
+			return "success";
+		}
+		
+		return "error";
+	}
+	
 //	
 	@RequestMapping("/register.do")
     public ModelAndView register(HttpServletRequest request, HttpServletResponse response) throws Exception {

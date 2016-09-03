@@ -7,13 +7,47 @@
     <meta name="author" content="">
 	<title>SignIn - WSnippets</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 <script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<style>
+.si_header {
+	background-color: #777 !important;
+	color: #FFF !important;
+	padding-top:58px !important;
+	padding-bottom:8px !important;
+}
+</style>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	function goRequestLogin(){
+		
+		$.ajax({
+			url: "requestLogin.do",
+		    data: {
+		    	email:$("#login-username").val(),
+		    	password:$("#login-password").val()
+		    },
+		  success: function( result ) {
+			  alert(result);
+			  //document.location = 'loginSuccess.do';				
+		  }
+		});
+	}
+	
+	$("#btn-login").on("click", function(event){
+		goRequestLogin();
+	});
+});
+</script>
    </head>
-
   <body>
+  <jsp:include page="header.jsp"></jsp:include>
+  <div class="jumbotron text-center si_header">
+	  <h1>Sign in</h1>
+	  <p>Resize this responsive page to see the effect!</p> 
+  </div>
     <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
@@ -158,6 +192,6 @@
                 
          </div> 
     </div>
-    
+  <jsp:include page="footer.jsp"></jsp:include>
   </body>
 </html>

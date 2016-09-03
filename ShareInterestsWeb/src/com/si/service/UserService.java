@@ -26,8 +26,8 @@ public class UserService {
 	
 	boolean isEncrypt = true;
 
-	public List<User> findAll() {
-		return userDao.findAll();
+	public List<User> readUserList(User user) {
+		return userDao.readUserList(user);
 	}
 
 	public int createUser(User user) throws Exception {
