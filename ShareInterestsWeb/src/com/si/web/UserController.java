@@ -20,6 +20,7 @@ import com.si.domain.Category;
 import com.si.domain.User;
 import com.si.service.CategoryService;
 import com.si.service.UserService;
+import com.si.util.SISessionManager;
 
 
 
@@ -30,94 +31,65 @@ import com.si.service.UserService;
 public class UserController {
 
 	private Logger logger = Logger.getLogger(getClass());
-	
+
 	@Autowired
 	private final UserService userService = null;
-	
+
 	@Autowired
 	private final CategoryService categoryService = null;
-	
-	@RequestMapping("/index.do")
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-//		String submittedUserId = ServletRequestUtils.getStringParameter(request, "submittedUserId", "");
-//		String loginComplete = ServletRequestUtils.getStringParameter(request, "loginComplete", "false");
-//		String loginFail = ServletRequestUtils.getStringParameter(request, "loginFail", "false");
-//		String logoutComplete = ServletRequestUtils.getStringParameter(request, "logoutComplete", "false");
-//		String registerComplete = ServletRequestUtils.getStringParameter(request, "registerComplete", "false");
-//		String registerFail = ServletRequestUtils.getStringParameter(request, "registerFail", "false");
-//	    String userid = (String)request.getSession().getAttribute("userid");
-//	    String user_type = (String) request.getSession().getAttribute("user_type");
-//	    
-//	   
-//	    String language = (String)request.getSession().getAttribute("lang");
-//		//LanguagePack lang = LanguageServiceImpl.getLangPack(language);
-		
+	@RequestMapping("/index.do")
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		//		String submittedUserId = ServletRequestUtils.getStringParameter(request, "submittedUserId", "");
+		//		String loginComplete = ServletRequestUtils.getStringParameter(request, "loginComplete", "false");
+		//		String loginFail = ServletRequestUtils.getStringParameter(request, "loginFail", "false");
+		//		String logoutComplete = ServletRequestUtils.getStringParameter(request, "logoutComplete", "false");
+		//		String registerComplete = ServletRequestUtils.getStringParameter(request, "registerComplete", "false");
+		//		String registerFail = ServletRequestUtils.getStringParameter(request, "registerFail", "false");
+		//	    String userid = (String)request.getSession().getAttribute("userid");
+		//	    String user_type = (String) request.getSession().getAttribute("user_type");
+		//	    
+		//	   
+		//	    String language = (String)request.getSession().getAttribute("lang");
+		//		//LanguagePack lang = LanguageServiceImpl.getLangPack(language);
+
 		List<Category> categoryList = categoryService.findAll();
 		System.out.println("JH: "+ categoryList);
-		ModelAndView model = new ModelAndView("index");
+		ModelAndView model = SISessionManager.SIModelAndView("index", request);
 		model.addObject("category", categoryList);
-		
-		
+
+
 		//model.addObject("page_title", lang.getStringHazardReportingSystem());
-//		model.addObject("loginComplete", loginComplete);
-//		model.addObject("loginFail", loginFail);
-//		model.addObject("logoutComplete", logoutComplete);
-//		model.addObject("registerComplete", registerComplete);
-//		model.addObject("registerFail", registerFail);
-//		model.addObject("submittedUserId", submittedUserId);
-//		model.addObject("isUseController", "true");
-//		model.addObject("user_type", user_type);
-		
+		//		model.addObject("loginComplete", loginComplete);
+		//		model.addObject("loginFail", loginFail);
+		//		model.addObject("logoutComplete", logoutComplete);
+		//		model.addObject("registerComplete", registerComplete);
+		//		model.addObject("registerFail", registerFail);
+		//		model.addObject("submittedUserId", submittedUserId);
+		//		model.addObject("isUseController", "true");
+		//		model.addObject("user_type", user_type);
+
 		model.addObject("active", "index");
 		return model;
-    }
-	
+	}
+
 	@RequestMapping("/login.do")
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		logger.debug("public ModelAndView login");
-		logger.debug("===[S]======================");
-		logger.debug("email : "+email);
-		logger.debug("password : "+password);
-		User user = new User();
-		user.setEmail(email);
-		user.setPassword(password);
-		
-		int result = userService.readUser(user);
-		
-		
-		ModelAndView model = null;
-		
-		if(result == User.STATUS_NOT_FOUNDED){
-			model = new ModelAndView("join");
-			System.out.println("User does not exist! or password is wrong.");
-			model.addObject("loginFail", "true");
+		ModelAndView model = SISessionManager.SIModelAndView("login", request);
+		//model.addObject("active", "login");
+		if(model.getModel().get("user") != null){
+			return new ModelAndView("redirect:index.do");
 		}
-		else if(result == User.STATUS_FOUNDED){
-			model = new ModelAndView("redirect:index.do");
-			System.out.println("User is founded!");
-						
-			request.getSession().setAttribute("email", user.getEmail());
-			request.getSession().setAttribute("islogin", "true");
-			model.addObject("loginComplete", "true");
-		}
-		model.addObject("email", email);
-		logger.debug("===[S]======================");
-		*/
-		ModelAndView model = new ModelAndView("login");;
-		model.addObject("active", "login");
 		return model;
-    }
-	
+	}
+
 	@RequestMapping("/requestLogin.do")
 	public @ResponseBody String requestLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = ServletRequestUtils.getStringParameter(request, "email", "");
 		String password = ServletRequestUtils.getStringParameter(request, "password", "");
-		
+
 		logger.debug("public ModelAndView login");
 		logger.debug("===[S]======================");
 		logger.debug("email : "+email);
@@ -125,106 +97,104 @@ public class UserController {
 		User user = new User();
 		user.setEmail(email);
 		user.setPassword(password);
-		
-		int result = userService.readUser(user);
-		
-		
-		if(result == User.STATUS_NOT_FOUNDED){
-			
-			System.out.println("User does not exist! or password is wrong.");
-			return "notfound";
-		}
-		else if(result == User.STATUS_FOUNDED){
-			System.out.println("User is founded!");
-						
-			return "success";
-		}
-		
-		return "error";
-	}
-	
-//	
-	@RequestMapping("/register.do")
-    public ModelAndView register(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-		ModelAndView model = new ModelAndView("redirect:index.do");
-		if( email == null || password == null){
-			model.addObject("reason", "parameter_incomplete");
-			model.addObject("registerFail", "true");
-		}else{
-			User user = new User();
-			user.setEmail(email);
-			user.setPassword(password);
-			user.setType("1");	//Set as normal user
-			int result = userService.createUser(user);
-			if(result == User.STATUS_ALREADY_REGISTEREDED){
-				System.out.println("The ID requested to register is already exists!");
-				model.addObject("reason", "already_exist");
-				model.addObject("registerFail", "true");
-				//model.addObject("submittedUserId", id);
-			}else if(result == User.STATUS_SUCCESS_REGISTER){
-				
-	//			UserIdMap userIdMap = new UserIdMap();
-	//			userIdMap.setExternalId(id);
-	//			userIdMap.setInternalId(nextId);
-	//			userService.createUserIdMap(userIdMap);
-	//			model.addObject("registerComplete", "true");
-	//			model.addObject("submittedUserId", id);
-				
-				model.addObject("registerComplete", "true");
+
+		String errorStr = "";
+		try{
+			int result = userService.readUser(user);
+
+			if(result == User.STATUS_NOT_FOUNDED){
+				System.out.println("User does not exist! or password is wrong.");
+				return "notfound";
 			}
+			else if(result == User.STATUS_FOUNDED){
+				System.out.println("User is founded!");
+				User userFound = userService.readUserData(user);
+				request.getSession().setAttribute("user", userFound);
+				return "success";
+			}
+		}catch(Exception e){
+			errorStr += e.toString();
 		}
-		return model;
-    }
-	
+
+		return "error_"+errorStr;
+	}
+
+	//	
+	@RequestMapping("/requestSignup.do")
+	public @ResponseBody String requestSignup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String email = ServletRequestUtils.getStringParameter(request, "email", "");
+		String name = ServletRequestUtils.getStringParameter(request, "name", "");
+		String password = ServletRequestUtils.getStringParameter(request, "password", "");
+
+		String errorStr = "";
+		try{
+			if( email != null && password != null){
+				User user = new User();
+				user.setName(name);
+				user.setEmail(email);
+				user.setPassword(password);
+
+				int result = userService.createUser(user);
+				if(result == User.STATUS_ALREADY_REGISTEREDED){
+					System.out.println("The ID requested to register is already exists!");
+					return "already_registered";
+				}else if(result == User.STATUS_SUCCESS_REGISTER){
+					return "success";
+				}
+			}else{
+				errorStr += "parameterNotSatisfied:email:"+email+", password:"+password;
+			}
+		}catch(Exception e){
+			errorStr+=e.toString();
+		}
+		return "error_"+errorStr;
+	}
+
 	@RequestMapping("/logout.do")
-    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().invalidate();
-		
+
 		ModelAndView model = new ModelAndView("redirect:index.do");
 		model.addObject("logoutComplete", "true");
 		return model;
-    }
-	
-	
+	}
+
+
 	@RequestMapping("/category/{Cat1}/{Cat2}/{Cat3}")
 	public ModelAndView categoryTest(HttpServletRequest request, HttpServletResponse response
 			,@PathVariable(value = "Cat1") String Cat1
 			,@PathVariable(value = "Cat2") String Cat2
 			,@PathVariable(value = "Cat3") String Cat3
 			) {
-//	    String remainingPaths = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-//	    logger.debug("path = " + path + "/" + remainingPaths);
-		
+		//	    String remainingPaths = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		//	    logger.debug("path = " + path + "/" + remainingPaths);
+
 		System.out.println("Cat1: "+Cat1);
 		System.out.println("Cat2: "+Cat2);
 		System.out.println("Cat3: "+Cat3);
-		
-	    return new ModelAndView("index");
+
+		return new ModelAndView("index");
 	}
-//	
-//	@RequestMapping("/findPassword.do")
-//    public ModelAndView findPassword(HttpServletRequest request, HttpServletResponse response) {
-//		
-//		request.getSession().removeAttribute("userid");
-//		
-//		ModelAndView model = new ModelAndView("index");
-//		model.addObject("logoutComplete", "true");
-//		return model;
-//    }
-//	
-//	
-//	@RequestMapping("/changePassword.do")
-//    public ModelAndView changePassword(HttpServletRequest request, HttpServletResponse response) {
-//		
-//		request.getSession().removeAttribute("userid");
-//		
-//		ModelAndView model = new ModelAndView("index");
-//		model.addObject("logoutComplete", "true");
-//		return model;
-//    }
-//	
+	//	
+	//	@RequestMapping("/findPassword.do")
+	//    public ModelAndView findPassword(HttpServletRequest request, HttpServletResponse response) {
+	//		
+	//		request.getSession().removeAttribute("userid");
+	//		
+	//		ModelAndView model = new ModelAndView("index");
+	//		model.addObject("logoutComplete", "true");
+	//		return model;
+	//    }
+	//	
+	//	
+	//	@RequestMapping("/changePassword.do")
+	//    public ModelAndView changePassword(HttpServletRequest request, HttpServletResponse response) {
+	//		
+	//		request.getSession().removeAttribute("userid");
+	//		
+	//		ModelAndView model = new ModelAndView("index");
+	//		model.addObject("logoutComplete", "true");
+	//		return model;
+	//    }
+	//	
 }

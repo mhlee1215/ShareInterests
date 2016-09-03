@@ -30,7 +30,39 @@ $(document).ready(function(){
 		    	password:$("#login-password").val()
 		    },
 		  success: function( result ) {
-			  alert(result);
+			  //alert(result);
+			  if(result == 'success'){
+				  alert('login success!');
+				  window.location = '/ShareInterestsWeb/';
+			  }else if(result == 'notfound'){
+				  alert('user not found');
+			  }else {
+				  alert(result);
+			  }
+			  //document.location = 'loginSuccess.do';				
+		  }
+		});
+	}
+	
+	function goRequestSignup(){
+		
+		$.ajax({
+			url: "requestSignup.do",
+		    data: {
+		    	email:$("#signup-email").val(),
+		    	name:$("#signup-name").val(),
+		    	password:$("#signup-password").val()
+		    },
+		  success: function( result ) {
+			  //alert(result);
+			  if(result == 'success'){
+				  //alert('login success!');
+				  document.location = '/ShareInterestsWeb/login.do';
+			  }else if(result == 'notfound'){
+				  //alert('user not found');
+			  }else {
+				  //alert(result);
+			  }
 			  //document.location = 'loginSuccess.do';				
 		  }
 		});
@@ -38,6 +70,10 @@ $(document).ready(function(){
 	
 	$("#btn-login").on("click", function(event){
 		goRequestLogin();
+	});
+	
+	$("#btn-signup").on("click", function(event){
+		goRequestSignup();
 	});
 });
 </script>
@@ -88,7 +124,7 @@ $(document).ready(function(){
 
                                     <div class="col-sm-12 controls">
                                       <a id="btn-login" href="#" class="btn btn-success">Login  </a>
-                                      <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
+                                      <a id="btn-fblogin" href="/ShareInterestsWeb//social/facebook/signin.do" class="btn btn-primary">Login with Facebook</a>
 
                                     </div>
                                 </div>
@@ -130,14 +166,14 @@ $(document).ready(function(){
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                        <input id="signup-email" type="text" class="form-control" name="email" placeholder="Email Address">
                                     </div>
                                 </div>
                                     
                                 <div class="form-group">
                                     <label for="name" class="col-md-3 control-label">Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="name" placeholder="Name">
+                                        <input id="signup-name" type="text" class="form-control" name="name" placeholder="Name">
                                     </div>
                                 </div>
                                 
@@ -152,7 +188,7 @@ $(document).ready(function(){
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">Password</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                        <input id="signup-password" type="password" class="form-control" name="passwd" placeholder="Password">
                                     </div>
                                 </div>
                                     

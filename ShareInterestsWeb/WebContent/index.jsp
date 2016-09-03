@@ -10,13 +10,19 @@
 
 <script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+header .index {
+	padding-top:200px !important;
+	padding-bottom:50px !important;
+}
+</style>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
  <header>
         <div class="container">
-            <div class="intro-text">
+            <div class="intro-text index">
                 <div class="intro-heading">Share Interests</div>
                 <div class="intro-lead-in">Tell us your Story and More</div>
                     <div class="input-group">

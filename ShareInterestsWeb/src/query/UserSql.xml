@@ -26,7 +26,7 @@
  
 	<insert id="createUser" parameterClass="com.si.domain.User">
 		 INSERT INTO
-		 rs_user (NAME, EMAIL, PASSWORD)
+		 user (NAME, EMAIL, PASSWORD)
 		 VALUES (#name#, #email#, #password#)
 	</insert>
 	

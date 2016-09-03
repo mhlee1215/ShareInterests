@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -41,9 +42,8 @@
 
 <%
 	String contextPath = request.getContextPath();
-System.out.println(contextPath);
-%>
 
+%>
 <body id="page-top" class="index">
 
     <!-- Navigation -->
@@ -54,7 +54,7 @@ System.out.println(contextPath);
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Share Interests</a>
+                <a class="navbar-brand page-scroll" href="<%=contextPath%>/index.do">Share Interests</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,9 +69,23 @@ System.out.println(contextPath);
                     <li>
                         <a class="page-scroll" href="<%=contextPath%>/index.do">Home</a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="<%=contextPath%>/login.do">Sign In</a>
-                    </li>
+                    
+	                    <c:choose>
+	                    	<c:when test="${not empty user}">
+	                    		<li>
+	                    			<a class="page-scroll" href="<%=contextPath%>/userSetting.do">${user.name}</a>
+	                    		</li>
+	                    		<li>
+	                    			<a class="page-scroll" href="<%=contextPath%>/logout.do">Log Out</a>
+	                    		</li>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li>
+	                    			<a class="page-scroll" href="<%=contextPath%>/login.do">Sign In</a>
+	                    		</li>
+	                    	</c:otherwise>
+	                    </c:choose>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
