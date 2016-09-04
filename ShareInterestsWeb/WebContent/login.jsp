@@ -72,11 +72,26 @@ $(document).ready(function(){
 		goRequestLogin();
 	});
 	
+		
 	$("#btn-signup").on("click", function(event){
 		goRequestSignup();
 	});
+	
+	$("#btn-fbsignup").on("click", function(event){
+		checkLoginState();
+	});
+
+	
+	if('${result}' == 'notfound'){
+		alert('User Not found! Please sign up first.');	
+	}
+
 });
 </script>
+
+
+
+<!--   //http://graph.facebook.com/10208778724299557/picture?type=large -->
    </head>
   <body>
   <jsp:include page="header.jsp"></jsp:include>
@@ -125,7 +140,6 @@ $(document).ready(function(){
                                     <div class="col-sm-12 controls">
                                       <a id="btn-login" href="#" class="btn btn-success">Login  </a>
                                       <a id="btn-fblogin" href="/ShareInterestsWeb//social/facebook/signin.do" class="btn btn-primary">Login with Facebook</a>
-
                                     </div>
                                 </div>
 
@@ -213,6 +227,8 @@ $(document).ready(function(){
                                     
                                     <div class="col-md-offset-3 col-md-9">
                                         <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
+                                        
+                                        
                                     </div>                                           
                                         
                                 </div>

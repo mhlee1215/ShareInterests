@@ -15,6 +15,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,14 +26,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.si.domain.FacebookResponse;
+import com.si.domain.User;
+import com.si.service.UserService;
 
 @RequestMapping(value = "/social/facebook")
 @Controller
 public class FacebookController {
 	
+	@Autowired
+	private final UserService userService = null;
 	
-	private static final String SCOPE = "email,offline_access,user_about_me,user_birthday,read_friendlists";
-	private static final String SERVER_DOMAIN = "http://localhost:8080/";
+	private static final String SCOPE = "email";//,offline_access,user_about_me,user_birthday,read_friendlists";
+	private static final String SERVER_DOMAIN = "http://localhost:8083/";
 	private static final String ContextPath = "ShareInterestsWeb";
 	//private static final String SERVER_DOMAIN = "http://respace.co.kr/";
 	 
@@ -48,7 +53,21 @@ public class FacebookController {
 	@RequestMapping(value = "/signin.do", method = RequestMethod.GET)
 	public void signin(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("hi signin");
+		System.out.println("hi signin===");
+		try {
+			// TODO: if already have a valid access token, no need to redirect,
+			// just login
+			response.sendRedirect(DIALOG_OAUTH + "?client_id=" + CLIENT_ID
+					+ "&redirect_uri=" + REDIRECT_URI + "&scope=" + SCOPE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/signup.do", method = RequestMethod.GET)
+	public void signup(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println("hi signup===");
 		try {
 			// TODO: if already have a valid access token, no need to redirect,
 			// just login
@@ -104,7 +123,7 @@ public class FacebookController {
 					while ((line = rd.readLine()) != null) {
 						accessTokenStr += line;
 					}
-					accessTokenStr += "&locale=ko_KR";
+					accessTokenStr += "&locale=en";
 					
 					System.out.println("accessToken : "+"https://graph.facebook.com/me?"
 							+ accessTokenStr);
@@ -119,10 +138,35 @@ public class FacebookController {
 					
 					//System.out.println(GameController.facebookResponseList);
 					
-					//response.sendRedirect(GAME_MATCH_URL);
-					ModelAndView model = new ModelAndView("redirect:"+CALLBACK_URL+"?id="+fBin.getId());
-					//model.addObject("fBin", fBin);
-					return model;
+					
+					User pUser = new User();
+					pUser.setType("facebook");
+					pUser.setExternalId(fBin.getId());
+					User user = userService.readUserData(pUser);
+					
+					
+					if(user == null){
+						User newUser = new User();
+						newUser.setType("facebook");
+						newUser.setExternalId(fBin.getId());
+						
+						newUser.setName(fBin.getName());
+						System.out.println("create User!!! :"+newUser);
+						userService.createUser(newUser);
+						System.out.println("read User!!! :"+pUser);
+						user = userService.readUserData(pUser);
+					}
+					
+					if(user != null){
+						request.getSession().setAttribute("user", user);
+						ModelAndView model = new ModelAndView("redirect:/index.do");
+						return model;	
+					}else{
+						ModelAndView model = new ModelAndView("redirect:/login.do?result=fail");
+						return model;
+					}
+					
+					//
 					
 
 				}

@@ -43,6 +43,7 @@ public class User {
 	private String	isverified		= "N";
 	private String	isdeleted		= "N";
 	private String  type			= "";
+	private String  externalId		= "";
 	
 	private int query_start = 0;
 	private int query_number = 0;
@@ -62,6 +63,12 @@ public class User {
 	}
 
 	
+	public String getExternalId() {
+		return externalId;
+	}
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
 	public String getType() {
 		return type;
 	}

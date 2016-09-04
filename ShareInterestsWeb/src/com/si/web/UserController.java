@@ -77,7 +77,10 @@ public class UserController {
 	@RequestMapping("/login.do")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		String result = ServletRequestUtils.getStringParameter(request, "result", "");
+		
 		ModelAndView model = SISessionManager.SIModelAndView("login", request);
+		model.addObject("result", result);
 		//model.addObject("active", "login");
 		if(model.getModel().get("user") != null){
 			return new ModelAndView("redirect:index.do");

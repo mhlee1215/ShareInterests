@@ -38,6 +38,7 @@ public class UserService {
         	 user.setPassword(Crypto.encrypt(user.getPassword()));       
 		User paramUser = new User();
 		paramUser.setEmail(user.getEmail());
+		paramUser.setExternalId(user.getExternalId());
 		User foundUser = readUserData(paramUser);
 		logger.debug("create User");
 		logger.debug("==[S]============================");

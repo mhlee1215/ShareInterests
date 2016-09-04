@@ -8,26 +8,39 @@
 		<result column="ID" property="id" />
 		<result column="NAME" property="name" />
 		<result column="EMAIL" property="email" />
+		<result column="TYPE" property="type" />
+		<result column="EXTERNALID" property="externalId" />
  	</resultMap>
  	
  	<select id="readUserList" resultMap="User" parameterClass="com.si.domain.User">
- 		SELECT ID, NAME, EMAIL
+ 		/* readUserList */
+ 		SELECT ID, NAME, EMAIL, TYPE, EXTERNALID
  		FROM user
  	</select>
  	
 	<select id="readUser" resultMap="User">
-       SELECT ID, NAME, EMAIL 
+		/* readUserData */
+       SELECT ID, NAME, EMAIL, TYPE, EXTERNALID
        FROM user 
-       WHERE EMAIL = #email# 
-       <isNotEmpty property="password">
-       and PASSWORD = #password#
+       WHERE ID = ID
+       <isNotEmpty property="email" prepend="and"> 
+       EMAIL = #email# 
+       </isNotEmpty>
+       <isNotEmpty property="password" prepend="and">
+       PASSWORD = #password#
+       </isNotEmpty>
+       <isNotEmpty property="externalId" prepend="and"> 
+       EXTERNALID = #externalId#
+       </isNotEmpty>
+       <isNotEmpty property="type" prepend="and"> 
+       TYPE = #type#
        </isNotEmpty>
 	</select>
  
 	<insert id="createUser" parameterClass="com.si.domain.User">
 		 INSERT INTO
-		 user (NAME, EMAIL, PASSWORD)
-		 VALUES (#name#, #email#, #password#)
+		 user (NAME, EMAIL, PASSWORD, TYPE, EXTERNALID)
+		 VALUES (#name#, #email#, #password#, #type#, #externalId#)
 	</insert>
 	
 	<update id="updateUser" parameterClass="com.si.domain.User">
@@ -38,6 +51,12 @@
 		 </isNotEmpty>
 		 <isNotEmpty property="email">
 		 ,EMAIL = #email#
+		 </isNotEmpty>
+		 <isNotEmpty property="type">
+		 ,TYPE = #type#
+		 </isNotEmpty>
+		 <isNotEmpty property="externalId">
+		 ,EXTERNALID = #externalId#
 		 </isNotEmpty>
 		 WHERE ID = #id# 
 	</update>
