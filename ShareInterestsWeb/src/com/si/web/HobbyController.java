@@ -41,7 +41,7 @@ private Logger logger = Logger.getLogger(getClass());
 	@Autowired
 	private final CategoryService categoryService = null;
 	
-	@RequestMapping("/{category_name}/{hobby_title}/{action}.do")
+	@RequestMapping("/{category_name}/{hobby_title}/{action}")
     public ModelAndView article(HttpServletRequest request, HttpServletResponse response
     		,@PathVariable(value = "category_name") String categoryName
 			,@PathVariable(value = "hobby_title") String hobbyTitle

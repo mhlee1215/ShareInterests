@@ -109,13 +109,14 @@ var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
 simplemde.value("This text will appear in the editor");
 });
 </script>
-
+<div class="container" >
 <div class="container" >
 	<textarea id="MyID">
 	</textarea>
 </div>
 
-
+<button class="button button_like"><span>Submit</span></button>
+</div>
 <jsp:include page="footer.jsp"/>
 <script src="/ShareInterestsWeb/js/pgwslider.min.js"></script>
 </body>

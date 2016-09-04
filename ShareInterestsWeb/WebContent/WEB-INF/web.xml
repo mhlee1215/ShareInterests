@@ -29,7 +29,15 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
-  
+<!-- 
+  <servlet-mapping>
+  <servlet-name>default</servlet-name>
+  <url-pattern>*.css</url-pattern>
+  <url-pattern>*.js</url-pattern>
+  <url-pattern>*.gif</url-pattern>
+  <url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
+   -->
   <filter>
     <filter-name>Encoding Filter</filter-name>
     <filter-class>
