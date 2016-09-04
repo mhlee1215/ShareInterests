@@ -37,18 +37,18 @@ public class FacebookController {
 	private final UserService userService = null;
 	
 	private static final String SCOPE = "email";//,offline_access,user_about_me,user_birthday,read_friendlists";
-	private static final String SERVER_DOMAIN = "http://localhost:8083/";
+	private static String SERVER_DOMAIN = "http://localhost:8080/";
 	private static final String ContextPath = "ShareInterestsWeb";
 	//private static final String SERVER_DOMAIN = "http://respace.co.kr/";
 	 
-	private static final String REDIRECT_URI = SERVER_DOMAIN+ContextPath+"/social/facebook/callback.do";
+	private static String REDIRECT_URI = SERVER_DOMAIN+ContextPath+"/social/facebook/callback.do";
 	
 	private static final String CLIENT_ID = "1742107286033861";
 	private static final String APP_SECRET = "c46700f981c23db682349b2635bcc40f";
 	private static final String DIALOG_OAUTH = "https://www.facebook.com/dialog/oauth";
 	private static final String ACCESS_TOKEN = "https://graph.facebook.com/oauth/access_token";
 	
-	private static final String CALLBACK_URL = SERVER_DOMAIN+ContextPath+"/index.do";
+	private static String CALLBACK_URL = SERVER_DOMAIN+ContextPath+"/index.do";
 
 	@RequestMapping(value = "/signin.do", method = RequestMethod.GET)
 	public void signin(HttpServletRequest request, HttpServletResponse response)
@@ -57,20 +57,12 @@ public class FacebookController {
 		try {
 			// TODO: if already have a valid access token, no need to redirect,
 			// just login
-			response.sendRedirect(DIALOG_OAUTH + "?client_id=" + CLIENT_ID
-					+ "&redirect_uri=" + REDIRECT_URI + "&scope=" + SCOPE);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@RequestMapping(value = "/signup.do", method = RequestMethod.GET)
-	public void signup(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		System.out.println("hi signup===");
-		try {
-			// TODO: if already have a valid access token, no need to redirect,
-			// just login
+			
+			System.out.println("serverName: "+request.getServerName());
+			SERVER_DOMAIN = "http://"+request.getServerName()+":8080/";
+			CALLBACK_URL = SERVER_DOMAIN+ContextPath+"/index.do";
+			REDIRECT_URI = SERVER_DOMAIN+ContextPath+"/social/facebook/callback.do";
+			
 			response.sendRedirect(DIALOG_OAUTH + "?client_id=" + CLIENT_ID
 					+ "&redirect_uri=" + REDIRECT_URI + "&scope=" + SCOPE);
 		} catch (Exception e) {
