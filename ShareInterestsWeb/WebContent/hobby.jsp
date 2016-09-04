@@ -117,8 +117,8 @@ $(document).ready(function() {
 
 <div class="container" >
 <ul class="pgwSlider">
-    <li><img src="/ShareInterestsWeb/assets/surfing.jpg" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars"></li>
-    <li><img src="/ShareInterestsWeb/assets/surfing.jpg" alt="Montréal, QC, Canada" data-large-src="/ShareInterestsWeb/assets/surfing.jpg"></li>
+    <li><img src="/ShareInterestsWeb/assets/get.do?id=123" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars"></li>
+    <li><img src="/ShareInterestsWeb/assets/get.do?id=123" alt="Montréal, QC, Canada" data-large-src="/ShareInterestsWeb/assets/surfing.jpg"></li>
     <li>
         <img src="/ShareInterestsWeb/assets/surfing.jpg">
         <span>Shanghai, China</span>

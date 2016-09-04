@@ -68,7 +68,7 @@ header .index {
     		<div id="collapse${cat.id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${cat.id}">
       			<div class="panel-body">
         		<c:forEach items="${cat.hobbyList}" var="hobby">
-        			<a href="${cat.name}/${hobby.title}.do"> ${hobby.title}, </a>
+        			<a href="browse/${cat.name}/${hobby.title}.do"> ${hobby.title}, </a>
       			</c:forEach>
       			</div>
     		</div>

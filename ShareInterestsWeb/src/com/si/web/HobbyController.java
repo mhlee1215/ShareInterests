@@ -31,7 +31,7 @@ import com.si.service.UserService;
 
 @Controller
 
-//@RequestMapping("/test")
+@RequestMapping("/browse")
 public class HobbyController {
 private Logger logger = Logger.getLogger(getClass());
 	
@@ -41,20 +41,20 @@ private Logger logger = Logger.getLogger(getClass());
 	@Autowired
 	private final CategoryService categoryService = null;
 	
-	@RequestMapping("/{category_name}/{hobby_title}/{action}")
+	@RequestMapping(value="/{category_name}/{hobby_title}/{action}.do")
     public ModelAndView article(HttpServletRequest request, HttpServletResponse response
     		,@PathVariable(value = "category_name") String categoryName
 			,@PathVariable(value = "hobby_title") String hobbyTitle
 			,@PathVariable(value = "action") String action) throws Exception {
 
 		
-		System.out.println("category_name:"+categoryName);
-		System.out.println("hobby_title:"+hobbyTitle);
+		//System.out.println("category_name:"+categoryName);
+		System.out.println("11hobby_title:"+hobbyTitle);
 		System.out.println("action:"+action);
 //		List<Category> categoryList = categoryService.findAll();
 //		System.out.println("JH: "+ categoryList);
 		ModelAndView model = new ModelAndView("article");
-		model.addObject("categoryName", categoryName);
+		//model.addObject("categoryName", categoryName);
 		model.addObject("hobbyTitle", hobbyTitle);
 		model.addObject("action", action);
 		return model;
@@ -67,7 +67,7 @@ private Logger logger = Logger.getLogger(getClass());
 			) throws Exception {
 
 		
-		System.out.println("category_name:"+categoryName);
+		System.out.println("12category_name:"+categoryName);
 		System.out.println("hobby_title:"+hobbyTitle);
 //		List<Category> categoryList = categoryService.findAll();
 //		System.out.println("JH: "+ categoryList);
@@ -77,29 +77,7 @@ private Logger logger = Logger.getLogger(getClass());
 		return model;
     }
 	
-	@RequestMapping(value = "/fileUpload.do", method = RequestMethod.GET)
-    public String dragAndDrop(Model model) {
-         
-        return "fileUpload";
-         
-    }
-     
-    @RequestMapping(value = "/fileUpload/post.do") //ajax에서 호출하는 부분
-    @ResponseBody
-    public String upload(MultipartHttpServletRequest multipartRequest) { //Multipart로 받는다.
-         
-        Iterator<String> itr =  multipartRequest.getFileNames();
-         
-        while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
-             
-            MultipartFile mpf = multipartRequest.getFile(itr.next());
-            String originFileName = mpf.getOriginalFilename();
-            System.out.println("FILE_INFO: "+originFileName); //받은 파일 리스트 출력
-             
-       }
-         
-        return "success";
-    }
+	
      
 	
      

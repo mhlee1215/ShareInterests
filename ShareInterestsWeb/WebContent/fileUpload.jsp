@@ -170,7 +170,7 @@
                  
                 function sendFileToServer(formData,status)
                 {
-                    var uploadURL = "/ShareInterestsWeb/fileUpload/post.do"; //Upload URL
+                    var uploadURL = "/ShareInterestsWeb/assets/fileUpload/post.do"; //Upload URL
                     var extraData ={}; //Extra Data.
                     var jqXHR=$.ajax({
                             xhr: function() {

@@ -163,21 +163,21 @@ public class UserController {
 	}
 
 
-	@RequestMapping("/category/{Cat1}/{Cat2}/{Cat3}")
-	public ModelAndView categoryTest(HttpServletRequest request, HttpServletResponse response
-			,@PathVariable(value = "Cat1") String Cat1
-			,@PathVariable(value = "Cat2") String Cat2
-			,@PathVariable(value = "Cat3") String Cat3
-			) {
-		//	    String remainingPaths = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		//	    logger.debug("path = " + path + "/" + remainingPaths);
-
-		System.out.println("Cat1: "+Cat1);
-		System.out.println("Cat2: "+Cat2);
-		System.out.println("Cat3: "+Cat3);
-
-		return new ModelAndView("index");
-	}
+//	@RequestMapping("/category/{Cat1}/{Cat2}/{Cat3}")
+//	public ModelAndView categoryTest(HttpServletRequest request, HttpServletResponse response
+//			,@PathVariable(value = "Cat1") String Cat1
+//			,@PathVariable(value = "Cat2") String Cat2
+//			,@PathVariable(value = "Cat3") String Cat3
+//			) {
+//		//	    String remainingPaths = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+//		//	    logger.debug("path = " + path + "/" + remainingPaths);
+//
+//		System.out.println("Cat1: "+Cat1);
+//		System.out.println("Cat2: "+Cat2);
+//		System.out.println("Cat3: "+Cat3);
+//
+//		return new ModelAndView("index");
+//	}
 	//	
 	//	@RequestMapping("/findPassword.do")
 	//    public ModelAndView findPassword(HttpServletRequest request, HttpServletResponse response) {
