@@ -20,9 +20,7 @@ header .index {
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
-<script>
-$("#mainNav").attr("class", "navbar navbar-default navbar-custom navbar-fixed-top affix");
-</script>
+
 
 <div class="container" style="display:block;">
 

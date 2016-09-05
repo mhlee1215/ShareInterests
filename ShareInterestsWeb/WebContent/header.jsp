@@ -47,7 +47,7 @@
 <body id="page-top" class="index">
 
     <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top affix">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -99,9 +99,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/ShareInterestsWeb/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-
-    <!-- Theme JavaScript -->
-    <script src="/ShareInterestsWeb/js/agency.js"></script>
 
 </body>
 

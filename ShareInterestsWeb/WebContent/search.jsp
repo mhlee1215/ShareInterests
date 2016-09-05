@@ -53,7 +53,8 @@ header .index {
 	 -->
 	  
 	 
-<!-- category 
+
+	<!-- category -->
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 	<c:forEach items="${category}" var="cat">
 		<div class="panel panel-default" style="margin:0px">
@@ -73,7 +74,7 @@ header .index {
     		</div>
   		</div>  		
 	</c:forEach>
-	</div> -->
+	</div>
 	
 	<c:forEach items="${category}" var="cat">
 	<button class="accordion2">${cat.name} <span class="badge" align="right"> ${cat.size()} </span>   </button>
@@ -85,7 +86,7 @@ header .index {
       			</div>
 	</div>
 	</c:forEach>
-
+	
 	
 	
 	
