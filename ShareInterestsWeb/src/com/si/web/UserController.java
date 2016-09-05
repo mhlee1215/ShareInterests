@@ -161,6 +161,13 @@ public class UserController {
 		model.addObject("logoutComplete", "true");
 		return model;
 	}
+	
+	@RequestMapping("/about.do")
+	public ModelAndView about(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = SISessionManager.SIModelAndView("about", request);
+		model.addObject("active", "about");
+		return model;
+	}
 
 
 //	@RequestMapping("/category/{Cat1}/{Cat2}/{Cat3}")
