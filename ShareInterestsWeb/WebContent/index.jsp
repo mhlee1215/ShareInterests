@@ -81,7 +81,7 @@ header .index {
 	  <div class="panel-body">
         		<c:forEach items="${cat.hobbyList}" var="hobby">
         			<a href="browse/${cat.name}/${hobby.title}.do"> ${hobby.title}, </a>
-      			</c:forEach>
+      			</c:forEach> 
       			</div>
 	</div>
 	</c:forEach>
