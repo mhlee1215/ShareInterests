@@ -43,4 +43,10 @@ public class HobbyDao extends SqlMapClientDaoSupport {
 		getSqlMapClientTemplate().update("HobbySql.updateHobby", hobby);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Hobby> searchHobbyList(Hobby hobby) {
+		List<Hobby> array = getSqlMapClientTemplate().queryForList("HobbySql.searchHobbyList", hobby);
+		return array;
+	}
+
 }

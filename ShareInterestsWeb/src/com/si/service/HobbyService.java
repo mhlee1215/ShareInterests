@@ -19,6 +19,11 @@ public class HobbyService{
 	public List<Hobby> readHobbyList(Hobby hobby) {
 		return hobbyDao.readHobbyList(hobby);
 	}
+	
+	public List<Hobby> searchHobbyList(Hobby hobby) {
+		return hobbyDao.searchHobbyList(hobby);
+	}
+	
 
 	public Hobby readHobby(Hobby hobby) {
 		return hobbyDao.readHobby(hobby);

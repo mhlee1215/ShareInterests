@@ -1,5 +1,6 @@
 package com.si.web;
 
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -135,6 +136,17 @@ private Logger logger = Logger.getLogger(getClass());
     	return new ModelAndView("error");
     }
 	
-     
+    @RequestMapping(value="/search.do")
+    public ModelAndView search(HttpServletRequest request, HttpServletResponse response){
+    	ModelAndView model = SISessionManager.SIModelAndView("search", request);
+    	model.addObject("active", "search");
+    	
+    	String keyword = request.getParameter("keyword");
+    	Hobby hobby = new Hobby();
+    	hobby.setTitle(keyword);
+
+    	List<Hobby> searchResult = this.hobbyService.searchHobbyList(hobby);
+    	return model;
+    }
 	
 }

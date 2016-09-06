@@ -1,5 +1,10 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
+
+<%
+	String contextPath = request.getContextPath();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,15 +30,16 @@ header .index {
             <div class="intro-text index">
                 <div class="intro-heading">Share Interests</div>
                 <div class="intro-lead-in">Tell us your Story and More</div>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
+                        <form class="input-group" action="<%=contextPath%>/browse/search.do" method="post">
+                        	<input type="text" name = "keyword" class="form-control">
+                        	<span class="input-group-btn">
+                            	<input class="btn btn-default" type="submit" value="Go!"/>
+                        	</span>
+                        </form>
+                    
                 </div>
             </div>
-    </header>
+ </header>
     
 <!-- logo -->
 <div class="container" style="display:block;">
