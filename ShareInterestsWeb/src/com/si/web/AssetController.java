@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -119,6 +120,35 @@ public class AssetController {
 	    }
 	    return IOUtils.toByteArray(fis);
 	}
+	
+	@RequestMapping(value = "/get3.do", method = RequestMethod.GET)
+	  public void showImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String id = ServletRequestUtils.getStringParameter(request, "id", "");
+		System.out.println("+++>>>"+context.getRealPath("/") + "/assets/"+id);
+		File f = new File(context.getRealPath("/") + "/assets/"+id);
+		FileInputStream fis = null;
+
+		if(!f.exists()){
+			System.out.println("NOT FOUND : alternative path : "+context.getRealPath("/") + "/assets/not-found.png");
+	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/not-found.png");
+		}
+	    else{
+	    	System.out.println("FOUND : current-path : "+context.getRealPath("/") + "/assets/"+id);
+	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/"+id);
+	    }
+
+	    byte[] imgByte = IOUtils.toByteArray(fis);
+
+	    response.setHeader("Cache-Control", "no-store");
+	    response.setHeader("Pragma", "no-cache");
+	    response.setDateHeader("Expires", 0);
+	    response.setContentType("image/jpeg");
+	    ServletOutputStream responseOutputStream = response.getOutputStream();
+	    responseOutputStream.write(imgByte);
+	    responseOutputStream.flush();
+	    responseOutputStream.close();
+	  }
 	
 	@RequestMapping(value = "/fileUpload.do", method = RequestMethod.GET)
     public String dragAndDrop(Model model) {
