@@ -74,7 +74,7 @@ public class AssetController {
 
 
 	@ResponseBody
-	@RequestMapping(value = "/get.do", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	@RequestMapping(value = "/get.do", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> testphoto(HttpServletRequest request) throws IOException {
 	    //InputStream in = context.getResourceAsStream("classpath:images/123.jpg");
 		String id = ServletRequestUtils.getStringParameter(request, "id", "");
@@ -93,7 +93,8 @@ public class AssetController {
 	    
 	    byte[] image = IOUtils.toByteArray(fis);
 	    HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.IMAGE_JPEG);
+	    headers.setContentType(MediaType.IMAGE_PNG);
+	    //headers.setContentType(MediaType.IMAGE_JPEG);
 	    headers.setContentLength(image.length);
 	    
 	    return new ResponseEntity<>(image, headers, HttpStatus.OK);
