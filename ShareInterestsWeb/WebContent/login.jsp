@@ -32,7 +32,7 @@ $(document).ready(function(){
 		  success: function( result ) {
 			  //alert(result);
 			  if(result == 'success'){
-				  alert('login success!');
+				  //alert('login success!');
 				  window.location = '/ShareInterestsWeb/index.do';
 			  }else if(result == 'notfound'){
 				  alert('user not found');
@@ -86,6 +86,29 @@ $(document).ready(function(){
 		alert('User Not found! Please sign up first.');	
 	}
 
+	$('#login-password').bind("enterKey",function(e){
+		   //do stuff here
+		goRequestLogin();
+	});
+	
+	$('#login-password').keyup(function(e){
+	    if(e.keyCode == 13)
+	    {
+	        $(this).trigger("enterKey");
+	    }
+	});
+	
+	$('#signup-password').bind("enterKey",function(e){
+		   //do stuff here
+		goRequestSignup();
+	});
+	
+	$('#signup-password').keyup(function(e){
+	    if(e.keyCode == 13)
+	    {
+	        $(this).trigger("enterKey");
+	    }
+	});
 });
 </script>
 
@@ -224,17 +247,10 @@ $(document).ready(function(){
                                 </div>
                                 
                                 <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
-                                    
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                                        
-                                        
+                                        <a id="btn-fblogin" href="/ShareInterestsWeb//social/facebook/signin.do" class="btn btn-primary">Sign Up with Facebook</a>
                                     </div>                                           
-                                        
                                 </div>
-                                
-                                
-                                
                             </form>
                          </div>
                     </div>

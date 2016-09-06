@@ -111,9 +111,9 @@ $(document).ready(function() {
   background-color: #f4511e;
   border: none;
   color: #FFFFFF;
+  padding: 7px;
   text-align: center;
-  font-size: 12px;
-  padding: 0px;
+  font-size: 13px;
   width: 160px;
   transition: all 0.5s;
   cursor: pointer;

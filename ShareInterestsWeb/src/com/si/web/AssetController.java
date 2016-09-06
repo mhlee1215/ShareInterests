@@ -79,7 +79,14 @@ public class AssetController {
 	    //InputStream in = context.getResourceAsStream("classpath:images/123.jpg");
 		String id = ServletRequestUtils.getStringParameter(request, "id", "");
 		System.out.println("+++>>>"+context.getRealPath("/") + "/assets/"+id);
-	    FileInputStream fis = new FileInputStream(context.getRealPath("/") + "/assets/"+id);
+		File f = new File(context.getRealPath("/") + "/assets/"+id);
+		FileInputStream fis = null;
+
+		if(!f.exists())
+	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/not-found.png");
+	    else
+	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/"+id);
+	    
 	    byte[] image = IOUtils.toByteArray(fis);
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.IMAGE_JPEG);
