@@ -32,7 +32,7 @@
 		<isNotEmpty property="title"> and a.TITLE LIKE '%$title$%'</isNotEmpty>
 		<isNotEqual compareValue="0" property="query_number"> LIMIT
 			#query_start#,#query_number#
-		</isNotEqual> 
+		</isNotEqual>  
 	</select> 
 	
 	<select id="readHobby" parameterClass="com.si.domain.Hobby"
