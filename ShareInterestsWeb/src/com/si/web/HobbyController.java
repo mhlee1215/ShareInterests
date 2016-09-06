@@ -117,7 +117,7 @@ private Logger logger = Logger.getLogger(getClass());
 				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getName()+"?action=new";
 				actionArticleDisplay = "Write my article";
 				model.addObject("action", "new");
-			}
+			} 
 			else{
 				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getName()+"?action=read";
 				actionArticleDisplay = "Read my article";
