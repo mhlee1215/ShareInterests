@@ -33,7 +33,7 @@
 		<isNotEqual compareValue="0" property="query_number"> LIMIT
 			#query_start#,#query_number#
 		</isNotEqual> 
-	</select>
+	</select> 
 	
 	<select id="readHobby" parameterClass="com.si.domain.Hobby"
 		resultMap="Hobby">
