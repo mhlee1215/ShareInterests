@@ -41,7 +41,7 @@ header .index {
             </div>
  </header>
     
-<!-- logo -->
+<!-- logo1 -->
 <div class="container" style="display:block;">
 	<!-- Header -->
    <!-- 
