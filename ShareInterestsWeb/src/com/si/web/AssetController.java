@@ -82,10 +82,14 @@ public class AssetController {
 		File f = new File(context.getRealPath("/") + "/assets/"+id);
 		FileInputStream fis = null;
 
-		if(!f.exists())
+		if(!f.exists()){
+			System.out.println("NOT FOUND : alternative path : "+context.getRealPath("/") + "/assets/not-found.png");
 	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/not-found.png");
-	    else
+		}
+	    else{
+	    	System.out.println("FOUND : current-path : "+context.getRealPath("/") + "/assets/"+id);
 	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/"+id);
+	    }
 	    
 	    byte[] image = IOUtils.toByteArray(fis);
 	    HttpHeaders headers = new HttpHeaders();
