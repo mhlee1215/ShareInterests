@@ -98,6 +98,26 @@ public class AssetController {
 	    headers.setContentLength(image.length);
 	    
 	    return new ResponseEntity<>(image, headers, HttpStatus.OK);
+	} 
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/get2.do", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public byte[] testphoto2(HttpServletRequest request) throws IOException {
+		String id = ServletRequestUtils.getStringParameter(request, "id", "");
+		System.out.println("+++>>>"+context.getRealPath("/") + "/assets/"+id);
+		File f = new File(context.getRealPath("/") + "/assets/"+id);
+		FileInputStream fis = null;
+
+		if(!f.exists()){
+			System.out.println("NOT FOUND : alternative path : "+context.getRealPath("/") + "/assets/not-found.png");
+	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/not-found.png");
+		}
+	    else{
+	    	System.out.println("FOUND : current-path : "+context.getRealPath("/") + "/assets/"+id);
+	    	fis = new FileInputStream(context.getRealPath("/") + "/assets/"+id);
+	    }
+	    return IOUtils.toByteArray(fis);
 	}
 	
 	@RequestMapping(value = "/fileUpload.do", method = RequestMethod.GET)
