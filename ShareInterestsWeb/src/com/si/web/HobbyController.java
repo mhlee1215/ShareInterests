@@ -3,6 +3,7 @@ package com.si.web;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,10 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.si.domain.Article;
 import com.si.domain.Category;
+import com.si.domain.Hobby;
 import com.si.domain.User;
 import com.si.service.ArticleService;
 import com.si.service.CategoryService;
+import com.si.service.HobbyService;
 import com.si.service.UserService;
+import com.si.util.SISessionManager;
 
 
 
@@ -34,14 +38,22 @@ import com.si.service.UserService;
 @RequestMapping("/browse")
 public class HobbyController {
 private Logger logger = Logger.getLogger(getClass());
-	
+	@Autowired
+	ServletContext context; 
+
 	@Autowired
 	private final UserService userService = null;
 	
 	@Autowired
+	private final HobbyService hobbyService = null;
+	
+	@Autowired
 	private final CategoryService categoryService = null;
 	
-	@RequestMapping(value="/{category_name}/{hobby_title}/{action}.do")
+	@Autowired
+	private final ArticleService articleService = null;
+	
+	@RequestMapping(value="/{category_name}/{hobby_title}/{action}")
     public ModelAndView article(HttpServletRequest request, HttpServletResponse response
     		,@PathVariable(value = "category_name") String categoryName
 			,@PathVariable(value = "hobby_title") String hobbyTitle
@@ -60,25 +72,68 @@ private Logger logger = Logger.getLogger(getClass());
 		return model;
     }
 	
-	@RequestMapping("/{category_name}/{hobby_title}.do")
+	@RequestMapping("/{category_name}/{hobby_title}")
     public ModelAndView hobby(HttpServletRequest request, HttpServletResponse response
     		,@PathVariable(value = "category_name") String categoryName
 			,@PathVariable(value = "hobby_title") String hobbyTitle
 			) throws Exception {
 
-		
-		System.out.println("12category_name:"+categoryName);
+		System.out.println("category_name:"+categoryName);
 		System.out.println("hobby_title:"+hobbyTitle);
-//		List<Category> categoryList = categoryService.findAll();
-//		System.out.println("JH: "+ categoryList);
-		ModelAndView model = new ModelAndView("hobby");
+		
+		Category pCat = new Category();
+		pCat.setName(categoryName);
+		Category cat = categoryService.readCategory(pCat);
+		if(cat == null) return getErrorPage();
+		
+		Hobby pHobby = new Hobby();
+		pHobby.setCategoryId(cat.getId());
+		pHobby.setTitle(hobbyTitle);
+		Hobby hobby = hobbyService.readHobby(pHobby);
+		if(hobby == null) return getErrorPage();
+		
+		User user = (User) request.getSession().getAttribute("user");
+		ModelAndView model = SISessionManager.SIModelAndView("hobby", request);
+		model.addObject("categoryName", categoryName);
 		model.addObject("hobbyTitle", hobbyTitle);
-//		
+		
+		
+		String actionArticleDisplay = "";
+		String actionArticleUrl = "";
+		
+		if(user == null){
+			actionArticleDisplay = "Write my article";
+			actionArticleUrl = context.getContextPath()+"/"+"login.do";
+			model.addObject("action", "loginRequired");
+		}
+		else{
+			
+			Article pArticle = new Article();
+			pArticle.setAuthorId(user.getId());
+			pArticle.setHobbyId(hobby.getId());
+			Article article = articleService.readArticle(pArticle);
+			
+			if(article == null){
+				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getName()+"?action=new";
+				actionArticleDisplay = "Write my article";
+				model.addObject("action", "new");
+			}
+			else{
+				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getName()+"?action=read";
+				actionArticleDisplay = "Read my article";
+				model.addObject("action", "read");
+			}
+		}
+		
+		model.addObject("actionArticleDisplay", actionArticleDisplay);
+		model.addObject("actionArticleUrl", actionArticleUrl);
 		return model;
     }
 	
 	
-     
+    public ModelAndView getErrorPage(){
+    	return new ModelAndView("error");
+    }
 	
      
 	

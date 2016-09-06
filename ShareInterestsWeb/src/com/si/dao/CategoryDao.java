@@ -17,9 +17,30 @@ public class CategoryDao extends SqlMapClientDaoSupport {
 		 this.setSqlMapClient(sqlMapClient);
 	 } 
 	
-	@SuppressWarnings("unchecked")
 	public List<Category> findAll() {
-		return getSqlMapClientTemplate().queryForList("CategorySql.readCategoryList");
+		return readCategoryList(new Category());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Category> readCategoryList(Category category) {
+		List<Category> array = getSqlMapClientTemplate().queryForList("CategorySql.readCategoryList", category);
+		return array;
+	}
+
+	public Category readCategory(Category category) {
+		return (Category)getSqlMapClientTemplate().queryForObject("CategorySql.readCategory", category);
+	}
+
+	public void createCategory(Category category) {
+		getSqlMapClientTemplate().insert("CategorySql.createCategory", category);
+	}
+
+	public void deleteCategory(Category category) {
+		getSqlMapClientTemplate().delete("CategorySql.deleteCategory", category);
+	}
+
+	public void updateCategory(Category category) {
+		getSqlMapClientTemplate().update("CategorySql.updateCategory", category);
 	}
 
 }

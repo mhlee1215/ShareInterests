@@ -17,9 +17,30 @@ public class HobbyDao extends SqlMapClientDaoSupport {
 		 this.setSqlMapClient(sqlMapClient);
 	 } 
 	
-	@SuppressWarnings("unchecked")
 	public List<Hobby> findAll() {
-		return getSqlMapClientTemplate().queryForList("HobbySql.readHobbyList");
+		return readHobbyList(new Hobby());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Hobby> readHobbyList(Hobby hobby) {
+		List<Hobby> array = getSqlMapClientTemplate().queryForList("HobbySql.readHobbyList", hobby);
+		return array;
+	}
+
+	public Hobby readHobby(Hobby hobby) {
+		return (Hobby)getSqlMapClientTemplate().queryForObject("HobbySql.readHobby", hobby);
+	}
+
+	public void createHobby(Hobby hobby) {
+		getSqlMapClientTemplate().insert("HobbySql.createHobby", hobby);
+	}
+
+	public void deleteHobby(Hobby hobby) {
+		getSqlMapClientTemplate().delete("HobbySql.deleteHobby", hobby);
+	}
+
+	public void updateHobby(Hobby hobby) {
+		getSqlMapClientTemplate().update("HobbySql.updateHobby", hobby);
 	}
 
 }

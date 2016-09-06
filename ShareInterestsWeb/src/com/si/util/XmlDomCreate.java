@@ -111,6 +111,23 @@ public class XmlDomCreate {
 //		
 		List<QueryParams> qList = new ArrayList<QueryParams>();
 		
+		params = new QueryParams();
+		params.name = "Category";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `name`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
+		
+		params = new QueryParams();
+		params.name = "Hobby";
+		params.packageName = "com.si.domain";
+		params.className = params.packageName+"."+params.name;
+		params.columns = "`id`, `title`, `categoryId`";
+		params.extra_columns = "";
+		params.orderStr = "";
+		qList.add(params);
 		
 		params = new QueryParams();
 		params.name = "Article";

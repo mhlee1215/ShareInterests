@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,6 +27,36 @@ $(document).ready(function() {
     	"verticalCentering":true,
     	"intervalDuration":5000
     });
+    
+        
+    
+    $("#action_article").on("click", function(event){
+    	document.location = '${actionArticleUrl}';
+	});
+    
+	function goArticleAction(url){
+		
+		$.ajax({
+			url: url,
+		    data: {
+		    	email:$("#signup-email").val(),
+		    	name:$("#signup-name").val(),
+		    	password:$("#signup-password").val()
+		    },
+		  success: function( result ) {
+			  //alert(result);
+			  if(result == 'success'){
+				  //alert('login success!');
+				  document.location = '/ShareInterestsWeb/login.do';
+			  }else if(result == 'notfound'){
+				  //alert('user not found');
+			  }else {
+				  //alert(result);
+			  }
+			  //document.location = 'loginSuccess.do';				
+		  }
+		});
+	}
 });
 </script>
 <style>
@@ -75,6 +106,20 @@ $(document).ready(function() {
   margin: 5px;
 }
 
+.button_my_article {
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  padding: 0px;
+  width: 160px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
 .button span {
   cursor: pointer;
   display: inline-block;
@@ -115,10 +160,14 @@ $(document).ready(function() {
   <button class="button button_price"><span>$$</span></button>
 </div>
 
+<div class="container" style="text-align: right">
+<button id="action_article" class="button button_my_article"><span>${actionArticleDisplay}</span></button>
+</div>
+
 <div class="container" >
 <ul class="pgwSlider">
-    <li><img src="/ShareInterestsWeb/assets/get.do?id=123" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars"></li>
-    <li><img src="/ShareInterestsWeb/assets/get.do?id=123" alt="Montréal, QC, Canada" data-large-src="/ShareInterestsWeb/assets/surfing.jpg"></li>
+    <li><img src="/ShareInterestsWeb/assets/get.do?id=surfing" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars"></li>
+    <li><img src="/ShareInterestsWeb/assets/get.do?id=surfing" alt="Montréal, QC, Canada" data-large-src="/ShareInterestsWeb/assets/surfing.jpg"></li>
     <li>
         <img src="/ShareInterestsWeb/assets/surfing.jpg">
         <span>Shanghai, China</span>

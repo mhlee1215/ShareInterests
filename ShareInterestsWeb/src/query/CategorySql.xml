@@ -8,13 +8,57 @@
 		<result column="ID" property="id" />
 		<result column="NAME" property="name" />
  	</resultMap>
- 	<select id="readCategoryList" resultMap="Category">
- 		SELECT ID, NAME 
- 		FROM category
- 	</select>
  	
+ 	<select id="readCategoryList" parameterClass="com.si.domain.Category"
+		resultMap="Category">
+		/*select read list Category*/
+		SELECT a.id, a.name FROM category a WHERE
+		1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
+		</isNotEqual>
+		<isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+		<isNotEqual compareValue="0" property="query_number"> LIMIT
+			#query_start#,#query_number#</isNotEqual>
+	</select>
  	
- 	
+ 	<select id="readCategory" parameterClass="com.si.domain.Category"
+		resultMap="Category">
+		/*select read Category*/
+		SELECT a.id, a.name FROM category a WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
+		</isNotEqual>
+		<isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+	</select>
+	<insert id="createCategory" parameterClass="com.si.domain.Category">
+		/* insert Category*/
+		INSERT INTO category(name)
+		VALUES (#name#)
+	</insert>
+	<update id="updateCategory" parameterClass="com.si.domain.Category">
+		/* update Category*/
+		update category SET ID = #id#
+		<isNotEqual compareValue="0" property="id">,ID = #id#
+		</isNotEqual>
+		<isNotEmpty property="name">,NAME = #name#</isNotEmpty>
+		<isNotEqual compareValue="0" property="id"> WHERE ID = #id#
+		</isNotEqual>
+	</update>
+	<delete id="deleteCategory" parameterClass="com.si.domain.Category">
+		/*delete Category*/
+		delete FROM category WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and ID = #id#
+		</isNotEqual>
+		<isNotEmpty property="name"> and NAME = #name#</isNotEmpty>
+	</delete>
+	<select id="countCategory" parameterClass="com.si.domain.Category"
+		resultClass="int">
+		/*count Category*/
+		SELECT count(*) FROM category a WHERE 1=1
+
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
+		</isNotEqual>
+		<isNotEmpty property="name"> and a.NAME = #name#</isNotEmpty>
+	</select>
  	
  	
 	<!-- <select id="readUser" resultMap="User">
@@ -51,6 +95,7 @@
 		 </isNotEmpty>
 		 WHERE ID = #id# 
 	</update> -->
+ 	
 </sqlMap>
 
 
