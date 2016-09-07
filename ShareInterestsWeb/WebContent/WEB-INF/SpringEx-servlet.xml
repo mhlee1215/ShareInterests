@@ -35,6 +35,7 @@
 					<list>
 						<value>image/jpeg</value>
 						<value>image/png</value>
+						<value>text/html;charset=UTF-8</value>
 					</list>
 				</property>
 			</bean>

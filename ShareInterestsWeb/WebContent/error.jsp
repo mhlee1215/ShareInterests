@@ -10,6 +10,7 @@
 
 <script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <style>
 .si_header {
 	background-color: #777 !important;

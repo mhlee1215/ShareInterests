@@ -202,12 +202,14 @@ private Logger logger = Logger.getLogger(getClass());
     	return new ModelAndView("error");
     }
 	
-    @RequestMapping(value="/updateArticle.do")
+    @RequestMapping(value="/updateArticle.do", produces = "text/html;charset=UTF-8")
     public @ResponseBody String updateArticle(HttpServletRequest request, HttpServletResponse response){
     	
     	String description = ServletRequestUtils.getStringParameter(request, "description", "");
     	int articleId = ServletRequestUtils.getIntParameter(request, "articleId", 0);
     	int authorId = ServletRequestUtils.getIntParameter(request, "authorId", 0);
+    	
+    	System.out.println("description:"+description);
     	
     	Article article = new Article();
     	article.setId(articleId);
