@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -100,23 +101,63 @@
 
 <div class="jumbotron text-center title_text">
   <h1>${hobbyTitle }</h1>
-  <p>now writing by ${action}</p> 
+  <p>now writing by ${author.name}</p> 
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
-var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
-simplemde.value("This text will appear in the editor");
+	var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
+	//simplemde.value("This text will appear in the editor");
+	
+	simplemde.codemirror.on("change", function(){
+	    //console.log(simplemde.value());
+	    $("#submit_button_text").html('not_Saved');
+	});
+	
+	function goUpdateArticle(){
+		$.ajax({
+			url: "/ShareInterestsWeb/browse/updateArticle.do",
+		    data: {
+		    	articleId: '${article.id}',
+		    	authorId: '${article.authorId}',
+		    	description: simplemde.value()
+		    },
+		  success: function( result ) {
+			  //alert(result);
+			  if(result == 'success'){
+				  //alert('login success!');
+				  //window.location = '/ShareInterestsWeb/index.do';
+				  $("#submit_button_text").html('Saved');
+			  }else if(result == 'notfound'){
+				  
+				  alert('user not found');
+			  }else {
+				  alert(result);
+			  }
+			  //document.location = 'loginSuccess.do';				
+		  }
+		});
+	}
+	
+	$("#submit_button").on("click", function(event){
+		goUpdateArticle();
+	});
+	
+	//$('#MyID').keyup(function(e){
+//		$("#submit_button_text").html('not_Saved');
+//	});
 });
 </script>
-
 <div class="container" >
 	<textarea id="MyID">
+	${article.description}
 	</textarea>
 </div>
+<c:if test="${action != 'read'}">
 <div class="container" style="text-align: right">
-<button class="button button_like"><span>Submit</span></button>
+<button id="submit_button" class="button button_like"><span id="submit_button_text">Submit</span></button>
 </div>
+</c:if>
 <jsp:include page="footer.jsp"/>
 <script src="/ShareInterestsWeb/js/pgwslider.min.js"></script>
 </body>

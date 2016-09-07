@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,22 +55,82 @@ private Logger logger = Logger.getLogger(getClass());
 	@Autowired
 	private final ArticleService articleService = null;
 	
-	@RequestMapping(value="/{category_name}/{hobby_title}/{action}")
+	@RequestMapping(value="/{category_name}/{hobby_title}/{user_id}")
     public ModelAndView article(HttpServletRequest request, HttpServletResponse response
     		,@PathVariable(value = "category_name") String categoryName
 			,@PathVariable(value = "hobby_title") String hobbyTitle
-			,@PathVariable(value = "action") String action) throws Exception {
+			,@PathVariable(value = "user_id") int userId) throws Exception {
 
-		
-		//System.out.println("category_name:"+categoryName);
+		String action = "";//ServletRequestUtils.getStringParameter(request, "action", "");
+		System.out.println("category_name:"+categoryName);
 		System.out.println("11hobby_title:"+hobbyTitle);
-		System.out.println("action:"+action);
+		System.out.println("userId:"+userId);
+		
+		
+		Category pCat = new Category();
+		pCat.setName(categoryName);
+		Category cat = categoryService.readCategory(pCat);
+		if(cat == null) return getErrorPage();
+		
+		Hobby pHobby = new Hobby();
+		pHobby.setCategoryId(cat.getId());
+		pHobby.setTitle(hobbyTitle);
+		Hobby hobby = hobbyService.readHobby(pHobby);
+		if(hobby == null) return getErrorPage();
+		
+		//User name overlapping problem can be occurred.
+		//Normal user and facebook username.
+		User pUser = new User();
+		pUser.setId(userId);
+		User u = userService.readUserData(pUser);
+		if(u == null) return getErrorPage();
+		
+		
+		
+		
+		
+		Object userObj = request.getSession().getAttribute("user");
+		User user = null;//(User) userObj;
+		
+		boolean isMyArticle = false;
+		boolean isForRead = false;
+		if(userObj != null){
+			user = (User) userObj;
+			if(u.getId() != user.getId()){
+				action = "read";
+				isForRead = true;
+			}else{
+				isMyArticle = true;
+			}
+			
+		}else{
+			action = "read";
+			isForRead = true;
+		}
+		
+		
+		
+		Article pArticle = new Article();
+		pArticle.setAuthorId(userId);
+		pArticle.setHobbyId(hobby.getId());
+		Article article = articleService.readArticle(pArticle);
+		if(article == null){
+			if(isMyArticle){
+				articleService.createArticle(pArticle);
+				article = articleService.readArticle(pArticle);
+			}else{
+				return getErrorPage();
+			}
+		}
+		
 //		List<Category> categoryList = categoryService.findAll();
 //		System.out.println("JH: "+ categoryList);
 		ModelAndView model = new ModelAndView("article");
-		//model.addObject("categoryName", categoryName);
+		model.addObject("categoryName", categoryName);
 		model.addObject("hobbyTitle", hobbyTitle);
 		model.addObject("action", action);
+		model.addObject("article", article);
+		model.addObject("author", u);
 		return model;
     }
 	
@@ -94,6 +155,8 @@ private Logger logger = Logger.getLogger(getClass());
 		if(hobby == null) return getErrorPage();
 		
 		User user = (User) request.getSession().getAttribute("user");
+		
+		
 		ModelAndView model = SISessionManager.SIModelAndView("hobby", request);
 		model.addObject("categoryName", categoryName);
 		model.addObject("hobbyTitle", hobbyTitle);
@@ -115,14 +178,17 @@ private Logger logger = Logger.getLogger(getClass());
 			Article article = articleService.readArticle(pArticle);
 			
 			if(article == null){
-				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getName()+"?action=new";
+//				articleService.createArticle(pArticle);
+//				article = articleService.readArticle(pArticle);
+				
+				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getId()+"?action=edit";
 				actionArticleDisplay = "Write my article";
-				model.addObject("action", "new");
+				//model.addObject("action", "edit");
 			} 
 			else{
-				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getName()+"?action=read";
+				actionArticleUrl = context.getContextPath()+"/browse/"+categoryName+"/"+hobbyTitle+"/"+user.getId()+"?action=read";
 				actionArticleDisplay = "Read my article";
-				model.addObject("action", "read");
+				//model.addObject("action", "read");
 			}
 		}
 		
@@ -136,6 +202,23 @@ private Logger logger = Logger.getLogger(getClass());
     	return new ModelAndView("error");
     }
 	
+    @RequestMapping(value="/updateArticle.do")
+    public @ResponseBody String updateArticle(HttpServletRequest request, HttpServletResponse response){
+    	
+    	String description = ServletRequestUtils.getStringParameter(request, "description", "");
+    	int articleId = ServletRequestUtils.getIntParameter(request, "articleId", 0);
+    	int authorId = ServletRequestUtils.getIntParameter(request, "authorId", 0);
+    	
+    	Article article = new Article();
+    	article.setId(articleId);
+    	article.setAuthorId(authorId);
+    	article.setDescription(description);
+    	articleService.updateArticle(article);
+    	
+
+    	return "success";
+    }
+    
     @RequestMapping(value="/search.do")
     public ModelAndView search(HttpServletRequest request, HttpServletResponse response){
     	ModelAndView model = SISessionManager.SIModelAndView("search", request);

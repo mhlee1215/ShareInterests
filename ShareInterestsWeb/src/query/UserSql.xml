@@ -23,6 +23,12 @@
        SELECT ID, NAME, EMAIL, TYPE, EXTERNALID
        FROM user 
        WHERE ID = ID
+       <isNotEqual compareValue="0" property="id" prepend="and">
+       ID = #id#
+       </isNotEqual>
+       <isNotEmpty property="name" prepend="and"> 
+       NAME = #name# 
+       </isNotEmpty>
        <isNotEmpty property="email" prepend="and"> 
        EMAIL = #email# 
        </isNotEmpty>
