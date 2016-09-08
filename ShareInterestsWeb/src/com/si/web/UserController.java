@@ -78,9 +78,11 @@ public class UserController {
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String result = ServletRequestUtils.getStringParameter(request, "result", "");
-		
+		String referrer = request.getHeader("referer");
+		System.out.println("referrer::"+referrer);
 		ModelAndView model = SISessionManager.SIModelAndView("login", request);
 		model.addObject("result", result);
+		model.addObject("callbackUrl", referrer);
 		//model.addObject("active", "login");
 		if(model.getModel().get("user") != null){
 			return new ModelAndView("redirect:index.do");
@@ -93,6 +95,8 @@ public class UserController {
 		String email = ServletRequestUtils.getStringParameter(request, "email", "");
 		String password = ServletRequestUtils.getStringParameter(request, "password", "");
 
+		
+		
 		logger.debug("public ModelAndView login");
 		logger.debug("===[S]======================");
 		logger.debug("email : "+email);
