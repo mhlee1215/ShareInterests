@@ -18,6 +18,7 @@
 
 <link rel="stylesheet" href="/ShareInterestsWeb/css/simplemde.min.css">
 <script src="/ShareInterestsWeb/js/simplemde.min.js"></script>
+<script src="/ShareInterestsWeb/js/marked.js"></script>
 
 </head>
 <style>
@@ -92,6 +93,33 @@
   right: 0;
 }
 
+
+
+.left {
+  
+  font-family:Consolas,"Liberation Mono",Courier,monospace;
+  float: left;
+  width: 0%;
+  height:95%;
+  display:none;
+}
+.right {
+  float: right;
+  width: 100%;
+  height:95%;
+}
+.show {display:block;}
+.expanded_write { width: 44%; height:95%;}
+.expanded_read { width: 55%; height:95%;}
+.full-expanded { height:100vh; width:100% !important;}
+.menu-full-expanded { width:100% !important;}
+
+.collapsed { width: 0%; }
+.edit_mode { overflow-y:auto; border:1px solid #eee;}
+
+
+.trasition_div { min-height: 10em; transition: cubic-bezier(0, 0, 0.17, 0.79) 1s; }
+
 </style>
 
 <body>
@@ -106,13 +134,25 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
-	//simplemde.value("This text will appear in the editor");
 	
-	simplemde.codemirror.on("change", function(){
-	    //console.log(simplemde.value());
-	    $("#submit_button_text").html('not_Saved');
-	});
+	var action = '${action}';
+	
+	var simplemde = null;
+	
+	if(action != 'read'){
+		simplemde = new SimpleMDE({ element: $("#write_textarea")[0] });
+		//simplemde.value("This text will appear in the editor");
+		
+		simplemde.codemirror.on("change", function(){
+		    //console.log(simplemde.value());
+		    $("#submit_button_text").html('not_Saved');
+		});
+		
+		$("#submit_button").on("click", function(event){
+			goUpdateArticle();
+		});
+	}
+	
 	
 	function goUpdateArticle(){
 		//alert(simplemde.value());
@@ -122,7 +162,7 @@ $(document).ready(function() {
 		    data: {
 		    	articleId: '${article.id}',
 		    	authorId: '${article.authorId}',
-		    	description: simplemde.value()
+		    	description: $('#write_textarea').val()
 		    },
 		  success: function( result ) {
 			  //alert(result);
@@ -141,25 +181,76 @@ $(document).ready(function() {
 		});
 	}
 	
-	$("#submit_button").on("click", function(event){
-		goUpdateArticle();
-	});
-	
+	//alert(document.getElementById('read_textarea').innerHTML);
+	document.getElementById('read_textarea_div').innerHTML =
+	      marked(document.getElementById('read_textarea_div').innerHTML);
 	//$('#MyID').keyup(function(e){
 //		$("#submit_button_text").html('not_Saved');
 //	});
+	
+	$('#edit_button').click(function(){
+		
+		$('#write_textarea_div').toggleClass('show');
+	    $('#write_textarea_div').toggleClass('expanded_write');
+	    $('#read_textarea_div').toggleClass('expanded_read');
+	    $('#read_textarea_div').toggleClass('edit_mode');
+	    
+	    $('#parent_container').toggleClass('full-expanded');
+	    $('.menu_container').toggleClass('menu-full-expanded');
+	});
+	
+	$('#write_textarea').bind('input propertychange', function() {
+		
+		document.getElementById('read_textarea_div').innerHTML =
+		      marked($('#write_textarea').val());
+		
+		$("#submit_button_text").html('not_Saved');
+	});
+	
+	$("#submit_button").on("click", function(event){
+		goUpdateArticle();
+	});
 });
 </script>
-<div class="container" >
-	<textarea id="MyID">
-	${article.description}
-	</textarea>
+
+<div id="parent_container" class="container">
+
+				<div id="write_textarea_div" class="left trasition_div" style="height:100%;">
+				<textarea id="write_textarea" style="height:100%; width:100%;">
+				${article.description}
+				</textarea>		
+				</div>
+				
+				 
+				<div id="read_textarea_div" class="right trasition_div" style="height:100%;">
+				${article.description}
+				</div>
+		
+	
+	
+	
+	
+	
 </div>
-<c:if test="${action != 'read'}">
-<div class="container" style="text-align: right">
+
+
+<c:if test="${authority == 'my' }">
+<div class="container menu_container" style="text-align: right">
 <button id="submit_button" class="button button_like"><span id="submit_button_text">Submit</span></button>
 </div>
+<div class="container menu_container" style="text-align: right">
+<button id="edit_button" class="button button_like"><span id="submit_button_text">Edit mode</span></button>
+</div>
 </c:if>
+
+<c:if test="${authority != 'my' }">
+<div class="container menu_container" style="text-align: right">
+like button is here..
+</div>
+</c:if>
+
+
+
 <jsp:include page="footer.jsp"/>
 <script src="/ShareInterestsWeb/js/pgwslider.min.js"></script>
 </body>

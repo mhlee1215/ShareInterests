@@ -181,6 +181,11 @@ fieldset[disabled] .btn-xl.active {
   font-weight: 400;
   letter-spacing: 1px;
   color: white;
+  text-shadow:0px 0px #000000 !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  border-right:0px solid !important;
+  border-left:0px solid !important;
 }
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus {

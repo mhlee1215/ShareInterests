@@ -61,11 +61,11 @@ private Logger logger = Logger.getLogger(getClass());
 			,@PathVariable(value = "hobby_title") String hobbyTitle
 			,@PathVariable(value = "user_id") int userId) throws Exception {
 
-		String action = "";//ServletRequestUtils.getStringParameter(request, "action", "");
+		String action = ServletRequestUtils.getStringParameter(request, "action", "");
 		System.out.println("category_name:"+categoryName);
 		System.out.println("11hobby_title:"+hobbyTitle);
 		System.out.println("userId:"+userId);
-		
+		String authority = "other";
 		
 		Category pCat = new Category();
 		pCat.setName(categoryName);
@@ -101,6 +101,7 @@ private Logger logger = Logger.getLogger(getClass());
 				isForRead = true;
 			}else{
 				isMyArticle = true;
+				authority = "my";
 			}
 			
 		}else{
@@ -130,6 +131,7 @@ private Logger logger = Logger.getLogger(getClass());
 		model.addObject("hobbyTitle", hobbyTitle);
 		model.addObject("action", action);
 		model.addObject("article", article);
+		model.addObject("authority", authority);
 		model.addObject("author", u);
 		return model;
     }

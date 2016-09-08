@@ -33,7 +33,7 @@ $(document).ready(function(){
 			  //alert(result);
 			  if(result == 'success'){
 				  //alert('login success!');
-				  window.location = '/ShareInterestsWeb/index.do';
+				  window.location = '${callbackUrl}';
 			  }else if(result == 'notfound'){
 				  alert('user not found');
 			  }else {
