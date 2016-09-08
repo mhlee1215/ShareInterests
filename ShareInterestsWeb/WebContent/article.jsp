@@ -120,6 +120,9 @@
 
 .trasition_div { min-height: 10em; transition: cubic-bezier(0, 0, 0.17, 0.79) 1s; }
 
+.CodeMirror {
+    height: 95vh;
+}
 </style>
 
 <body>
@@ -139,19 +142,10 @@ $(document).ready(function() {
 	
 	var simplemde = null;
 	
-	if(action != 'read'){
-		simplemde = new SimpleMDE({ element: $("#write_textarea")[0] });
-		//simplemde.value("This text will appear in the editor");
+	
 		
-		simplemde.codemirror.on("change", function(){
-		    //console.log(simplemde.value());
-		    $("#submit_button_text").html('not_Saved');
-		});
 		
-		$("#submit_button").on("click", function(event){
-			goUpdateArticle();
-		});
-	}
+	
 	
 	
 	function goUpdateArticle(){
@@ -162,7 +156,7 @@ $(document).ready(function() {
 		    data: {
 		    	articleId: '${article.id}',
 		    	authorId: '${article.authorId}',
-		    	description: $('#write_textarea').val()
+		    	description: simplemde.value()
 		    },
 		  success: function( result ) {
 			  //alert(result);
@@ -197,15 +191,30 @@ $(document).ready(function() {
 	    
 	    $('#parent_container').toggleClass('full-expanded');
 	    $('.menu_container').toggleClass('menu-full-expanded');
+	    
+	    simplemde = new SimpleMDE({
+	    	hideIcons: ["preview"],
+	    	element: $("#write_textarea")[0] 
+	    });
+		//simplemde.value("This text will appear in the editor");
+		
+		simplemde.codemirror.on("change", function(){
+		    //console.log(simplemde.value());
+		    $("#submit_button_text").html('not_Saved');
+		    
+		    document.getElementById('read_textarea_div').innerHTML =
+			      marked(simplemde.value());
+		});
+		
 	});
 	
-	$('#write_textarea').bind('input propertychange', function() {
+	/*$('#write_textarea').bind('input propertychange', function() {
 		
 		document.getElementById('read_textarea_div').innerHTML =
 		      marked($('#write_textarea').val());
 		
 		$("#submit_button_text").html('not_Saved');
-	});
+	});*/
 	
 	$("#submit_button").on("click", function(event){
 		goUpdateArticle();
