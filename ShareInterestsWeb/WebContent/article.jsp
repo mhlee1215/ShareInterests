@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta property='og:image' content='http://54.201.96.236:8080/ShareInterestsWeb/assets/get.do?id=surfing.jpg'/>
+<link rel="image_src" href="http://54.201.96.236:8080/ShareInterestsWeb/assets/get.do?id=surfing.jpg" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
