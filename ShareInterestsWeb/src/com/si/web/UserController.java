@@ -172,6 +172,12 @@ public class UserController {
 		model.addObject("active", "about");
 		return model;
 	}
+	
+	@RequestMapping("/account.do")
+	public ModelAndView account(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = SISessionManager.SIModelAndView("account", request);
+		return model;
+	}
 
 
 //	@RequestMapping("/category/{Cat1}/{Cat2}/{Cat3}")

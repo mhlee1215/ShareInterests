@@ -73,7 +73,7 @@
 	                    <c:choose>
 	                    	<c:when test="${not empty user}">
 	                    		<li>
-	                    			<a class="page-scroll" href="<%=contextPath%>/userSetting.do">${user.name}</a>
+	                    			<a class="page-scroll" href="<%=contextPath%>/account.do">${user.name}</a>
 	                    		</li>
 	                    		<li>
 	                    			<a class="page-scroll" href="<%=contextPath%>/logout.do">Log Out</a>
