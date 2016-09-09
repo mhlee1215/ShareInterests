@@ -40,6 +40,7 @@
 	  <url-pattern>*.ttf</url-pattern>
 	  <url-pattern>*.woff</url-pattern>
 	  <url-pattern>*.woff2</url-pattern>
+	  <url-pattern>*.html</url-pattern> <!-- For Test. This shoudl be removed after development finished. -->
   </servlet-mapping>
 
   <filter>
