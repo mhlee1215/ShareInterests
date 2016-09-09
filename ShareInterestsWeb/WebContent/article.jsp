@@ -226,15 +226,11 @@ $(document).ready(function() {
 <div id="parent_container" class="container">
 
 				<div id="write_textarea_div" class="left trasition_div" style="height:100%;">
-				<textarea id="write_textarea" style="height:100%; width:100%;">
-				${article.description}
-				</textarea>		
+				<textarea id="write_textarea" style="height:100%; width:100%;">${article.description}</textarea>		
 				</div>
 				
 				 
-				<div id="read_textarea_div" class="right trasition_div" style="height:100%;">
-				${article.description}
-				</div>
+				<div id="read_textarea_div" class="right trasition_div" style="height:100%;">${article.description}</div>
 		
 	
 	
