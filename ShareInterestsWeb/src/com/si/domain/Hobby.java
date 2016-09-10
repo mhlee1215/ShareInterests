@@ -1,11 +1,33 @@
 package com.si.domain;
 
+import java.net.URL;
+import java.util.List;
+
 public class Hobby{
 	int id = 0;
 	String  title = "";
 	int  categoryId = 0;
 	int query_start = 0;
 	int query_number = 0;
+	
+	String represent_img_id = null;
+	List<String> img_ids = null;
+	
+	
+	public String getRepresent_img_id() {
+		return represent_img_id;
+	}
+	public void setRepresent_img_id(String represent_img_id) {
+		this.represent_img_id = represent_img_id;
+	}
+	public List<String> getImg_ids() {
+		return img_ids;
+	}
+	public void setImg_idss(List<String> img_ids) {
+		this.img_ids = img_ids;
+	}
+
+	
 	
 	public int getId(){
 		return id;

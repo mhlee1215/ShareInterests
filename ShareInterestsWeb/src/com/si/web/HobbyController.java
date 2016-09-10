@@ -234,7 +234,7 @@ private Logger logger = Logger.getLogger(getClass());
 
     	List<Hobby> searchResult = this.hobbyService.searchHobbyList(hobby);
     	
-    	model.addObject(searchResult);
+    	model.addObject("searchResult", searchResult);
     	model.addObject("keyword", keyword);
     	return model;
     }

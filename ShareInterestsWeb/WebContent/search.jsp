@@ -1,5 +1,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,24 +60,28 @@ header .index {
         </div>
         <!-- /.row -->
 
-        <!-- Project One -->
+
+
+        <!-- Search Result List -->
+        
+        <c:forEach items="${searchResult}" var="hobby">
         <div class="row">
             <div class="col-md-7">
                 <a href="#">
-                    <img class="img-responsive" src="/ShareInterestsWeb/assets/get.do?id=surfing2.jpg" alt="">
+                    <img class="img-responsive" src="/ShareInterestsWeb/assets/get.do?id=${hobby.represent_img_id}" alt="">
                 </a>
             </div>
             <div class="col-md-5">
-                <h3>Project One</h3>
-                <h4>Subheading</h4>
+                <h3>${hobby.title}</h3>
+                <!--<h4>Subheading: quote for this hobby</h4>-->
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-                <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="<%=contextPath%>/browse/search.do">Details<span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
         </div>
         <!-- /.row -->
 
         <hr>
-        
+        </c:forEach>
         
 
         <!-- Pagination -->
