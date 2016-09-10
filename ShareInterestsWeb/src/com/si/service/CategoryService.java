@@ -26,6 +26,7 @@ public class CategoryService {
 
 
 	public List<Category> findAll() {
+		System.out.println("??");
 
 		List<Hobby> hobbyList = hobbyDao.findAll();
 		List<Category> categoryList = categoryDao.findAll();
