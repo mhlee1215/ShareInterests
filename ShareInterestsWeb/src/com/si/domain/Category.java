@@ -63,5 +63,11 @@ public class Category {
 	public void setHobbyList(List<Hobby> hobbyList) {
 		this.hobbyList = hobbyList;
 	}
-	
+
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", hobbyList=" + hobbyList + ", query_start=" + query_start
+				+ ", query_number=" + query_number + "]";
+	}
 }
