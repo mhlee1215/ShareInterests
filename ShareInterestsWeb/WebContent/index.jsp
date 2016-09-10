@@ -28,7 +28,7 @@ header .index {
  <header>
         <div class="container">
             <div class="intro-text index">
-                <div class="intro-heading">Share Interests</div>
+                <div class="intro-heading">My Share Interests</div>
                 <div class="intro-lead-in">Tell us your Story and More</div>
                         <form class="input-group" action="<%=contextPath%>/browse/search.do" method="post">
                         	<input type="text" name = "keyword" class="form-control">
