@@ -67,7 +67,7 @@
 		resultMap="Article">
 		/*select read Article*/
 		SELECT a.id, a.authorId, a.hobbyId, a.date,
-		a.priceMin, a.priceMax, a.description, a.practiceHour FROM article a
+		a.priceMin, a.priceMax, a.description, a.practiceHour, a.title, a.articleAbstract FROM article a
 		WHERE 1=1
 		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
 		</isNotEqual>
