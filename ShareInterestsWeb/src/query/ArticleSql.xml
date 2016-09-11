@@ -61,7 +61,7 @@
 		/* insert Article*/
 		INSERT INTO article(authorId, hobbyId, date, priceMin, priceMax,
 		description, practiceHour)
-		VALUES (#authorId#, #hobbyId#, #date#, #priceMin#, #priceMax#,
+		VALUES (#authorId#, #hobbyId#, now(), #priceMin#, #priceMax#,
 		#description#, #practiceHour#)
 	</insert>
 	<update id="updateArticle" parameterClass="com.si.domain.Article">
@@ -81,6 +81,7 @@
 		</isNotEmpty>
 		<isNotEqual compareValue="0" property="practiceHour">,PRACTICEHOUR =
 			#practiceHour#</isNotEqual>
+		,date = now()
 		<isNotEqual compareValue="0" property="id"> WHERE ID = #id#
 		</isNotEqual>
 	</update>

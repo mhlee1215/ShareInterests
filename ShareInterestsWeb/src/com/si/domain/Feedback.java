@@ -4,6 +4,7 @@ public class Feedback{
 	int id = 0;
 	int  userId = 0;
 	int  articleId = 0;
+	String type = "";
 	int query_start = 0;
 	int query_number = 0;
 	
@@ -14,6 +15,12 @@ public class Feedback{
 		this.id = id;
 	}
 
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getUserId(){
 		return userId;
 	}
