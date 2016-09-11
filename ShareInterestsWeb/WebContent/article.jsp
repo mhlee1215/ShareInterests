@@ -152,7 +152,7 @@ $(document).ready(function() {
 	function goUpdateArticle(){
 		//alert(simplemde.value());
 		$.ajax({
-			url: "/ShareInterestsWeb/browse/updateArticle.do",
+			url: "/ShareInterestsWeb/browse/updateArticle",
 			type: "post",
 		    data: {
 		    	articleId: '${article.id}',

@@ -66,7 +66,7 @@ public class AssetController {
 	private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 //	@ResponseBody
-//	@RequestMapping(value = "/assets/get.do", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+//	@RequestMapping(value = "/assets/get", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 //	public byte[] testphoto() throws IOException {
 //	    InputStream in = context.getResourceAsStream("classpath:images/123.jpg");
 //	    FileInputStream fis = new FileInputStream(getServletContext().getRealPath("/") + "/");
@@ -76,7 +76,7 @@ public class AssetController {
 
 	//Not work in AWS
 //	@ResponseBody
-//	@RequestMapping(value = "/get.do", method = RequestMethod.GET)
+//	@RequestMapping(value = "/get", method = RequestMethod.GET)
 //	public ResponseEntity<byte[]> testphoto(HttpServletRequest request) throws IOException {
 //	    //InputStream in = context.getResourceAsStream("classpath:images/123.jpg");
 //		String id = ServletRequestUtils.getStringParameter(request, "id", "");
@@ -104,7 +104,7 @@ public class AssetController {
 //	
 //	//Not work in AWS
 //	@ResponseBody
-//	@RequestMapping(value = "/get2.do", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+//	@RequestMapping(value = "/get2", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 //	public byte[] testphoto2(HttpServletRequest request) throws IOException {
 //		String id = ServletRequestUtils.getStringParameter(request, "id", "");
 //		System.out.println("+++>>>"+context.getRealPath("/") + "/assets/"+id);
@@ -123,7 +123,7 @@ public class AssetController {
 //	}
 	
 	//Work in AWS !!!! 
-	@RequestMapping(value = "/get.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	  public void showImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String id = ServletRequestUtils.getStringParameter(request, "id", "");
@@ -152,14 +152,14 @@ public class AssetController {
 	    responseOutputStream.close();
 	  }
 	
-	@RequestMapping(value = "/fileUpload.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
     public String dragAndDrop(Model model) {
          
         return "fileUpload";
          
     }
      
-    @RequestMapping(value = "/fileUpload/post.do") //ajax에서 호출하는 부분
+    @RequestMapping(value = "/fileUpload/post") //ajax에서 호출하는 부분
     @ResponseBody
     public String upload(MultipartHttpServletRequest multipartRequest) { //Multipart로 받는다.
          

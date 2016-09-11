@@ -38,7 +38,7 @@ public class UserController {
 	@Autowired
 	private final CategoryService categoryService = null;
 
-	@RequestMapping("/index.do")
+	@RequestMapping("/index")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		//		String submittedUserId = ServletRequestUtils.getStringParameter(request, "submittedUserId", "");
@@ -80,7 +80,7 @@ public class UserController {
 		return model;
 	}
 
-	@RequestMapping("/login.do")
+	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String result = ServletRequestUtils.getStringParameter(request, "result", "");
@@ -91,12 +91,12 @@ public class UserController {
 		model.addObject("callbackUrl", referrer);
 		//model.addObject("active", "login");
 		if(model.getModel().get("user") != null){
-			return new ModelAndView("redirect:index.do");
+			return new ModelAndView("redirect:index");
 		}
 		return model;
 	}
 
-	@RequestMapping("/requestLogin.do")
+	@RequestMapping("/requestLogin")
 	public @ResponseBody String requestLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = ServletRequestUtils.getStringParameter(request, "email", "");
 		String password = ServletRequestUtils.getStringParameter(request, "password", "");
@@ -133,7 +133,7 @@ public class UserController {
 	}
 
 	//	
-	@RequestMapping("/requestSignup.do")
+	@RequestMapping("/requestSignup")
 	public @ResponseBody String requestSignup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = ServletRequestUtils.getStringParameter(request, "email", "");
 		String name = ServletRequestUtils.getStringParameter(request, "name", "");
@@ -163,23 +163,23 @@ public class UserController {
 		return "error_"+errorStr;
 	}
 
-	@RequestMapping("/logout.do")
+	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().invalidate();
 
-		ModelAndView model = new ModelAndView("redirect:index.do");
+		ModelAndView model = new ModelAndView("redirect:index");
 		model.addObject("logoutComplete", "true");
 		return model;
 	}
 	
-	@RequestMapping("/about.do")
+	@RequestMapping("/about")
 	public ModelAndView about(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = SISessionManager.SIModelAndView("about", request);
 		model.addObject("active", "about");
 		return model;
 	}
 	
-	@RequestMapping("/account.do")
+	@RequestMapping("/account")
 	public ModelAndView account(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = SISessionManager.SIModelAndView("account", request);
 		return model;
@@ -202,7 +202,7 @@ public class UserController {
 //		return new ModelAndView("index");
 //	}
 	//	
-	//	@RequestMapping("/findPassword.do")
+	//	@RequestMapping("/findPassword")
 	//    public ModelAndView findPassword(HttpServletRequest request, HttpServletResponse response) {
 	//		
 	//		request.getSession().removeAttribute("userid");
@@ -213,7 +213,7 @@ public class UserController {
 	//    }
 	//	
 	//	
-	//	@RequestMapping("/changePassword.do")
+	//	@RequestMapping("/changePassword")
 	//    public ModelAndView changePassword(HttpServletRequest request, HttpServletResponse response) {
 	//		
 	//		request.getSession().removeAttribute("userid");

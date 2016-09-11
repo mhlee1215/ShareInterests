@@ -169,7 +169,7 @@ private Logger logger = Logger.getLogger(getClass());
 		
 		if(user == null){
 			actionArticleDisplay = "Write my article";
-			actionArticleUrl = context.getContextPath()+"/"+"login.do";
+			actionArticleUrl = context.getContextPath()+"/"+"login";
 			model.addObject("action", "loginRequired");
 		}
 		else{
@@ -204,7 +204,7 @@ private Logger logger = Logger.getLogger(getClass());
     	return new ModelAndView("error");
     }
 	
-    @RequestMapping(value="/updateArticle.do", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value="/updateArticle", produces = "text/html;charset=UTF-8")
     public @ResponseBody String updateArticle(HttpServletRequest request, HttpServletResponse response){
     	
     	String description = ServletRequestUtils.getStringParameter(request, "description", "");
@@ -223,7 +223,7 @@ private Logger logger = Logger.getLogger(getClass());
     	return "success";
     }
     
-    @RequestMapping(value="/search.do")
+    @RequestMapping(value="/search")
     public ModelAndView search(HttpServletRequest request, HttpServletResponse response){
     	ModelAndView model = SISessionManager.SIModelAndView("search", request);
     	model.addObject("active", "search");

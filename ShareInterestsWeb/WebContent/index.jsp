@@ -30,7 +30,7 @@ header .index {
             <div class="intro-text index">
                 <div class="intro-heading">My Share Interests</div>
                 <div class="intro-lead-in">Tell us your Story and More</div>
-                        <form class="input-group" action="<%=contextPath%>/browse/search.do" method="post">
+                        <form class="input-group" action="<%=contextPath%>/browse/search" method="post">
                         	<input type="text" name = "keyword" class="form-control">
                         	<span class="input-group-btn">
                             	<input class="btn btn-default" type="submit" value="Go!"/>
@@ -73,7 +73,7 @@ header .index {
     		<div id="collapse${cat.id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${cat.id}">
       			<div class="panel-body">
         		<c:forEach items="${cat.hobbyList}" var="hobby">
-        			<a href="browse/${cat.name}/${hobby.title}.do"> ${hobby.title}, </a>
+        			<a href="browse/${cat.name}/${hobby.title}"> ${hobby.title}, </a>
       			</c:forEach>
       			</div>
     		</div>

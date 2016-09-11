@@ -41,16 +41,16 @@ public class FacebookController {
 	private static final String ContextPath = "ShareInterestsWeb";
 	//private static final String SERVER_DOMAIN = "http://respace.co.kr/";
 	 
-	private static String REDIRECT_URI = SERVER_DOMAIN+ContextPath+"/social/facebook/callback.do";
+	private static String REDIRECT_URI = SERVER_DOMAIN+ContextPath+"/social/facebook/callback";
 	
 	private static final String CLIENT_ID = "1742107286033861";
 	private static final String APP_SECRET = "c46700f981c23db682349b2635bcc40f";
 	private static final String DIALOG_OAUTH = "https://www.facebook.com/dialog/oauth";
 	private static final String ACCESS_TOKEN = "https://graph.facebook.com/oauth/access_token";
 	
-	private static String CALLBACK_URL = SERVER_DOMAIN+ContextPath+"/index.do";
+	private static String CALLBACK_URL = SERVER_DOMAIN+ContextPath+"/index";
 
-	@RequestMapping(value = "/signin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public void signin(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println("hi signin===");
@@ -60,8 +60,8 @@ public class FacebookController {
 			
 			System.out.println("serverName: "+request.getServerName());
 			SERVER_DOMAIN = "http://"+request.getServerName()+":8080/";
-			CALLBACK_URL = SERVER_DOMAIN+ContextPath+"/index.do";
-			REDIRECT_URI = SERVER_DOMAIN+ContextPath+"/social/facebook/callback.do";
+			CALLBACK_URL = SERVER_DOMAIN+ContextPath+"/index";
+			REDIRECT_URI = SERVER_DOMAIN+ContextPath+"/social/facebook/callback";
 			
 			response.sendRedirect(DIALOG_OAUTH + "?client_id=" + CLIENT_ID
 					+ "&redirect_uri=" + REDIRECT_URI + "&scope=" + SCOPE);
@@ -70,7 +70,7 @@ public class FacebookController {
 		}
 	}
 
-	@RequestMapping(value = "/test.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	@ResponseBody
 	public String test(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -78,7 +78,7 @@ public class FacebookController {
 		return "{\"name\":\"game_name\", \"round\":\"1\"}";
 	}
 
-	@RequestMapping(value = "/callback.do", params = "code", method = RequestMethod.GET)
+	@RequestMapping(value = "/callback", params = "code", method = RequestMethod.GET)
 	//@ResponseBody
 	public ModelAndView accessCode(@RequestParam("code") String code,
 			HttpServletRequest request, HttpServletResponse response)
@@ -151,10 +151,10 @@ public class FacebookController {
 					
 					if(user != null){
 						request.getSession().setAttribute("user", user);
-						ModelAndView model = new ModelAndView("redirect:/index.do");
+						ModelAndView model = new ModelAndView("redirect:/index");
 						return model;	
 					}else{
-						ModelAndView model = new ModelAndView("redirect:/login.do?result=fail");
+						ModelAndView model = new ModelAndView("redirect:/login?result=fail");
 						return model;
 					}
 					
@@ -179,7 +179,7 @@ public class FacebookController {
 		return null;
 	}
 
-	@RequestMapping(value = "/callback.do", params = "error_reason", method = RequestMethod.GET)
+	@RequestMapping(value = "/callback", params = "error_reason", method = RequestMethod.GET)
 	@ResponseBody
 	public void error(@RequestParam("error_reason") String errorReason,
 			@RequestParam("error") String error,

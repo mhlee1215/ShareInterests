@@ -46,13 +46,13 @@ $(document).ready(function() {
 			  //alert(result);
 			  if(result == 'success'){
 				  //alert('login success!');
-				  document.location = '/ShareInterestsWeb/login.do';
+				  document.location = '/ShareInterestsWeb/login';
 			  }else if(result == 'notfound'){
 				  //alert('user not found');
 			  }else {
 				  //alert(result);
 			  }
-			  //document.location = 'loginSuccess.do';				
+			  //document.location = 'loginSuccess';				
 		  }
 		});
 	}
@@ -165,8 +165,8 @@ $(document).ready(function() {
 
 <div class="container" >
 <ul class="pgwSlider">
-    <li><img src="/ShareInterestsWeb/assets/get.do?id=surfing" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars"></li>
-    <li><img src="/ShareInterestsWeb/assets/get.do?id=surfing" alt="Montréal, QC, Canada" data-large-src="/ShareInterestsWeb/assets/surfing.jpg"></li>
+    <li><img src="/ShareInterestsWeb/assets/get?id=surfing" alt="Paris, France" data-description="Eiffel Tower and Champ de Mars"></li>
+    <li><img src="/ShareInterestsWeb/assets/get?id=surfing" alt="Montréal, QC, Canada" data-large-src="/ShareInterestsWeb/assets/surfing.jpg"></li>
     <li>
         <img src="/ShareInterestsWeb/assets/surfing.jpg">
         <span>Shanghai, China</span>

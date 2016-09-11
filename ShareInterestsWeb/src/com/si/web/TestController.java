@@ -46,7 +46,7 @@ public class TestController {
 	@Autowired
 	private final ArticleService articleService = null;
 	
-	@RequestMapping("/{action}.do")
+	@RequestMapping("/{action}")
     public @ResponseBody String testAction(HttpServletRequest request, HttpServletResponse response
     		,@PathVariable(value = "action") String action
 			) throws Exception {

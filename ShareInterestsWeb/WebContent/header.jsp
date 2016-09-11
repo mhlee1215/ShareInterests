@@ -54,7 +54,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="<%=contextPath%>/index.do">Share Interests</a>
+                <a class="navbar-brand page-scroll" href="<%=contextPath%>/index">Share Interests</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -64,24 +64,24 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="<%=contextPath%>/about.do">About</a>
+                        <a class="page-scroll" href="<%=contextPath%>/about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="<%=contextPath%>/index.do">Home</a>
+                        <a class="page-scroll" href="<%=contextPath%>/index">Home</a>
                     </li>
                     
 	                    <c:choose>
 	                    	<c:when test="${not empty user}">
 	                    		<li>
-	                    			<a class="page-scroll" href="<%=contextPath%>/account.do">${user.name}</a>
+	                    			<a class="page-scroll" href="<%=contextPath%>/account">${user.name}</a>
 	                    		</li>
 	                    		<li>
-	                    			<a class="page-scroll" href="<%=contextPath%>/logout.do">Log Out</a>
+	                    			<a class="page-scroll" href="<%=contextPath%>/logout">Log Out</a>
 	                    		</li>
 	                    	</c:when>
 	                    	<c:otherwise>
 	                    		<li>
-	                    			<a class="page-scroll" href="<%=contextPath%>/login.do">Sign In</a>
+	                    			<a class="page-scroll" href="<%=contextPath%>/login">Sign In</a>
 	                    		</li>
 	                    	</c:otherwise>
 	                    </c:choose>

@@ -24,7 +24,7 @@ $(document).ready(function(){
 	function goRequestLogin(){
 		
 		$.ajax({
-			url: "requestLogin.do",
+			url: "requestLogin",
 		    data: {
 		    	email:$("#login-username").val(),
 		    	password:$("#login-password").val()
@@ -39,7 +39,7 @@ $(document).ready(function(){
 			  }else {
 				  alert(result);
 			  }
-			  //document.location = 'loginSuccess.do';				
+			  //document.location = 'loginSuccess';				
 		  }
 		});
 	}
@@ -47,7 +47,7 @@ $(document).ready(function(){
 	function goRequestSignup(){
 		
 		$.ajax({
-			url: "requestSignup.do",
+			url: "requestSignup",
 		    data: {
 		    	email:$("#signup-email").val(),
 		    	name:$("#signup-name").val(),
@@ -57,13 +57,13 @@ $(document).ready(function(){
 			  //alert(result);
 			  if(result == 'success'){
 				  //alert('login success!');
-				  document.location = '/ShareInterestsWeb/login.do';
+				  document.location = '/ShareInterestsWeb/login';
 			  }else if(result == 'notfound'){
 				  //alert('user not found');
 			  }else {
 				  //alert(result);
 			  }
-			  //document.location = 'loginSuccess.do';				
+			  //document.location = 'loginSuccess';				
 		  }
 		});
 	}
@@ -162,7 +162,7 @@ $(document).ready(function(){
 
                                     <div class="col-sm-12 controls">
                                       <a id="btn-login" href="#" class="btn btn-success">Login  </a>
-                                      <a id="btn-fblogin" href="/ShareInterestsWeb//social/facebook/signin.do" class="btn btn-primary">Login with Facebook</a>
+                                      <a id="btn-fblogin" href="/ShareInterestsWeb//social/facebook/signin" class="btn btn-primary">Login with Facebook</a>
                                     </div>
                                 </div>
 
@@ -248,7 +248,7 @@ $(document).ready(function(){
                                 
                                 <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <a id="btn-fblogin" href="/ShareInterestsWeb//social/facebook/signin.do" class="btn btn-primary">Sign Up with Facebook</a>
+                                        <a id="btn-fblogin" href="/ShareInterestsWeb//social/facebook/signin" class="btn btn-primary">Sign Up with Facebook</a>
                                     </div>                                           
                                 </div>
                             </form>
