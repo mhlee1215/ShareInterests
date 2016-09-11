@@ -73,6 +73,12 @@ public class UserController {
 		model.addObject("active", "index");
 		return model;
 	}
+	
+	@RequestMapping("/")
+	public ModelAndView welcome(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView model = SISessionManager.SIModelAndView("index", request);
+		return model;
+	}
 
 	@RequestMapping("/login.do")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
