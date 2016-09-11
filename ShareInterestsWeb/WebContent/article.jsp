@@ -124,6 +124,10 @@
 .CodeMirror {
     height: 95vh;
 }
+
+.center_aligned {
+	text-align: center;
+}
 </style>
 
 <body>
@@ -228,32 +232,37 @@ $(document).ready(function() {
 				<div id="write_textarea_div" class="left trasition_div" style="height:100%;">
 				<textarea id="write_textarea" style="height:100%; width:100%;">${article.description}</textarea>		
 				</div>
-				
-				 
 				<div id="read_textarea_div" class="right trasition_div" style="height:100%;">${article.description}</div>
-		
-	
-	
-	
-	
-	
 </div>
 
+<div class="container" style="text-align:center">
+<button type="button" class="btn btn-default btn">
+  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
+</button>
+<button type="button" class="btn btn-default btn">
+  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Useful
+</button>
+<button type="button" class="btn btn-default btn">
+  <span class="glyphicon glyphicon-ice-lolly" aria-hidden="true"></span> Funny
+</button>
+</div>
 
 <c:if test="${authority == 'my' }">
 <div class="container menu_container" style="text-align: right">
-<button id="submit_button" class="button button_like"><span id="submit_button_text">Submit</span></button>
+<button id="submit_button" class="button button_articles"><span id="submit_button_text">Submit</span></button>
 </div>
 <div class="container menu_container" style="text-align: right">
-<button id="edit_button" class="button button_like"><span id="submit_button_text">Edit mode</span></button>
+<button id="edit_button" class="button button_articles"><span id="submit_button_text">Edit mode</span></button>
 </div>
 </c:if>
 
 <c:if test="${authority != 'my' }">
 <div class="container menu_container" style="text-align: right">
-like button is here..
+
 </div>
 </c:if>
+
+
 
 
 

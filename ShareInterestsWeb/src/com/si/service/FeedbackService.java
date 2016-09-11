@@ -15,6 +15,54 @@ public class FeedbackService{
 
 	@Autowired
 	private FeedbackDao feedbackDao;
+	
+	public void setFeedbackLike(int userId, int articleId){
+		Feedback fd = new Feedback();
+		fd.setUserId(userId);
+		fd.setArticleId(articleId);
+		fd.setType(Feedback.TYPE_LIKE);
+		createFeedback(fd);
+	}
+	
+	public void removeFeedbackLike(int userId, int articleId){
+		Feedback fd = new Feedback();
+		fd.setUserId(userId);
+		fd.setArticleId(articleId);
+		fd.setType(Feedback.TYPE_LIKE);
+		deleteFeedback(fd);
+	}
+	
+	public void setFeedbackUseful(int userId, int articleId){
+		Feedback fd = new Feedback();
+		fd.setUserId(userId);
+		fd.setArticleId(articleId);
+		fd.setType(Feedback.TYPE_USEFUL);
+		createFeedback(fd);
+	}
+	
+	public void removeFeedbackUseful(int userId, int articleId){
+		Feedback fd = new Feedback();
+		fd.setUserId(userId);
+		fd.setArticleId(articleId);
+		fd.setType(Feedback.TYPE_USEFUL);
+		deleteFeedback(fd);
+	}
+	
+	public void setFeedbackFunny(int userId, int articleId){
+		Feedback fd = new Feedback();
+		fd.setUserId(userId);
+		fd.setArticleId(articleId);
+		fd.setType(Feedback.TYPE_FUNNY);
+		createFeedback(fd);
+	}
+	
+	public void removeFeedbackFunny(int userId, int articleId){
+		Feedback fd = new Feedback();
+		fd.setUserId(userId);
+		fd.setArticleId(articleId);
+		fd.setType(Feedback.TYPE_FUNNY);
+		deleteFeedback(fd);
+	}
 
 	public List<Feedback> readFeedbackList(Feedback feedback) {
 		return feedbackDao.readFeedbackList(feedback);

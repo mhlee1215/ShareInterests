@@ -16,6 +16,10 @@ public class ArticleService{
 	@Autowired
 	private ArticleDao articleDao;
 
+	public List<Article> readPopularArticleList(Article article) {
+		return articleDao.readPopularArticleList(article);
+	}
+	
 	public List<Article> readArticleList(Article article) {
 		return articleDao.readArticleList(article);
 	}

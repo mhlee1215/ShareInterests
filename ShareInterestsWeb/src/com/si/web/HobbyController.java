@@ -156,12 +156,17 @@ private Logger logger = Logger.getLogger(getClass());
 		Hobby hobby = hobbyService.readHobby(pHobby);
 		if(hobby == null) return getErrorPage();
 		
+		Article ppArticle = new Article();
+		ppArticle.setHobbyId(hobby.getId());
+		List<Article> popularArticleList = articleService.readPopularArticleList(ppArticle);
+		
 		User user = (User) request.getSession().getAttribute("user");
 		
 		
 		ModelAndView model = SISessionManager.SIModelAndView("hobby", request);
 		model.addObject("categoryName", categoryName);
 		model.addObject("hobbyTitle", hobbyTitle);
+		model.addObject("popularArticleList", popularArticleList);
 		
 		
 		String actionArticleDisplay = "";

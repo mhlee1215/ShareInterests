@@ -15,6 +15,12 @@ public class ArticleDao extends SqlMapClientDaoSupport{
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Article> readPopularArticleList(Article article) {
+		List<Article> array = getSqlMapClientTemplate().queryForList("ArticleSql.readPopularArticleList", article);
+		return array;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Article> readArticleList(Article article) {
 		List<Article> array = getSqlMapClientTemplate().queryForList("ArticleSql.readArticleList", article);
 		return array;

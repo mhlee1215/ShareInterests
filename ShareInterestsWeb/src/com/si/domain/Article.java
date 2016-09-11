@@ -11,6 +11,8 @@ public class Article{
 	int  practiceHour = 0;
 	int query_start = 0;
 	int query_number = 0;
+	String title = "";
+	String articleAbstract = "";
 	
 	public int getId(){
 		return id;
@@ -19,6 +21,18 @@ public class Article{
 		this.id = id;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getArticleAbstract() {
+		return articleAbstract;
+	}
+	public void setArticleAbstract(String articleAbstract) {
+		this.articleAbstract = articleAbstract;
+	}
 	public int getAuthorId(){
 		return authorId;
 	}
@@ -82,8 +96,12 @@ public class Article{
 		this.query_number = query_number;
 	}
 
+	@Override
 	public String toString() {
-		return "{\"id\":\"" + id + "\",\"authorId\":\"" + authorId + "\",\"hobbyId\":\"" + hobbyId + "\",\"date\":\"" + date + "\",\"priceMin\":\"" + priceMin + "\",\"priceMax\":\"" + priceMax + "\",\"description\":\"" + description + "\",\"practiceHour\":\"" + practiceHour + "\",\"query_start\":\"" + query_start + "\",\"query_number\":\"" + query_number + "\"}";
+		return "Article [id=" + id + ", authorId=" + authorId + ", hobbyId=" + hobbyId + ", date=" + date
+				+ ", priceMin=" + priceMin + ", priceMax=" + priceMax + ", description=" + description
+				+ ", practiceHour=" + practiceHour + ", query_start=" + query_start + ", query_number=" + query_number
+				+ ", title=" + title + ", articleAbstract=" + articleAbstract + "]";
 	}
 
 }

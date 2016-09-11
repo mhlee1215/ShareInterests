@@ -1,6 +1,10 @@
 package com.si.domain;
 
 public class Feedback{
+	public final static String TYPE_LIKE = "like";
+	public final static String TYPE_USEFUL = "useful";
+	public final static String TYPE_FUNNY = "funny";
+	
 	int id = 0;
 	int  userId = 0;
 	int  articleId = 0;

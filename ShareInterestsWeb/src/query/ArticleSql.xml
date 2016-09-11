@@ -10,12 +10,40 @@
 		<result column="PRICEMAX" property="priceMax" />
 		<result column="DESCRIPTION" property="description" />
 		<result column="PRACTICEHOUR" property="practiceHour" />
+		<result column="TITLE" property="title" />
+		<result column="ARTICLEABSTRACT" property="articleAbstract" />
 	</resultMap>
+	
+	<select id="readPopularArticleList" parameterClass="com.si.domain.Article"
+		resultMap="Article">
+		/*select read list Article*/
+		SELECT a.id, a.authorId, a.hobbyId,
+		a.date, a.priceMin, a.priceMax, a.description, a.practiceHour, a.title, a.articleAbstract FROM
+		article a WHERE 1=1
+		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
+		</isNotEqual>
+		<isNotEqual compareValue="0" property="authorId"> and a.AUTHORID =
+			#authorId#</isNotEqual>
+		<isNotEqual compareValue="0" property="hobbyId"> and a.HOBBYID =
+			#hobbyId#</isNotEqual>
+		<isNotEmpty property="date"> and a.DATE = #date#</isNotEmpty>
+		<isNotEqual compareValue="0" property="priceMin"> and a.PRICEMIN =
+			#priceMin#</isNotEqual>
+		<isNotEqual compareValue="0" property="priceMax"> and a.PRICEMAX =
+			#priceMax#</isNotEqual>
+		<isNotEmpty property="description"> and a.DESCRIPTION = #description#
+		</isNotEmpty>
+		<isNotEqual compareValue="0" property="practiceHour"> and a.PRACTICEHOUR =
+			#practiceHour#</isNotEqual>
+		<isNotEqual compareValue="0" property="query_number"> LIMIT
+			#query_start#,#query_number#</isNotEqual>
+	</select>
+	
 	<select id="readArticleList" parameterClass="com.si.domain.Article"
 		resultMap="Article">
 		/*select read list Article*/
 		SELECT a.id, a.authorId, a.hobbyId,
-		a.date, a.priceMin, a.priceMax, a.description, a.practiceHour FROM
+		a.date, a.priceMin, a.priceMax, a.description, a.practiceHour, a.title, a.articleAbstract FROM
 		article a WHERE 1=1
 		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
 		</isNotEqual>
@@ -60,9 +88,9 @@
 	<insert id="createArticle" parameterClass="com.si.domain.Article">
 		/* insert Article*/
 		INSERT INTO article(authorId, hobbyId, date, priceMin, priceMax,
-		description, practiceHour)
+		description, practiceHour, title, articleAbstract)
 		VALUES (#authorId#, #hobbyId#, now(), #priceMin#, #priceMax#,
-		#description#, #practiceHour#)
+		#description#, #practiceHour#, #title#, #articleAbstract#)
 	</insert>
 	<update id="updateArticle" parameterClass="com.si.domain.Article">
 		/* update Article*/
@@ -81,6 +109,10 @@
 		</isNotEmpty>
 		<isNotEqual compareValue="0" property="practiceHour">,PRACTICEHOUR =
 			#practiceHour#</isNotEqual>
+		<isNotEmpty property="title">,TITLE = #title#
+		</isNotEmpty>
+		<isNotEmpty property="articleAbstract">,ARTICLEABSTRACT = #articleAbstract#
+		</isNotEmpty>	
 		,date = now()
 		<isNotEqual compareValue="0" property="id"> WHERE ID = #id#
 		</isNotEqual>
