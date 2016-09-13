@@ -141,7 +141,7 @@ public class FacebookController {
 						User newUser = new User();
 						newUser.setType("facebook");
 						newUser.setExternalId(fBin.getId());
-						
+						newUser.setEmail(fBin.getEmail());
 						newUser.setName(fBin.getName());
 						System.out.println("create User!!! :"+newUser);
 						userService.createUser(newUser);
