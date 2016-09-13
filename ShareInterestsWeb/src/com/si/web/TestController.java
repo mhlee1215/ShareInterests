@@ -87,7 +87,7 @@ public class TestController {
 	
 	@RequestMapping("/email")
     public @ResponseBody String email(HttpServletRequest request, HttpServletResponse response
-    		,@PathVariable(value = "action") String action
+    		
 			) throws Exception {
 
 		SendEmail se = new SendEmail();
