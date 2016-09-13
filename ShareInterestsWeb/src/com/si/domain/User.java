@@ -26,10 +26,13 @@ public class User {
 	public final static int		STATUS_ALREADY_REGISTEREDED	= 6;
 	public final static int		STATUS_ALREADY_VERIFIED		= 7;
 	public final static int		STATUS_ALREADY_DELETED		= 8;
-	public final static int		STATUS_NOT_VERIFIED			= 9;
+	//public final static int		STATUS_NOT_VERIFIED			= 9;
 	public final static int		STATUS_DELTE_FAIL			= 10;
 	
-	public final static String		STATUS_VERIFIED				= "STATUS_VERIFIED";
+	public final static String		STATUS_VERIFIED				= "VERIFIED";
+	public final static String		STATUS_NOT_VERIFIED			= "NOT_VERIFIED";
+	public final static String		STATUS_BLOCKED				= "BLOCKED";
+	public final static String		STATUS_DELETED				= "DELETED";
 	
 	
 	private int		id				= 0;	// ID

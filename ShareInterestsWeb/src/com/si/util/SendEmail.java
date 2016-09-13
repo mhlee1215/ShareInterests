@@ -15,7 +15,7 @@ public class SendEmail
       String from = "no-reply@shaint.com";
 
       // Assuming you are sending email from localhost
-      String host = "localhost";
+      String host = "http://54.201.96.236";
 
       // Get system properties
       Properties properties = System.getProperties();
@@ -48,5 +48,10 @@ public class SendEmail
       }catch (MessagingException mex) {
          mex.printStackTrace();
       }
+   }
+   
+   public static void main(String[] argv){
+	   SendEmail se = new SendEmail();
+	   
    }
 }

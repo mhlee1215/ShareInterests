@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,6 +33,9 @@ import com.si.service.UserService;
 @RequestMapping(value = "/social/facebook")
 @Controller
 public class FacebookController {
+	
+	@Autowired
+	ServletContext context; 
 	
 	@Autowired
 	private final UserService userService = null;
@@ -142,6 +146,7 @@ public class FacebookController {
 						newUser.setType("facebook");
 						newUser.setExternalId(fBin.getId());
 						newUser.setEmail(fBin.getEmail());
+						
 						newUser.setName(fBin.getName());
 						System.out.println("create User!!! :"+newUser);
 						userService.createUser(newUser);

@@ -39,6 +39,7 @@ public class UserService {
 		User paramUser = new User();
 		paramUser.setEmail(user.getEmail());
 		paramUser.setExternalId(user.getExternalId());
+	
 		User foundUser = readUserData(paramUser);
 		logger.debug("create User");
 		logger.debug("==[S]============================");
@@ -50,6 +51,7 @@ public class UserService {
 		}
 		else{
 			logger.debug("User doesn't find. Go Register.");
+			user.setStatus(User.STATUS_NOT_VERIFIED);
 			userDao.createUser(user);
 			
 			//Make User Folser
