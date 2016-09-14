@@ -1,12 +1,13 @@
 package com.si.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.si.dao.MediaDao;
+import com.si.domain.Hobby;
 import com.si.domain.Media;
 
 @Service
@@ -35,5 +36,7 @@ public class MediaService{
 	public void updateMedia(Media media) {
 		mediaDao.updateMedia(media);
 	}
+	
+	
 
 }

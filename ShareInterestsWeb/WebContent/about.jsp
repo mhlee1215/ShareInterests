@@ -84,7 +84,7 @@ header .index {
                     <div class="team-member">
                         <img src="img/team/4.jpg" class="img-responsive img-circle" alt="">
                         <h4>Minsik</h4>
-                        <p class="text-muted">??</p>
+                        <p class="text-muted">winner</p>
                         <ul class="list-inline social-buttons">
                             <li><a href="#"><i class="fa fa-twitter"></i></a>
                             </li>
