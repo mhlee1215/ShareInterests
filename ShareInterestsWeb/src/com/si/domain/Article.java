@@ -13,7 +13,14 @@ public class Article{
 	int query_number = 0;
 	String title = "";
 	String articleAbstract = "";
+	int likes = 0;
 	
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 	public int getId(){
 		return id;
 	}

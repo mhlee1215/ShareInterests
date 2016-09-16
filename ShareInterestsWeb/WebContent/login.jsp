@@ -228,6 +228,13 @@ $(document).ready(function(){
                                         <input id="signup-password" type="password" class="form-control" name="passwd" placeholder="Password">
                                     </div>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Confirm</label>
+                                    <div class="col-md-9">
+                                        <input id="signup-password_confirm" type="password" class="form-control" name="passwd" placeholder="Password">
+                                    </div>
+                                </div>
                                     
                                 <!-- 
                                 <div class="form-group">

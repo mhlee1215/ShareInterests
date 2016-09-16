@@ -14,12 +14,27 @@
 		<result column="ARTICLEABSTRACT" property="articleAbstract" />
 	</resultMap>
 	
+	<resultMap class="com.si.domain.Article" id="PopularArticle">
+		<result column="ID" property="id" />
+		<result column="AUTHORID" property="authorId" />
+		<result column="HOBBYID" property="hobbyId" />
+		<result column="DATE" property="date" />
+		<result column="PRICEMIN" property="priceMin" />
+		<result column="PRICEMAX" property="priceMax" />
+		<result column="DESCRIPTION" property="description" />
+		<result column="PRACTICEHOUR" property="practiceHour" />
+		<result column="TITLE" property="title" />
+		<result column="ARTICLEABSTRACT" property="articleAbstract" />
+		<result column="LIKES" property="likes" />
+	</resultMap>
+	
 	<select id="readPopularArticleList" parameterClass="com.si.domain.Article"
-		resultMap="Article">
-		/*select read list Article*/
+		resultMap="PopularArticle">
+		/*select read list popular Article*/
 		SELECT a.id, a.authorId, a.hobbyId,
-		a.date, a.priceMin, a.priceMax, a.description, a.practiceHour, a.title, a.articleAbstract FROM
-		article a WHERE 1=1
+		a.date, a.priceMin, a.priceMax, a.description, a.practiceHour, a.title, a.articleAbstract, count(b.id) likes 
+		FROM article a left join feedback b on a.id = b.articleId 
+		WHERE 1=1
 		<isNotEqual compareValue="0" property="id"> and a.ID = #id#
 		</isNotEqual>
 		<isNotEqual compareValue="0" property="authorId"> and a.AUTHORID =
@@ -37,6 +52,8 @@
 			#practiceHour#</isNotEqual>
 		<isNotEqual compareValue="0" property="query_number"> LIMIT
 			#query_start#,#query_number#</isNotEqual>
+		group by a.id
+        order by likes desc
 	</select>
 	
 	<select id="readArticleList" parameterClass="com.si.domain.Article"
