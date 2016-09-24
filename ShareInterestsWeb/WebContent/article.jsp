@@ -136,7 +136,7 @@
 
 
 <div class="jumbotron text-center title_text">
-  <h1>${hobbyTitle }</h1>
+  <h1><a href="/ShareInterestsWeb/browse/${categoryName}/${hobbyTitle}" style="text-decoration: none; color: black;">${hobbyTitle }</a></h1>
   <p>now writing by ${author.name}</p> 
 </div>
 
@@ -228,7 +228,10 @@ $(document).ready(function() {
 </script>
 
 <div id="parent_container" class="container">
-
+				
+				<div><h1>${article.title }</h1></div>
+				<div><h2>${article.articleAbstract }</h2></div>
+				
 				<div id="write_textarea_div" class="left trasition_div" style="height:100%;">
 				<textarea id="write_textarea" style="height:100%; width:100%;">${article.description}</textarea>		
 				</div>
